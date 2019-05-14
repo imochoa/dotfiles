@@ -13,6 +13,8 @@ then
 else   
 	# Script is in a subshell
 	# echo "subshell";
+	echo "You need to source the file *. file.sh*, not execute it!";
+	exit 125;
 	export CHOSEN_CONFIG=`basename "$0"`;
 
 fi
@@ -34,4 +36,6 @@ export SCOPE=SYSTEM;
 #######################
 export INSTALL_I3=true;
 export INSTALL_FREECAD=true;
-
+export INSTALL_GIT=true;
+export INSTALL_TREE=true;
+export INSTALL_WGET=true;

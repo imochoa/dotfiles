@@ -24,7 +24,7 @@ $SCRIPTPATH/fonts/install-fonts.sh;
 ############
 # programs #
 ############
-# sudo apt-get update && sudo apt-get upgrade -y;
+sudo apt-get update && sudo apt-get upgrade -y;
 
 find $SCRIPTPATH/scripts -type f -iname '*.sh' -exec {} \; 
 	
