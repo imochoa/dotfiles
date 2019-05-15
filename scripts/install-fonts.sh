@@ -18,14 +18,23 @@ else
 	FONT_CMD='cp'
 fi;
 
-# Create the dir if missing
-mkdir -p $FONT_DIR
 
-# Move the fonts to the correct directory
-find $SCRIPTPATH -type f -regex '.*\.\(ttf\|otf\)' -exec $FONT_CMD {} $FONT_DIR \;
+if [[ "${INSTALL_FONTS:-false}" == true ]] 
+then 
+	pretty_echo "Flag set to true: [INSTALL_FONTS] "; #> running [$2]"; 
+	# Create the dir if missing
+	mkdir -p $FONT_DIR
 
-# Recreate the fonts cache
-fc fc-cache -f -v
+	# Move the fonts to the correct directory
+	find $SCRIPTPATH/../fonts/ -type f -regex '.*\.\(ttf\|otf\)' -exec $FONT_CMD {} $FONT_DIR \;
+
+	# Recreate the fonts cache
+	fc fc-cache -f -v
+else
+	pretty_echo "Flag not true: [INSTALL_FONTS]"; 
+fi;
+
+
 
 ############
 # cleanup! #

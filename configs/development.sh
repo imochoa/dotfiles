@@ -7,17 +7,15 @@
 if [[ $_ != $0 ]]; 
 then   
 	# Script is being sourced	
-	# echo "Sourcing";
 	export CHOSEN_CONFIG=${BASH_SOURCE[0]};
 
 else   
-	# Script is in a subshell
-	# echo "subshell";
+	# Script is running in a subshell
 	echo "You need to source the file *. file.sh*, not execute it!";
-	exit 125;
-	export CHOSEN_CONFIG=`basename "$0"`;
+	# exit 125;
+	# export CHOSEN_CONFIG=`basename "$0"`;
 
-fi
+fi;
 
 echo "Chose config-> [$CHOSEN_CONFIG]";
 
@@ -41,4 +39,12 @@ export INSTALL_GIT=true;
 export INSTALL_TREE=true;
 export INSTALL_WGET=true;
 export INSTALL_MUPDF=true;
+export INSTALL_CHROME=false;
+
+
+
+#######################
+# Extras              #
+#######################
+
 export WALLPAPER_URL='https://c.wallhere.com/photos/f4/de/1920x1080_px_Brume_Hills_Mount_Everest_mountains-1214842.jpg!d';
