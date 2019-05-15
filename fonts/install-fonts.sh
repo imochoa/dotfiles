@@ -3,7 +3,7 @@
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
 ###############################
-# sssfont awesome .otf fonts #
+# font awesome .otf fonts     #
 ###############################
 
 if [[ $SCOPE = "SYSTEM" ]]; 
@@ -16,7 +16,7 @@ else
 	echo "Installing fonts for user $USER";
 	FONT_DIR=~/.fonts/
 	FONT_CMD='cp'
-fi
+fi;
 
 # Create the dir if missing
 mkdir -p $FONT_DIR
@@ -33,8 +33,6 @@ fc fc-cache -f -v
 
 function finish {
 	  # Your cleanup code here
-
-  rm -rf $FONTAWESOME_TMP_DIR
-
+	echo "done!";
   }
 trap finish EXIT
