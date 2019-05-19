@@ -19,15 +19,13 @@ cd ${REPO_DIR};
 echo "${REPO_DIR}";
 for i in $(find ${REPO_DIR}/src -type f -iname '*.sh'); 
 do
-	. $i;
+  source $i;
 done;
 
 # Chosen a config file?
-if [ -n "${CONFIG_TO_TEST}" ];  
+if [[ -n "${CONFIG_TO_TEST}" ]];  
 then 
-  # Control will enter here if /repo exists 
-  # TODO NOT WORKING!!
-  echo "existed"!; 
+  # The test script will enter here and load the test config
   source ${REPO_DIR}/configs/${CONFIG_TO_TEST};
 fi;
 

@@ -40,6 +40,7 @@ export INSTALL_TREE=true;
 export INSTALL_WGET=true;
 export INSTALL_MUPDF=true;
 export INSTALL_CHROME=false;
+export INSTALL_STRETCHLY=true;
 
 
 

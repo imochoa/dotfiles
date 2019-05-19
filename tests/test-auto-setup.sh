@@ -4,9 +4,9 @@
 if [ -d "/dotfiles" ];  
 then 
   # Control will enter here if /repo exists 
-  echo "existed"!; 
+  echo -e "\nThe '/dotfiles/' directory existed! Testing the locally mounted version\n"; 
   source /dotfiles/auto-setup.sh;
 else 
-  echo "not there! Pull from github and run!...";
+  echo -e "\nNo local info. Pulling from github\n";
   source /pull-from-github.sh;
 fi;

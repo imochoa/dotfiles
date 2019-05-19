@@ -9,12 +9,12 @@ install_envvar INSTALL_FREECAD 'sudo apt-get install -y freecad';
 install_envvar INSTALL_VIM 'sudo apt-get install -y vim';
 install_envvar INSTALL_I3 'sudo apt-get install -y i3';
 install_envvar INSTALL_MUPDF 'sudo apt-get install -y mupdf';
-install_envvar INSTALL_CHROME 'wget -c https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O $TMP_DIR/chrome.deb && sudo dpkg -i $TMP_DIR/chrome.deb';
+install_envvar INSTALL_CHROME 'wget -c https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/chrome.deb && sudo dpkg -i /tmp/chrome.deb';
 install_envvar INSTALL_MEDIA_CODECS 'sudo apt install ubuntu-restricted-extras';
 install_envvar INSTALL_GNOME_TWEAK_TOOL 'sudo apt install gnome-tweak-tool';
 install_envvar INSTALL_VLC 'sudo apt-get install vlc';
 install_envvar INSTALL_SLACK 'sudo apt-get install slack';
-
+install_envvar INSTALL_STRETCHLY 'wget -c https://github.com/hovancik/stretchly/releases/download/v0.19.1/stretchly_0.19.1_amd64.deb -O /tmp/stretchly.deb && sudo dpkg -i /tmp/stretchly.deb';
 
 # TODO docker CE, pycharm
 
