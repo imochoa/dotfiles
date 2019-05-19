@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-if [[ $SCOPE = "SYSTEM" ]]; 
+if [[ ${SCOPE} = "SYSTEM" ]]; 
 then    
 	echo "Installing system-wide wallpapers";
         IMG_DIR=/usr/local/share/wallpapers/;
@@ -31,6 +31,11 @@ else
 	# FONT_DIR=~/.fonts/
 	# FONT_CMD='cp'
 fi;
+
+export GIO_EXTRA_MODULES=/usr/lib/x86_64-linux-gnu/gio/modules/
+# Otherwise the set wallpaper command (gsettings) fails, see:
+# https://stackoverflow.com/questions/44934641/glib-gio-message-using-the-memory-gsettings-backend-your-settings-will-not-b
+# https://github.com/conda-forge/glib-feedstock/issues/19
 
 
 ############
