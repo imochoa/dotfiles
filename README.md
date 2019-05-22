@@ -1,8 +1,35 @@
 # dotfiles
 collection of the setting that I like as well as some scripts to automate the post-install setup process
 
-
 You can download and run it at the same time by copying the command in `pull-from-github.sh` 
+
+# Components
+Here is what the repo structure looks like, along with short explanations:
+
+```
+dotfiles
+├── auto-setup.sh # starts everything
+├── configs
+│   └── These files will tell the *auto-setup.sh* script what to set up
+├── Dockerfile
+├── dotfiles
+│   └── The dotfiles to use (e.g. for bash, vim, i3 etc.)
+├── private
+│   └── similar to "dotfiles", but these config files should not be shared! (e.g. private/public ssh keys)
+├── fonts
+│   ├── Some useful fonts
+│   └── update-fonts.sh # Look online for new versions of these fonts
+├── LICENSE
+├── pull-from-github.sh
+├── README.md
+├── scripts
+│   └── these scripts are the ones that do the actual work
+├── src
+│   └── a compilation of some nice-to-have functions
+├── tests
+│   └── for debugging 
+└── update.sh # Looks for updates (e.g. runs the update-fonts.sh script) 
+```
 
 # Testing
 Build the base docker image with:
