@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Create your dotfile</title>
+    <!--  <link rel="stylesheet" href="style.css">-->
+    <!--  <script src="script.js"></script>-->
+  </head>
+
+  <body>
+
+  <form id="config-form">
+
+    <div id="bool-flags">
+    </div>
+
+    <input type="submit" value="Submit">
+  </form>
+
+
+  </body>
+
+  <script>
+    var boolObjs = [
+      {"id":"test", "desc":"fancy"},
+      {"id":"test2", "desc":"fancy2"}
+     ];
+    var configForm = document.getElementById("config-form");
+    var boolForm  = document.getElementById("bool-flags");
+
+    function addCheckBox(formVar, data){
+        var newDiv = document.createElement("div");
+      
+        // Create an <input> element, set its type and name attributes
+        var input = document.createElement("input");
+        input.type = "checkbox";
+        input.name = data["id"];
+        var label = document.createElement("label");
+        label.setAttribute("for",data["id"]);
+        label.innerHTML=data["desc"];
+        var newContent = document.createTextNode("<label for="+data["id"]+">"+data["desc"]+"</label>");
+
+        newDiv.appendChild(input);
+        newDiv.appendChild(label);
+        newDiv.appendChild(document.createElement("br"));
+        formVar.appendChild(newDiv);
+        // Append a line break 
+        // formVar.appendChild(document.createElement("br"));
+    }
+
+    boolObjs.forEach((dataObj)=>{addCheckBox(boolForm,dataObj);})
+
+  </script>
+</html>
