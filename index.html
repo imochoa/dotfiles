@@ -5,40 +5,83 @@
     <title>Create your dotfile</title>
     <!--  <link rel="stylesheet" href="style.css">-->
     <!--  <script src="script.js"></script>-->
+    <style>
+          form {
+            text-align: center;
+          }
+    </style>
   </head>
 
   <body>
+    <h1>Generate your own config file easily using this form</h1>
 
-  <form id="config-form">
+    <form id="config-form">
 
     <div id="bool-flags">
     </div>
 
-    <input type="submit" value="Submit">
+    <!--<input type="submit" value="Submit" id="submit-btn" >-->
+    <button type="button" onclick="generateConfig()">Click to generate the config file!</button>
   </form>
 
+
+  <textarea id="config-output" rows="40" cols="80">Your configuration will appear here!</textarea>
 
   </body>
 
   <script>
     var boolObjs = [
-      {"id":"test", "desc":"fancy"},
-      {"id":"test2", "desc":"fancy2"}
-     ];
+{"id":"INSTALL_I3","name":"i3", "tooltip":"the i3 window manager"},
+{"id":"INSTALL_FREECAD","name":"FreeCAD", "tooltip":"CAD"},
+{"id":"INSTALL_GIT","name":"git", "tooltip":"Install git"},
+{"id":"INSTALL_TREE","name":"tree", "tooltip":"A basic command to show the directory structure"},
+{"id":"INSTALL_WGET","name":"wget", "tooltip":"Basic command for getting info from a URL"},
+{"id":"INSTALL_MUPDF","name":"muPDF", "tooltip":"A simple PDF viewer"},
+{"id":"INSTALL_CHROME","name":"chrome", "tooltip":"The google browser"},
+{"id":"INSTALL_STRETCHLY","name":"stretchly", "tooltip":"A program to help you take regular breaks"}
+    ];
+
     var configForm = document.getElementById("config-form");
     var boolForm  = document.getElementById("bool-flags");
+    var configOutput = document.getElementById("config-output");
+    
+    var configSetupStr=`#!/usr/bin/env bash
 
-    function addCheckBox(formVar, data){
+#############
+# Automatic #
+#############
+
+if [[ $_ != $0 ]]; 
+then   
+  # Script is being sourced	
+  export CHOSEN_CONFIG=\${BASH_SOURCE[0]};
+
+else   
+  # Script is running in a subshell
+  echo "You need to source the file *. file.sh*, not execute it!";
+
+fi;
+
+echo "Chose config-> [$CHOSEN_CONFIG]";
+
+`;
+
+    function addCheckBox(formVar, data, clsName){
         var newDiv = document.createElement("div");
       
         // Create an <input> element, set its type and name attributes
         var input = document.createElement("input");
         input.type = "checkbox";
-        input.name = data["id"];
+        input.className = clsName;
+        // input.name = data["id"];
+        input.onclick = generateConfig;
+        input.id = data["id"];
         var label = document.createElement("label");
-        label.setAttribute("for",data["id"]);
-        label.innerHTML=data["desc"];
-        var newContent = document.createTextNode("<label for="+data["id"]+">"+data["desc"]+"</label>");
+        label.setAttribute("for",data.id);
+        label.setAttribute("title",data.tooltip);
+        label.innerHTML=data.name;
+        // # var newContent = document.createTextNode(`<label title="${data.tooltip}" for="${data.id}">${data.name}</label>`);
+        // var newContent = document.createTextNode('<label title='+data.tooltip+' for='+data.id+'>'+data.name+'</label>');
 
         newDiv.appendChild(input);
         newDiv.appendChild(label);
@@ -48,7 +91,18 @@
         // formVar.appendChild(document.createElement("br"));
     }
 
-    boolObjs.forEach((dataObj)=>{addCheckBox(boolForm,dataObj);})
+    boolObjs.forEach((dataObj)=>{addCheckBox(boolForm,dataObj,"envVar");})
+
+    function generateConfig(){
+      var configStr=configSetupStr;
+      var list = boolForm.getElementsByClassName("envVar");
+        for (let item of list) {
+          configStr+= "export " + item.id + "=" + item.checked + ";\n";
+        }
+
+      configOutput.innerHTML=configStr;
+
+    }
 
   </script>
 </html>
