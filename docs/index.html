@@ -1,108 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Create your dotfile</title>
-    <!--  <link rel="stylesheet" href="style.css">-->
-    <!--  <script src="script.js"></script>-->
-    <style>
-          form {
-            text-align: center;
-          }
-    </style>
-  </head>
+# dotfiles
+collection of the setting that I like as well as some scripts to automate the post-install setup process
 
-  <body>
-    <h1>Generate your own config file easily using this form</h1>
+You can download and run it at the same time by copying the command in `pull-from-github.sh` 
 
-    <form id="config-form">
+# Components
+Here is what the repo structure looks like, along with short explanations:
 
-    <div id="bool-flags">
-    </div>
+```
+dotfiles
+├── auto-setup.sh # starts everything
+├── configs
+│   └── These files will tell the *auto-setup.sh* script what to set up
+├── Dockerfile
+├── dotfiles
+│   └── The dotfiles to use (e.g. for bash, vim, i3 etc.)
+├── private
+│   └── similar to "dotfiles", but these config files should not be shared! (e.g. private/public ssh keys)
+├── fonts
+│   ├── Some useful fonts
+│   └── update-fonts.sh # Look online for new versions of these fonts
+├── LICENSE
+├── pull-from-github.sh
+├── README.md
+├── scripts
+│   └── these scripts are the ones that do the actual work
+├── src
+│   └── a compilation of some nice-to-have functions
+├── tests
+│   └── for debugging 
+└── update.sh # Looks for updates (e.g. runs the update-fonts.sh script) 
+```
 
-    <!--<input type="submit" value="Submit" id="submit-btn" >-->
-    <button type="button" onclick="generateConfig()">Click to generate the config file!</button>
-  </form>
+# Testing
+Build the base docker image with:
+```
+docker build . --tag dotfile-test
+```
 
+Afterwards, you can test the output of the `auto-setup.sh` script by running the following command (substituting "development.sh" with any one of the configs in *configs/*: 
+```
+docker run --rm -it --env CONFIG_TO_TEST=development.sh dotfile-test
+```
 
-  <textarea id="config-output" rows="40" cols="80">Your configuration will appear here!</textarea>
+For development, it's easiert to copy over the local files instead of pulling them from github every time. You can do that by mounting the repo like so:
+```
+docker run --rm -it --env CONFIG_TO_TEST=development.sh --mount type=bind,source=$(pwd),destination=/dotfiles/,readonly dotfile-test
+```
 
-  </body>
-
-  <script>
-    var boolObjs = [
-{"id":"INSTALL_I3","name":"i3", "tooltip":"the i3 window manager"},
-{"id":"INSTALL_FREECAD","name":"FreeCAD", "tooltip":"CAD"},
-{"id":"INSTALL_GIT","name":"git", "tooltip":"Install git"},
-{"id":"INSTALL_TREE","name":"tree", "tooltip":"A basic command to show the directory structure"},
-{"id":"INSTALL_WGET","name":"wget", "tooltip":"Basic command for getting info from a URL"},
-{"id":"INSTALL_MUPDF","name":"muPDF", "tooltip":"A simple PDF viewer"},
-{"id":"INSTALL_CHROME","name":"chrome", "tooltip":"The google browser"},
-{"id":"INSTALL_STRETCHLY","name":"stretchly", "tooltip":"A program to help you take regular breaks"}
-    ];
-
-    var configForm = document.getElementById("config-form");
-    var boolForm  = document.getElementById("bool-flags");
-    var configOutput = document.getElementById("config-output");
-    
-    var configSetupStr=`#!/usr/bin/env bash
-
-#############
-# Automatic #
-#############
-
-if [[ $_ != $0 ]]; 
-then   
-  # Script is being sourced	
-  export CHOSEN_CONFIG=\${BASH_SOURCE[0]};
-
-else   
-  # Script is running in a subshell
-  echo "You need to source the file *. file.sh*, not execute it!";
-
-fi;
-
-echo "Chose config-> [$CHOSEN_CONFIG]";
-
-`;
-
-    function addCheckBox(formVar, data, clsName){
-        var newDiv = document.createElement("div");
-      
-        // Create an <input> element, set its type and name attributes
-        var input = document.createElement("input");
-        input.type = "checkbox";
-        input.className = clsName;
-        // input.name = data["id"];
-        input.onclick = generateConfig;
-        input.id = data["id"];
-        var label = document.createElement("label");
-        label.setAttribute("for",data.id);
-        label.setAttribute("title",data.tooltip);
-        label.innerHTML=data.name;
-        // # var newContent = document.createTextNode(`<label title="${data.tooltip}" for="${data.id}">${data.name}</label>`);
-        // var newContent = document.createTextNode('<label title='+data.tooltip+' for='+data.id+'>'+data.name+'</label>');
-
-        newDiv.appendChild(input);
-        newDiv.appendChild(label);
-        newDiv.appendChild(document.createElement("br"));
-        formVar.appendChild(newDiv);
-        // Append a line break 
-        // formVar.appendChild(document.createElement("br"));
-    }
-
-    boolObjs.forEach((dataObj)=>{addCheckBox(boolForm,dataObj,"envVar");})
-
-    function generateConfig(){
-      var configStr=configSetupStr;
-      var list = boolForm.getElementsByClassName("envVar");
-        for (let item of list) {
-          configStr+= "export " + item.id + "=" + item.checked + ";\n";
-        }
-
-      configOutput.innerHTML=configStr;
-
-    }
-
-  </script>
-</html>
+You can also just start an interactive bash shell directly:
+```
+docker run --rm -it --mount type=bind,source=$(pwd),destination=/dotfiles/,readonly dotfile-test /bin/bash
+```
