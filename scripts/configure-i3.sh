@@ -8,7 +8,7 @@ if [[ "${CONFIGURE_I3:-false}" == true ]]
 		pretty_echo 'Configuring i3'; 
 
         # Install programs
-        sudo apt-get install -y pactl lxappearance rofi compton i3blocks;
+        sudo apt-get install -y pactl arandr lxappearance rofi compton i3blocks;
         # Copy over the config files
         # TODO
         cp ${SCRIPTPATH}/../dotfiles/.vimrc{,.local} ~/
