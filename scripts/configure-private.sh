@@ -2,8 +2,9 @@
 
 SCRIPTPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-install_envvar CONFIGURE_VIM "cp ${SCRIPTPATH}/../dotfiles/.vimrc{,.local} ~/";
-install_envvar CONFIGURE_BASH "cp ${SCRIPTPATH}/../dotfiles/.bash{rc,_profile,_aliases} ~/";
+pretty_print 'Setting the private configurations';
+# TODO
+# install_envvar CONFIGURE_VIM "cp ${SCRIPTPATH}/../private/.";
 
 #############
 # cleanup! #

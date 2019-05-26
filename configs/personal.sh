@@ -37,7 +37,6 @@ export SCOPE=USER
 # Programs to install #
 #######################
 export INSTALL_I3=true;
-export INSTALL_FREECAD=false;
 export INSTALL_GIT=true;
 export INSTALL_TREE=true;
 export INSTALL_WGET=true;
