@@ -7,7 +7,7 @@ pretty_echo 'Installing programs...';
 install_envvar INSTALL_GIT 'sudo apt-get install -y git';
 install_envvar INSTALL_TREE 'sudo apt-get install -y tree';
 install_envvar INSTALL_WGET 'sudo apt-get install -y wget';
-install_envvar INSTALL_VIM 'sudo apt-get remove -y vim-tiny gvim && sudo apt-get install -y vim';
+install_envvar INSTALL_VIM 'sudo apt-get remove -y vim-tiny gvim && sudo apt-get install -y vim vim-gtk';
 install_envvar INSTALL_I3 'sudo apt-get install -y i3';
 install_envvar INSTALL_MUPDF 'sudo apt-get install -y mupdf';
 install_envvar INSTALL_CHROME 'wget -c https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/chrome.deb && sudo dpkg -i /tmp/chrome.deb';
