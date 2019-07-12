@@ -121,8 +121,12 @@ export PATH=$HOME/tools/nvim:$PATH
 setxkbmap -option caps:swapescape
 
 set -o vi
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
 # "\C-o": operate-and-get-next
 # With this, once you have selected a command from history (e.g. via Vim search) hit Ctrl-O instead of Enter and Bash will run the command and insert the next command from history, ready to run.
 # See Readline Command Names section in the Bash manpage for complete list.
+
 
 
