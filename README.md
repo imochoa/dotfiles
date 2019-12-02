@@ -3,6 +3,8 @@ collection of the setting that I like as well as some scripts to automate the po
 
 You can download and run it at the same time by copying the command in `pull-from-github.sh` 
 
+TODO Add symlinks everywhere!
+
 # Components
 Here is what the repo structure looks like, along with short explanations:
 
