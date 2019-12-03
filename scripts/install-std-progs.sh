@@ -14,7 +14,7 @@ install_envvar INSTALL_CHROME 'wget -c https://dl.google.com/linux/direct/google
 install_envvar INSTALL_GNOME_TWEAK_TOOL 'sudo apt install gnome-tweak-tool';
 install_envvar INSTALL_VLC 'sudo apt-get install vlc';
 install_envvar INSTALL_SLACK 'sudo apt-get install slack';
-install_envvar INSTALL_STRETCHLY 'wget -c https://github.com/hovancik/stretchly/releases/download/v0.19.1/stretchly_0.19.1_amd64.deb -O /tmp/stretchly.deb && sudo dpkg -i /tmp/stretchly.deb';
+install_envvar INSTALL_STRETCHLY 'wget -c https://github.com/hovancik/stretchly/releases/download/v0.21.0/stretchly_0.21.0_amd64.deb -O /tmp/stretchly.deb && sudo dpkg -i /tmp/stretchly.deb';
 
 
 install_envvar INSTALL_FIREWALL_GUI 'sudo apt-get install -y gufw';
