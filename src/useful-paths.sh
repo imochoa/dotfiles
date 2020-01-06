@@ -17,6 +17,8 @@ double_check_path SRC_DIR "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2
 double_check_path REPO_DIR "${SRC_DIR}/..";
 double_check_path DOTFILE_DIR "${REPO_DIR}/dotfiles";
 double_check_path FONT_DIR "${REPO_DIR}/fonts";
+double_check_path SCRIPT_DIR "${REPO_DIR}/scripts";
+double_check_path XPS9370_BIN_DIR "${SCRIPT_DIR}/xps-9370";
 
 
 # Configuration directories
