@@ -29,6 +29,7 @@ install_envvar INSTALL_I3 'sudo apt-get install -y i3';
 # For text & documents
 install_envvar INSTALL_VIM 'sudo apt-get remove -y vim-tiny gvim && sudo apt-get install -y vim vim-gtk';
 install_envvar INSTALL_MUPDF 'sudo apt-get install -y mupdf';
+install_envvar INSTALL_CALIBRE 'sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin';
 
 # Audio & video
 install_envvar INSTALL_CMUS 'sudo apt-get install -y cmus';
