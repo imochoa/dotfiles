@@ -6,6 +6,7 @@ SCRIPTPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 pretty_echo 'Installing programs...';
 
 # Basics
+install_envvar INSTALL_TRASH_CLI 'sudo apt-get install -y trash-cli';
 install_envvar INSTALL_GIT 'sudo apt-get install -y git';
 install_envvar INSTALL_TREE 'sudo apt-get install -y tree';
 install_envvar INSTALL_WGET 'sudo apt-get install -y wget';
