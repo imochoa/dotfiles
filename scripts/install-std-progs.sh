@@ -17,6 +17,10 @@ install_envvar INSTALL_XCWD 'wget https://github.com/schischi/xcwd/archive/maste
 # Web stuff
 install_envvar INSTALL_CHROME 'wget -c https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/chrome.deb && sudo dpkg -i /tmp/chrome.deb';
 
+# Battery life
+install_envvar INSTALL_TLP 'sudo apt-get install tlp';
+install_envvar INSTALL_TLP_GUI 'sudo add-apt-repository ppa:linuxuprising/apps && apt-get update && sudo apt install tlpui';
+
 # Networking
 install_envvar INSTALL_SLACK 'sudo apt-get install slack';
 
