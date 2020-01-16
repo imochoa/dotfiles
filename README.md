@@ -32,6 +32,10 @@ dotfiles
 │   └── for debugging 
 └── update.sh # Looks for updates (e.g. runs the update-fonts.sh script) 
 ```
+# Config file lookup
+program  |  config
+---      |  ---
+termite  |  ~/.config/gtk-3.0/gtk.css
 
 # Testing
 Build the base docker image with:
