@@ -133,3 +133,5 @@ _goinside(){
 }
 complete -F _goinside goinside;
 export -f goinside;
+
+bind -x '"\C-l": clear'
