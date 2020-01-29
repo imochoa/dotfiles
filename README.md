@@ -57,3 +57,8 @@ You can also just start an interactive bash shell directly:
 ```
 docker run --rm -it --mount type=bind,source=$(pwd),destination=/dotfiles/,readonly dotfile-test /bin/bash
 ```
+
+
+# Dotfiles
+- ~/.Xresources -> screen scaling for i3+High DPI screens
+- ~/.xprofile -> default screen layout from xrandr
