@@ -37,6 +37,12 @@ program  |  config
 ---      |  ---
 termite  |  ~/.config/gtk-3.0/gtk.css
 
+# Dotfiles
+file           |  purpose
+---            |  ---
+~/.Xresources  |  screen scaling for i3+High DPI screens
+~/.xprofile    |  default screen layout from xrandr
+
 # Testing
 Build the base docker image with:
 ```
@@ -59,6 +65,3 @@ docker run --rm -it --mount type=bind,source=$(pwd),destination=/dotfiles/,reado
 ```
 
 
-# Dotfiles
-- ~/.Xresources -> screen scaling for i3+High DPI screens
-- ~/.xprofile -> default screen layout from xrandr
