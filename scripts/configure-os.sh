@@ -4,7 +4,7 @@ SCRIPTPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 pretty_echo 'Configuring the OS';
 
-install_envvar INSTALL_MEDIA_CODECS 'sudo apt install ubuntu-restricted-extras';
+install_envvar INSTALL_MEDIA_CODECS 'sudo apt install -y ubuntu-restricted-extras';
 install_envvar ACTIVATE_FIREWALL  'sudo ufw enable';
 install_envvar REMOVE_AMAZON_LAUNCHER 'sudo apt purge -y ubuntu-web-launchers'
 # TLP – Linux Advanced Power Management
