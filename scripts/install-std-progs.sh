@@ -11,7 +11,7 @@ install_envvar INSTALL_GIT 'sudo apt-get install -y git';
 install_envvar INSTALL_TREE 'sudo apt-get install -y tree';
 install_envvar INSTALL_WGET 'sudo apt-get install -y wget';
 install_envvar INSTALL_FIREWALL_GUI 'sudo apt-get install -y gufw';
-install_envvar INSTALL_GNOME_TWEAK_TOOL 'sudo apt install gnome-tweak-tool';
+install_envvar INSTALL_GNOME_TWEAK_TOOL 'sudo apt install -y gnome-tweak-tool';
 install_envvar INSTALL_XCWD 'wget https://github.com/schischi/xcwd/archive/master.zip -O xcwd.zip  && unzip -j xcwd.zip -d xcwd-unzipped && cd xcwd-unzipped/ && make && sudo make install';
 
 # Web stuff
