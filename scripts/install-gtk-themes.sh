@@ -27,7 +27,7 @@ sudo apt install -y materia-gtk-theme
 # Remove with: 
 # sudo rm -rf /usr/share/themes/Materia{,-compact,-dark,-dark-compact,-light,-light-compact}
 
-mkdir -p ${IMG_DIR};
+sudo mkdir -p ${IMG_DIR};
 
 echo ${WALLPAPER_URL};
 
