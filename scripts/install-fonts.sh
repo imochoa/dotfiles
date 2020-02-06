@@ -29,7 +29,7 @@ then
 	find $SCRIPTPATH/../fonts/ -type f -regex '.*\.\(ttf\|otf\)' -exec $FONT_CMD {} $FONT_DIR \;
 
 	# Recreate the fonts cache
-	fc fc-cache -f -v
+	fc-cache -f -v
 else
 	pretty_echo "Flag not true: [INSTALL_FONTS]"; 
 fi;
