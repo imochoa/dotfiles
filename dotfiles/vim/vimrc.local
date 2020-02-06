@@ -1,6 +1,7 @@
+" vim-bootstrap custom modifications
+" ~/.vimrc.local
 
 set nu
-
 
 
 noremap <C-h> <C-w>h
