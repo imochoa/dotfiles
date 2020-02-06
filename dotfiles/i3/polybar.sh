@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+# ~/.config/i3/polybar.sh
+
 # Used to launch the polybar from the i3config file!
 
 # Terminate already running bar instances
