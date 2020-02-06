@@ -10,6 +10,7 @@ killall -q polybar
 # Wait until the processes have been shut down
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
+# For multiple monitors...
 for m in $(polybar --list-monitors | cut -d":" -f1); do
     echo "Setting up ${m}...";
     MONITOR=$m polybar -c ~/.config/polybar/config.ini  main &
@@ -27,3 +28,4 @@ done
 # Launch polybar
 # polybar main -c ~/.config/polybar/config &
 # polybar top &
+
