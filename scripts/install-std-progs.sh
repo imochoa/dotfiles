@@ -26,6 +26,7 @@ install_envvar INSTALL_SLACK 'sudo apt-get install slack';
 
 # Work Utils
 install_envvar INSTALL_DOCKER 'sudo curl -sSL https://get.docker.com/ | sh && sudo usermod -aG docker ${USER}';
+install_envvar INSTALL_DOCKER_COMPOSE 'sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose';
 install_envvar INSTALL_STRETCHLY 'wget -c https://github.com/hovancik/stretchly/releases/download/v0.21.0/stretchly_0.21.0_amd64.deb -O /tmp/stretchly.deb && sudo dpkg -i /tmp/stretchly.deb';
 install_envvar INSTALL_XOURNAL 'sudo add-apt-repository ppa:andreasbutti/xournalpp-master && sudo apt update -y && sudo apt install -y xournalpp';
 
