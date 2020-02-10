@@ -8,7 +8,7 @@ if [[ "${CONFIGURE_I3:-false}" == true ]]
 		pretty_echo 'Configuring i3'; 
 
         # Install programs
-        sudo apt-get install -y arandr lxappearance rofi compton i3blocks xbacklight htop;
+        sudo apt-get install -y arandr lxappearance rofi compton i3blocks xbacklight htop feh;
 	#  pactl was missing. Not required on Ubuntu 18?
 
         # Configure xbacklight!
