@@ -1,7 +1,27 @@
 " ~/.config/nvim/local_init.vim
 
-" To leave terminal mode easily
+"*****************************************************************************
+" Terminal mode
+"*****************************************************************************
 tnoremap <Esc> <C-\><C-n>
+
+
+"*****************************************************************************
+" Folding
+"*****************************************************************************
+nnoremap <space> za
+vnoremap <space> zf
+
+"*****************************************************************************
+" Python
+"*****************************************************************************
+augroup vimrc-python
+  autocmd!
+  autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 colorcolumn=79
+      \ formatoptions+=croq softtabstop=4 foldmethod=indent
+      \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+augroup END
+
 
 " vim-autoformat python files when you press F3...
 noremap <F3> :Autoformat<CR>
@@ -31,7 +51,3 @@ augroup NCM2
 augroup END
 
 
-"" So that vim-flake8 can fix PEP-8 problems in file automatically
-"autocmd BufWritePost *.py call Flake8()
-"autocmd BufWritePost *.py wincmd p
-"autocmd BufWritePost *.py set ft=python
