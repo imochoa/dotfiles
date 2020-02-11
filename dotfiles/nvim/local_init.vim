@@ -5,6 +5,11 @@
 "*****************************************************************************
 tnoremap <Esc> <C-\><C-n>
 
+"*****************************************************************************
+" Nerd Tree
+"*****************************************************************************
+map <silent> <C-n> :NERDTreeFocus<CR>
+
 
 "*****************************************************************************
 " Folding
@@ -23,10 +28,18 @@ augroup vimrc-python
 augroup END
 
 
+"*****************************************************************************
+" Autoformat 
+"*****************************************************************************
+
 " vim-autoformat python files when you press F3...
-noremap <F3> :Autoformat<CR>
-"... and when you save
-autocmd BufWritePre *.py :Autoformat
+" noremap <F3> :Autoformat<CR>
+
+" When saving...
+autocmd FileType json,yaml,python autocmd BufWritePre <buffer> :Autoformat
+" Will autoformat JSON and NOT overwrite your buffer if there's an error
+" autocmd FileType json autocmd BufWritePre <buffer> %!python3 -m json.tool 2>/dev/null || echo <buffer>
+
 
 " Autocomplete NCM2
 augroup NCM2
@@ -49,5 +62,3 @@ augroup NCM2
   "           \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
   "           \ })
 augroup END
-
-
