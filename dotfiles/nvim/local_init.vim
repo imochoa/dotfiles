@@ -40,6 +40,9 @@ autocmd FileType json,yaml,python autocmd BufWritePre <buffer> :Autoformat
 " Will autoformat JSON and NOT overwrite your buffer if there's an error
 " autocmd FileType json autocmd BufWritePre <buffer> %!python3 -m json.tool 2>/dev/null || echo <buffer>
 
+"*****************************************************************************
+" Autocomplete 
+"*****************************************************************************
 
 " Autocomplete NCM2
 augroup NCM2
@@ -62,3 +65,13 @@ augroup NCM2
   "           \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
   "           \ })
 augroup END
+
+"*****************************************************************************                                  
+" Snippets                                                                                                      
+"*****************************************************************************                                  
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.                 
+let g:UltiSnipsExpandTrigger="<tab>"                                                                            
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"                                                                     
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"                                                                    
+" If you want :UltiSnipsEdit to split your window.                                                              
+" let g:UltiSnipsEditSplit="vertical"                                                                           
