@@ -219,14 +219,35 @@ exec_always xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
 bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/'
 bindsym Ctrl+Print exec gnome-screenshot -i
 
+# TODO Substitute scrot and gnome-screenshot for shutter...
 # shutter -s --remove_cursor --disable_systray --exit_after_capture
 
+##================================================
+# Clipboard
+##=================================================
+set $mclip /usr/bin/mclip.py
+# bindsym control+shift+v rofi -modi "clipbard:/usr/bin/mclip.py menu" -show clipbard && /usr/bin/mclip.py paste
+bindsym $mod+shift+v exec rofi -modi "clipbard:$mclip menu" -show clipbard && $mclip paste
+exec --no-startup-id $mclip daemon
+
+##================================================
+# Assign Workspaces
+##=================================================
+# You can get the i3 info by using xprop & xwininfo
+
+# assign [class="Firefox"] $ws3
+# assign [class="Chromium"] $ws3
+assign [class="Google-chrome"] $ws1
+assign [class="jetbrains-pycharm"] $ws2
 
 # Startup programs
 exec --no-startup-id stretchly
-exec --no-startup-id /usr/local/bin/nextcloud
-exec --no-startup-id i3-msg 'workspace $ws1; exec /usr/bin/google-chrome'
-exec --no-startup-id i3-msg 'workspace $ws2; exec termite'
-# exec --no-startup-id i3-msg 'workspace $ws10; exec shutter'
+exec --no-startup-id nextcloud
+# exec --no-startup-id i3-msg 'workspace $ws1; exec /usr/bin/google-chrome'
+exec --no-startup-id google-chrome-stable
+exec --no-startup-id pycharm
+# exec --no-startup-id i3-msg /usr/bin/google-chrome
+exec --no-startup-id i3-msg 'workspace $ws3; exec termite'
+exec --no-startup-id i3-msg 'workspace $ws10; exec shutter'
 
 # exec --no-startup-id i3-msg 'workspace $ws7; exec termite -e htop'
