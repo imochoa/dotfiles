@@ -5,6 +5,7 @@ import pathlib
 import pdb
 import shutil
 
+from typing import Optional, Dict
 # Paths
 THIS_FILE = os.path.realpath(__file__)
 REPO_DIR = os.path.dirname(THIS_FILE)
@@ -49,7 +50,9 @@ DOTFILE_MAP = {
 }
 
 
-def map_dotfiles_to_paths(homedir=None):
+def map_dotfiles_to_paths(homedir: Optional[str] = None,
+                          ) -> Dict[str, str]:
+
     # Find all of the files
     repo_files = set()
     for root, subdirs, files in os.walk(DOTFILE_DIR):
@@ -109,16 +112,20 @@ def map_dotfiles_to_paths(homedir=None):
     return matched_configs
 
 
-def config_copy(src, dest, dry_run=True, keep_backup=True):
+def config_copy(src: str,
+                dest: str,
+                dry_run: bool = True,
+                keep_backup: bool = True,
+                ) -> bool:
     """
     returns: True if it worked, False otherwise
-    rtype: bool
     """
     print()
     if not os.path.isfile(src):
         print(f'{src} NOT FOUND!')
         return False
 
+    # TODO If it's a hardlink to src... skip!
     if keep_backup and os.path.isfile(dest):
         suffix_idx = 1
         while True:
@@ -147,7 +154,10 @@ def config_copy(src, dest, dry_run=True, keep_backup=True):
     return True
 
 
-def apply_dotfiles(dry_run=True, homedir=None, keep_backup=True):
+def apply_dotfiles(dry_run: bool = True,
+                   homedir: Optional[str] = None,
+                   keep_backup: bool = True,
+                   ):
     matched_configs = map_dotfiles_to_paths(homedir=homedir)
     for src_config_file, dest_config_file in matched_configs.items():
         config_copy(src_config_file,
