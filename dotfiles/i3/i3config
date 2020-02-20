@@ -225,10 +225,16 @@ bindsym Ctrl+Print exec gnome-screenshot -i
 ##================================================
 # Clipboard
 ##=================================================
-set $mclip /usr/bin/mclip.py
-# bindsym control+shift+v rofi -modi "clipbard:/usr/bin/mclip.py menu" -show clipbard && /usr/bin/mclip.py paste
-bindsym $mod+shift+v exec rofi -modi "clipbard:$mclip menu" -show clipbard && $mclip paste
-exec --no-startup-id $mclip daemon
+# set $mclip /usr/bin/mclip.py
+#set $mclip /usr/bin/clipit
+#bindsym $mod+shift+v exec rofi -modi "clipbard:$mclip menu" -show clipbard && $mclip paste
+## bindsym $mod+Shift+v exec rofi -fullscreen -padding 200 -opacity 80 -modi "clipboard:$mclip menu" -show clipboard && $mclip paste
+#exec --no-startup-id $mclip daemon
+
+# Clipster...
+exec --no-startup-id clipster -d
+bindsym $mod+shift+v exec roficlip
+# && clipster -o -c
 
 ##================================================
 # Assign Workspaces
