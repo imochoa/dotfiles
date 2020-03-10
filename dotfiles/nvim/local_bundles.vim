@@ -2,7 +2,6 @@
 
 "General ones not in vim bootstrap
 Plug 'Konfekt/FastFold'
-Plug 'tmhedberg/SimpylFold'
 
 Plug 'roxma/nvim-completion-manager'
 Plug 'SirVer/ultisnips'
@@ -16,7 +15,6 @@ Plug 'Yggdroot/indentLine'
 Plug 'w0rp/ale'
 
 
-
 " For python (not vim bootstrap)
 " Autocomplete
 Plug 'ncm2/ncm2'
@@ -26,3 +24,9 @@ Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-jedi'
 " Formater
 Plug 'Chiel92/vim-autoformat'
+" Folding
+Plug 'tmhedberg/SimpylFold'
+
+" YAML
+Plug 'mrk21/yaml-vim'
+
