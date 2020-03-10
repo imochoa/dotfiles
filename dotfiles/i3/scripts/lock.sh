@@ -6,6 +6,13 @@
 img=/tmp/i3lock.png
 
 scrot $img
-convert $img -scale 10% -scale 1000% $img
+
+# In order to maintain the image size, the upscaling of the downscaled image should be done by
+# a factor of 1/(down_scale/100.0)*100
+# e.g.
+#   - downscale by 10%
+#   -   upscale by 1/(10/100.0)*100 = 1000%
+
+convert $img -scale 5% -scale 2000% $img
 
 i3lock --image=$img --ignore-empty-password
