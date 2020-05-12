@@ -1,0 +1,31 @@
+{
+  // Require .prettierrc
+  "prettier.requireConfig": true,
+
+  // python config
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.linting.mypyEnabled": false,
+
+  // Tslint on save
+  "tslint.enable": true,
+  "tslint.autoFixOnSave": true,
+
+  // Run prettier (and others)
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "html",
+    "python",
+    "markdown",
+    "Markdown",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+    "snippets.ultisnips.directories": 
+  [
+    "UltiSnips",
+    "~/.config/nvim/utils/snips"
+  ]
+}
