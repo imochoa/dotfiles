@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 # ~/.bash_functions
 
+
+# Variables
+FEEDBACK_COLOR='\033[0;36m'
+NO_COLOR='\033[0m'
+
+
 # For going inside running docker containers
 goinside(){
     docker exec -it $1 bash -c "stty cols $COLUMNS rows $LINES && bash";
@@ -14,3 +20,30 @@ export -f goinside;
 
 # Cronometer
 alias crono='stf=$(date +%s.%N);for ((;;));do ctf=$( date +%s.%N );echo -en "\r$(date -u -d "0 $ctf sec - $stf sec" "+%H:%M:%S.%N")";done'
+
+
+# Starting a simple HTTP server
+#@server
+#+this command starts a simple python3 HTTP server in the current working dir
+#
+# It takes 1 optional argument: the server's port server (by default 8000)
+#            server       # Starts a server at 8000
+#            server  7999 # Starts a server at 7999
+#
+function server() {
+    local port="${1:-8000}"
+    printf '\033[0;36m%s\033[0m\n' "Starting a py3 HTTP server for ${port}";
+    python3 -m http.server "$port"
+}
+
+#@pool
+#+this command runs a file with one command per line using a pool of "P" workers
+#
+# It takes 1 mandatory argument:               pool /file/to/be/run.txt
+#      and optionally, the worker count:       pool /file/to/be/run.txt 5
+#
+function pool() {
+    local P="${2:-4}"
+    printf '\033[0;36m%s\033[0m\n' "Running the commands in ${1} with ${P} workers!";
+    cat "${1}" | xargs -P "${P}" -I % sh -c '%'
+}
