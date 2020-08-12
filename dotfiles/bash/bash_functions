@@ -43,7 +43,9 @@ function server() {
 #      and optionally, the worker count:       pool /file/to/be/run.txt 5
 #
 function pool() {
-    local P="${2:-4}"
-    printf '\033[0;36m%s\033[0m\n' "Running the commands in ${1} with ${P} workers!";
-    cat "${1}" | xargs -P "${P}" -I % sh -c '%'
+    local pcount="${2:-4}"
+    local logfile=$(mktemp --suffix=.log)
+    printf '\033[0;36m%s\033[0m\n' "Running the commands in ${1} with ${pcount} workers [LOGFILE AT ${logfile}]!";
+    cat "${1}" | xargs -P "${pcount}" -I % sh -c '%' 2>&1 | tee ${logfile};
+    printf '\033[0;36m%s\033[0m\n' "Finished running ${1} [LOGFILE AT ${logfile}]!";
 }
