@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 # ~/.bash_aliases
 
+# update & upgrade & autoremove
+alias uua='sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get autoremove -y'
+
+# audio restart
+alias restart-audio='systemctl --user restart pulseaudio'
+
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
@@ -31,3 +37,4 @@ alias cctk=/opt/dell/dcc/cctk
 alias audio-laptop='pacmd set-card-profile 0 output:analog-stereo+input:analog-stereo'
 # https://unix.stackexchange.com/questions/62818/how-can-i-switch-between-different-audio-output-hardware-using-the-shell
 # alias audio-hdmi='pacmd set-card-profile 0 output:hdmi-stereo+input:analog-stereo'
+# xrandr --output <other screen> --same-as <main screen>
