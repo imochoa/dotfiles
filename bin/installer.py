@@ -21,7 +21,7 @@ DOTFILE_DIR = REPO_DIR / 'dotfiles'
 # local imports
 sys.path.append(str(REPO_DIR))
 import jumpstart
-from jumpstart import InstallKeys
+# from jumpstart import InstallKeys
 from jumpstart.install_map import INSTALL_CMDS
 from jumpstart.utils import (
         bcolors,
@@ -61,21 +61,21 @@ def apply_installs(
         input_installs = input_installs.difference(invalid_keys)
 
 
-    total = len(invalid_keys)
+    total = len(input_installs)
     failed_ks=[]
-    for idx,k in enumerate(install_keys, start=1):
+    for idx,k in enumerate(input_installs, start=1):
 
-        echo(f"\n\t\t[{idx:>4}/{install_keys}]: {k}\n\n", color=bcolors.INFO)
+        echo(f"\n\t[{idx:>4}/{total}]: {k}\n\n", color=bcolors.INFO)
 
         if run_shell_str(
                         shell_str=INSTALL_CMDS[k],
                         dry_run=dry_run,
                         verbose=verbose,
                         ):
-            echo("Went ok")
+            echo(f"\n\t\t[OK!] [{k}]\n\n", color=bcolors.INFO)
         else:
             failed_ks.append(k)
-            echo(f"\nFAILED: {idx}\n", color=bcolors.FAILED)
+            echo(f"\n\t\t[FAILED!] [{k}]\n", color=bcolors.FAILED)
 
     if failed_ks:
         echo([f"There were {len(failed_ks)} failed installs:"]+sorted(failed_ks),
@@ -87,9 +87,22 @@ if __name__ == "__main__":
 
     install_keys = {
             'ssh',
+            'trash_cli',
+            'exfat',
+            'slack',
+            'git',
+            'tree',
+            'firewall_gui',
+            'docker',
+            'docker_compose',
+            'pavucontrol',
+            'vlc',
+            'entr',
+            'i3',
+            'shutter',
             'wrong_key_remove_this',
             }
 
     echo("\n\nPreparing to install...\n\n", color=bcolors.BOLD+bcolors.INFO)
-    apply_installs(install_keys, dry_run=True)
+    apply_installs(install_keys, dry_run=False, verbose=True)
     echo("\n\nDone!\n\n", color=bcolors.BOLD+bcolors.INFO)

@@ -11,10 +11,52 @@ import pdb
 
 INSTALL_PKGS = dict()
 
-# TODO PYTHON
-# py3 already installed but...
-# sudo apt-get install -y  python3-pip 
-# sudo -H /usr/bin/pip3  install --upgrade pip
+INSTALL_PKGS['fd'] = r"""
+#!/usr/bin/env bash
+sudo apt install -y fd-find
+"""
+
+
+INSTALL_PKGS['sxiv'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y sxiv
+"""
+
+INSTALL_PKGS['neofetch'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y neofetch
+"""
+
+INSTALL_PKGS['disk_space'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y baobab
+"""
+
+INSTALL_PKGS['nodejs'] = r"""
+#!/usr/bin/env bash
+# https://github.com/nodesource/distributions/blob/master/README.md
+# Using Ubuntu
+sudo apt-get install -y curl
+curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# [OPTIONAL] To compile and install native addons from npm you may also need to install build tools:
+sudo apt-get install -y build-essential
+"""
+
+
+INSTALL_PKGS['python3'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y python3 python3-pip python-dev python3-dev  build-essential libssl-dev libffi-dev  libxml2-dev libxslt1-dev zlib1g-dev
+# For python+PDF
+sudo apt-get install -y texlive texlive-xetex texlive-latex-extra pandoc pandoc-citeproc
+# For python+postgreSQL
+sudo apt install -y libpq-dev python3-dev
+
+# Upgrade pip
+sudo -H pip3  install --upgrade pip
+
+"""
 
 
 INSTALL_PKGS['polybar'] = r"""
@@ -56,7 +98,8 @@ sudo apt-get install -y exfat-fuse exfat-utils
 INSTALL_PKGS['ssh'] = r"""
 #!/usr/bin/env bash
 # TODO PREFER XCLIP OVER XSEL
-sudo apt install -y openssh-server xsel xauth
+# sudo apt install -y openssh-server xsel xauth
+sudo apt install -y openssh-server xclip xauth
 # xsel, xauth -> so that you can share the clipboard
 # using ssh -Y yourserver 
 # or by setting that as the default config in ~/.ssh/config
@@ -147,7 +190,7 @@ sudo apt-get install -y gufw
 
 INSTALL_PKGS['gnome_tweak_tool'] = r"""
 #!/usr/bin/env bash
-sudo apt-get install -y gnome-tweak-tool
+sudo apt-get install -y gnome-tweak-tool gnome-tweaks
 """
 INSTALL_PKGS['xcwd'] = r"""
 #!/usr/bin/env bash
@@ -169,10 +212,12 @@ sudo apt-get install -y wget
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb --continue --output-document=${TMP_DEB}
 sudo apt install ${TMP_DEB}
 """
+
 INSTALL_PKGS['tlp'] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y tlp
 """
+
 INSTALL_PKGS['tlp_gui'] = r"""
 #!/usr/bin/env bash
 
@@ -190,7 +235,12 @@ INSTALL_PKGS['docker'] = r"""
 sudo apt-get install -y curl \
 && sudo curl -sSL https://get.docker.com/ \
 | sh && sudo usermod -aG docker ${USER}
+
+# sudo apt install docker.io
+# sudo systemctl enable --now docker
+# sudo usermod -aG docker ${USER}
 """
+
 INSTALL_PKGS['docker_compose'] = r"""
 #!/usr/bin/env bash
 # https://github.com/docker/compose/releases
@@ -199,6 +249,7 @@ sudo apt-get install -y curl \
 && sudo curl -L https://github.com/docker/compose/releases/download/${VER}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose \
 && sudo chmod +x /usr/local/bin/docker-compose
 """
+
 INSTALL_PKGS['stretchly'] = r"""
 #!/usr/bin/env bash
 
@@ -212,6 +263,7 @@ sudo apt-get install -y wget \
 # && sudo dpkg -i /tmp/stretchly.deb
 
 """
+
 INSTALL_PKGS['xournal'] = r"""
 #!/usr/bin/env bash
 
@@ -220,10 +272,10 @@ sudo apt-get install -y software-properties-common \
 && sudo apt-get update -y \
 && sudo apt-get install -y xournalpp
 """
+
 INSTALL_PKGS['i3'] = r"""
 #!/usr/bin/env bash
-sudo apt-get install -y i3 arandr lxappearance rofi compton i3blocks \
-xbacklight htop feh
+sudo apt-get install -y i3 arandr lxappearance dmenu rofi compton i3blocks xbacklight htop feh i3lock-fancy
 # install  i3-snapshot?
 """
 
@@ -290,6 +342,8 @@ neovim +PackUpdate +qall
 # sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-9 100
 
 
+sudo update-alternatives --install /usr/bin/neovim  editor ~/Applications/nvim.appimage 100
+sudo update-alternatives --config editor
 
 && sudo ln -s /opt/nvim.appimage /usr/local/bin/nvim \
 && sudo apt install -y python-pip python3-pip python-autopep8 \

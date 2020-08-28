@@ -5,6 +5,7 @@ import pdb
 import os
 import sys
 import pathlib
+import datetime
 import logging
 import collections
 from enum import Enum, auto
@@ -30,7 +31,6 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-
 def echo(msg: collections.Iterable,
          color: bcolors = bcolors.INFO,
          sep: str = '',
@@ -39,17 +39,20 @@ def echo(msg: collections.Iterable,
         msg = sep.join(msg)
     print(f"{color}{msg}{bcolors.ENDC}", sep=sep)
 
+def dryrun_echo(msg:str)->None:
+    echo(f"\t[DRY RUN]: {msg}", color=bcolors.DEBUG)
+
 
 def cp(src: pathlib.Path, dest: pathlib.Path, dry_run: bool = True) -> None:
     if dry_run:
-        echo(f"Would CP:\n\t{src} -> {dest}", color=bcolors.DEBUG)
+        dryrun_echo(f"Would CP:\n\t{src} -> {dest}")
     else:
         shutil.copy2(src=src, dst=dest)
 
 
 def ln(src: pathlib.Path, dest: pathlib.Path, dry_run: bool = True) -> None:
     if dry_run:
-        echo(f"Would LINK:\n\t{src} -> {dest}", color=bcolors.DEBUG)
+        dryrun_echo(f"Would LINK:\n\t{src} -> {dest}")
     else:
         if dest.is_file():
             rm(dest, dry_run=dry_run)
@@ -58,14 +61,14 @@ def ln(src: pathlib.Path, dest: pathlib.Path, dry_run: bool = True) -> None:
 
 def mkdirs(src: pathlib.Path, dry_run: bool = True) -> None:
     if dry_run:
-        echo(f"Would MKDIRS:\n\t{src}", color=bcolors.DEBUG)
+        dryrun_echo(f"Would MKDIRS:\n\t{src}")
     else:
         os.makedirs(src)
 
 
 def rm(src: pathlib.Path, dry_run: bool = True) -> None:
     if dry_run:
-        echo(f"Would RM {src}", color=bcolors.DEBUG)
+        dryrun_echo(f"Would RM {src}")
     else:
         os.remove(src)
 
@@ -74,19 +77,19 @@ def get_timestamp() -> str:
     return datetime.datetime.now().strftime('backup_%Y_%m_%d_T_%H_%M_%s')
 
 
-class TempDir:
-    def __init__(self, dirname: Union[None, str] = None):
-        self.tmpdir = \
-            os.path.join(TMP,
-                         dirname or f'{uuid.uuid4()}')
+# class TempDir:
+#     def __init__(self, dirname: Union[None, str] = None):
+#         self.tmpdir = \
+#             os.path.join(TMP,
+#                          dirname or f'{uuid.uuid4()}')
 
-    def __enter__(self):
-        # os.makedirs(self.tmpdir, exist_ok=True)
-        os.makedirs(self.tmpdir)
-        return self.tmpdir
+#     def __enter__(self):
+#         # os.makedirs(self.tmpdir, exist_ok=True)
+#         os.makedirs(self.tmpdir)
+#         return self.tmpdir
 
-    def __exit__(self, type, value, traceback):
-        shutil.rmtree(self.tmpdir)
+#     def __exit__(self, type, value, traceback):
+#         shutil.rmtree(self.tmpdir)
 
 
 def tab(s: str) -> str:
@@ -127,7 +130,7 @@ def decode(s: str) -> str:
 
 
 def run_shell_str(shell_str: str,
-                    dry_run:bool=True,
+                  dry_run:bool=True,
                   verbose: bool = False,
                   ) -> Tuple[int, str]:
 
@@ -137,24 +140,25 @@ def run_shell_str(shell_str: str,
         echo(f"Would have run:\n\t{shell_str}", color=bcolors.DEBUG)
         return (0, 'DRY RUN -> NO OUTPUT')
 
-    # TODO
-
+    # TODO Use fp_stream?
     with tempfile.TemporaryFile() as fp_stream:
         with subprocess.Popen(shell_str,
                               shell=True,
-                              stdout=fp_stream,
-                              stderr=fp_stream,
-                              # stdout=subprocess.PIPE,
-                              # stderr=subprocess.STDOUT,
-                              bufsize=1,
+                              # stdout=fp_stream,
+                              # stderr=fp_stream,
+                              stdout=subprocess.PIPE,
+                              stderr=subprocess.STDOUT,
+                              # bufsize=1, # not supported in binary mode
                               ) as p:
+            # fp_stream.seek(0)
             while True:
                 line = decode(p.stdout.readline().rstrip())
+                # line = decode(fp_stream.readline().rstrip())
                 if not line:
                     break
                 
                 if verbose:
-                    sys.stdout.write(line)
+                    echo(f"\t\t{line}", color=bcolors.HEADER)
                 stdout += line
             returncode = p.returncode
 
