@@ -10,14 +10,17 @@ esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+# HISTCONTROL=ignoreboth
+export HISTCONTROL=erasedups	# when adding an item to history, delete itentical commands upstream
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+# HISTSIZE=1000
+export HISTSIZE=10000		# save 10000 items in history
+# HISTFILESIZE=2000
+export HISTFILESIZE=2000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -55,6 +58,11 @@ if [ -n "$force_color_prompt" ]; then
 	color_prompt=
     fi
 fi
+
+# TODO Get inspiration from
+#  https://github.com/nelstrom/dotfiles/blob/master/bashrc
+# # Bash customisations to be syncronised between machines.
+# export PS1='\[\e[1;34m\][\u@\h \W]\$\[\e[0m\] '
 
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
@@ -114,53 +122,38 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH=$HOME/tools/nvim:$PATH
-
 # Swaps caps-lock and ESC keys
 setxkbmap -option caps:swapescape
 
+export PATH=$HOME/tools/nvim:$PATH
+# the default nvr executable is in local/bin
+export PATH="~/.local/bin:$PATH"
+
 # Configure editors
 # WORKING
-# # set -o vi
+# Emacs so that <C-x><C-e> works
+set -o emacs
+# set -o vi
+
 # alias vim=nvim
 # alias vi=nvim
 # export VISUAL="nvim"
 # export EDITOR="$VISUAL"
 
-
-# the default nvr executable is in local/bin
-export PATH="~/.local/bin:$PATH"
-
+#  if [ -x "$(command -v nvr)" ]; then
 if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
-  set -o emacs
-  # Terminal within neovim!
-  export PS1="[nvr]$PS1"
-  # VISUAL & EDITOR should be set by ~/.config/nvim/init.vim!
-
-#   if [ -x "$(command -v nvr)" ]; then
-#       # Use neovim-remote to avoid nested neovim instances
-#       alias nvim=nvr
-#       export VISUAL="nvim -cc tabedit --remote-wait +'set bufhidden=wipe'"
-#     else
-#       alias nvim='echo "No nesting without neovim-remote!"'
-#     fi
-
-   # So that <C-x><C-e> works
-   # set -o emacs
-
+  # TERMINAL WITHIN NEOVIM!
+  export PS1="[nvr]${PS1}"
+  # VISUAL should be set by ~/.config/nvim/init.vim!
 else
-  # Normal terminal
-  # set -o vi
-  set -o emacs
+  # IN NORMAL TERMINAL!
   alias vim=nvim
   alias vi=nvim
   export VISUAL="nvim"
-  export EDITOR="$VISUAL"
-  # export VISUAL="nvim"
   neofetch
 fi
-export EDITOR="$VISUAL"
-alias v="$VISUAL"
+export EDITOR="${VISUAL}"
+alias v="${VISUAL}"
 
 
 
