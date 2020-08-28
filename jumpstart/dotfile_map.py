@@ -26,6 +26,8 @@ DOTFILE_MAP = {
     # 'vim/vimrc':                     '~/.vimrc',
     # 'vim/vimrc.local':               '~/.vimrc.local',
 
+    'ImageMagick/policy.xml':           '/etc/ImageMagick-6/policy.xml',
+
     # 'known_hosts':                   'path',
 
     # 'termite/config':                'path',
