@@ -10,12 +10,16 @@ DOTFILE_MAP = {
     'debugging/pdbrc': '~/.pdbrc',
 
     'i3/config':                  '~/.config/i3/config',
-    # 'i3/polybar.sh':                 '~/.config/i3/polybar.sh',
-    'polybar/colors.ini':            'path2',
-    'polybar/config.ini':            'path',
-    'polybar/bars.ini':              'path',
-    'polybar/modules.ini':           'path',
-    'polybar/user_modules.ini':      'path',
+
+    'i3/scripts/polybar.sh':            '~/.config/i3/scripts/polybar.sh',
+    'i3/scripts/lock.sh':               '~/.config/i3/scripts/lock.sh',
+    'i3/polybar/config.ini':            '~/.config/polybar/config.ini',
+    'i3/polybar/colors.ini':            '~/.config/polybar/colors.ini',
+    'i3/polybar/bars.ini':              '~/.config/polybar/bars.ini',
+    'i3/polybar/modules.ini':           '~/.config/polybar/modules.ini',
+    'i3/polybar/user_modules.ini':      '~/.config/polybar/user_modules.ini',
+
+    # 'i3/scripts/Lock_icon.png':         'path',
     # 'i3/i3blocks.conf':              'path',
     # 'rofi/config.rasi':              '~/.config/rasi/config.rasi',
 

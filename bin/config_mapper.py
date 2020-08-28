@@ -155,7 +155,7 @@ def config_copy(src: pathlib.Path,
         echo(f'{src} NOT FOUND!', color=bcolors.DEBUG)
         return False
 
-    if os.path.samefile(src,dest):
+    if dest.is_file() and os.path.samefile(src,dest):
         echo(f"Already hard-linked: {dest}\n", color=bcolors.DEBUG)
         # resolved dest hard-link points back to the source!
         return False
@@ -206,8 +206,23 @@ def apply_dotfiles(input_dotfiles:Set,
 if __name__ == "__main__":
 
     dotfile_keys={
-            'bash',
+
+            'bash/bashrc',
+            'bash/bash_aliases',
+            'bash/bash_functions',
+            'bash/inputrc',
+            'bash/bash_profile',
+
             'i3/config',
+
+            'i3/scripts/polybar.sh',
+            'i3/scripts/lock.sh',
+            'i3/polybar/config.ini',
+            'i3/polybar/colors.ini',
+            'i3/polybar/bars.ini',
+            'i3/polybar/modules.ini',
+            'i3/polybar/user_modules.ini',
+
             'nvim/init.vim',
             'nvim/coc-settings.json',
             'nvim/package-lock.json',
@@ -223,6 +238,10 @@ if __name__ == "__main__":
             'nvim/after/compiler/tslint.vim'         ,
             'nvim/after/compiler/typescript.vim'     ,
     }
+
+
+
+
     apply_dotfiles(dotfile_keys, dry_run=False)
     echo("\n\nDone!\n\n", color=bcolors.BOLD+bcolors.DEBUG)
 

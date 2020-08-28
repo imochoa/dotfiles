@@ -32,8 +32,9 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-gaps inner 10
-gaps outer 5
+# FOR GAPS
+# gaps inner 10
+# gaps outer 5
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -48,7 +49,9 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 # start a terminal at the previous location using xcwd
-bindsym $mod+Shift+Return exec "termite -d `xcwd`"
+# TODO FIX THIS WITHOUT TERMITE
+bindsym $mod+Shift+Return exec i3-sensible-terminal
+# bindsym $mod+Shift+Return exec "termite -d `xcwd`"
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -207,7 +210,7 @@ bindsym $mod+r mode "resize"
 #         status_command i3status
 # }
 
-exec_always --no-startup-id ~/.config/i3/polybar.sh &
+exec_always --no-startup-id ~/.config/i3/scripts/polybar.sh &
 # exec_always --no-startup-id ~/.config/polybar/launch.sh &
 
 # To set a wallpaper (Runs every time)
