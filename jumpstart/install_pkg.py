@@ -8,13 +8,14 @@ import pdb
 # TODO ADD Visual studio code: sudo snap install --classic code
 # TODO ADD pycharm etc.
 
+# TODO Add dependencies?
+DEPENDENCY_MAP=dict()
 INSTALL_PKGS = dict()
 
 INSTALL_PKGS['fd'] = r"""
 #!/usr/bin/env bash
 sudo apt install -y fd-find
 """
-
 
 INSTALL_PKGS['sxiv'] = r"""
 #!/usr/bin/env bash
@@ -103,10 +104,8 @@ sudo apt-get install -y exfat-fuse exfat-utils
 
 INSTALL_PKGS['ssh'] = r"""
 #!/usr/bin/env bash
-# TODO PREFER XCLIP OVER XSEL
-# sudo apt install -y openssh-server xsel xauth
 sudo apt install -y openssh-server xclip xauth
-# xsel, xauth -> so that you can share the clipboard
+# xsel, xauth -> so that you can share the clipboard (prefer xclip over xsel)
 # using ssh -Y yourserver 
 # or by setting that as the default config in ~/.ssh/config
 # https://superuser.com/questions/326871/using-clipboard-through-ssh-in-vim
@@ -135,13 +134,12 @@ sudo apt-get install -y openvpn easy-rsa
 INSTALL_PKGS['goxel'] = r"""
 #!/usr/bin/env bash
 
-mkdir -p ~/Applications \
-&& cd ~/Applications \
-&& sudo apt-get install -y scons pkg-config libglfw3-dev libgtk-3-dev git \
-&& git clone https://github.com/guillaumechereau/goxel \
+sudo apt-get install -y scons pkg-config libglfw3-dev libgtk-3-dev git \
+&& cd /opt/ \
+&& git clone https://github.com/guillaumechereau/goxel goxel \
 && cd goxel \
 && make release \
-&& sudo ln -s ~/Applications/goxel/goxel /usr/local/bin/goxel
+&& sudo ln -s /opt/goxel/goxel /usr/local/bin/goxel
 """
 
 # TODO Really slow install...
@@ -184,10 +182,7 @@ INSTALL_PKGS['tree'] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y tree
 """
-INSTALL_PKGS['wget'] = r"""
-#!/usr/bin/env bash
-sudo apt-get install -y wget
-"""
+
 INSTALL_PKGS['firewall_gui'] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y gufw
@@ -235,6 +230,8 @@ sudo apt-get install -y software-properties-common \
 INSTALL_PKGS['slack'] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y slack
+# # With snaps that would be:
+# sudo snap install slack --classic
 """
 INSTALL_PKGS['docker'] = r"""
 #!/usr/bin/env bash
@@ -259,14 +256,13 @@ sudo apt-get install -y curl \
 INSTALL_PKGS['stretchly'] = r"""
 #!/usr/bin/env bash
 
-sudo apt-get install -y wget \
-&& mkdir -p ~/Applications \
-&& wget -O ~/Applications/stretchlyx86_64.AppImage https://github.com/hovancik/stretchly/releases/download/v0.21.1/stretchly-0.21.1-x86_64.AppImage \
-&& chmod u+x ~/Applications/stretchlyx86_64.AppImage \
-&& sudo ln -s ~/Applications/stretchlyx86_64.AppImage /usr/local/bin/stretchly
-
-# wget -c https://github.com/hovancik/stretchly/releases/download/v0.21.0/stretchly_0.21.0_amd64.deb -O /tmp/stretchly.deb \
-# && sudo dpkg -i /tmp/stretchly.deb
+sudo apt-get install -y wget
+VER=1.0.0
+sudo mkdir -p /opt/
+sudo wget https://github.com/hovancik/stretchly/releases/download/v${VER}/Stretchly-${VER}.AppImage --continue --output-document=/opt/stretchly.appimage
+sudo chown ${USER}:${USER} /opt/stretchly.appimage
+sudo chmod u+x /opt/stretchly.appimage
+sudo ln -s /opt/stretchly.appimage /usr/local/bin/stretchly
 
 """
 
@@ -310,7 +306,9 @@ sudo apt-get remove -y vim-tiny gvim \
 INSTALL_PKGS['neovim'] = r"""
 #!/usr/bin/env bash
 
-sudo apt-get install -y wget git xclip exuberant-ctags ncurses-term curl python3-pip python3-autopep8 nodejs
+sudo apt-get install -y wget curl git xclip exuberant-ctags ncurses-term python3-pip python3-autopep8
+
+# DEPENDS ON NODEJS (install it as well)
 
 VER=0.4.4
 mkdir -p /opt/
@@ -321,8 +319,8 @@ sudo update-alternatives --install /usr/bin/neovim  editor /opt/nvim.appimage 10
 
 
 # py3
-sudo -H /usr/bin/pip3  install --upgrade pip
-sudo -H /usr/bin/pip3  install --upgrade neovim pynvim flake8 jedi autopep8
+sudo -H pip3  install --upgrade pip
+sudo -H pip3  install --upgrade neovim pynvim flake8 jedi autopep8 neovim-remote
 
 
 # Basic config
@@ -333,11 +331,8 @@ git clone https://github.com/k-takata/minpac.git ~/.config/nvim/pack/minpac/opt/
 
 # Config deps
 # Required by CoC
-sudo snap install node --classic --channel=8
+# sudo snap install node --classic --channel=8 -> Use nodejs installer instead!
 sudo npm install -g neovim
-
-
-neovim +PackUpdate +qall
 
 # sudo apt-get install llvm and sudo apt-get install clang
 
@@ -347,27 +342,9 @@ neovim +PackUpdate +qall
 # sudo apt-get installZQZQ clangd-9
 # sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-9 100
 
-
-sudo update-alternatives --install /usr/bin/neovim  editor ~/Applications/nvim.appimage 100
-sudo update-alternatives --config editor
-
-&& sudo ln -s /opt/nvim.appimage /usr/local/bin/nvim \
-&& sudo apt install -y python-pip python3-pip python-autopep8 \
-&& pip2 install --upgrade pip \
-&& pip3 install --upgrade pip \
-&& pip install flake8 jedi autopep8 \
-&& pip2 install --user --upgrade neovim pynvim \
-&& pip3 install --user --upgrade neovim pynvim \
-&& sudo apt-get install -y git exuberant-ctags ncurses-term curl \
-&& mkdir -p ~/.config/nvim \
-&& curl 'https://vim-bootstrap.com/generate.vim' --data 'langs=javascript&langs=c&langs=html&langs=python&langs=typescript&editor=nvim' > ~/.config/nvim/init.vim
- 
-
-
 # Update!
-
-# neovim +PluginInstall +qall
-# neovim +VimBootstrapUpdate +qall
+neovim +PackUpdate +qall
+neovim +CocInstall +qall
 """
 
 INSTALL_PKGS['mupdf'] = r"""
@@ -404,6 +381,7 @@ sudo apt-get install -y wget \
 | sudo sh /dev/stdin
 """
 
+# TODO
 INSTALL_PKGS['clipster'] = r"""
 #!/usr/bin/env bash
 
@@ -412,6 +390,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # Clipster
 # Config at ~/.config/clipster/clipster.ini
 
+# TODO MOVE TO OPT
 mkdir -p ~/Applications \
 && cd ~/Applications \
 && sudo apt-get install -y python-gi gir1.2-gtk-3.0 git \
@@ -428,6 +407,10 @@ mkdir -p ~/Applications \
 # sudo ln -s $(realpath roficlip) /usr/bin/roficlip
 """
 
+INSTALL_PKGS['networking'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y wget curl iputils-ping
+"""
 
 INSTALL_PKGS['entr'] = r"""
 #!/usr/bin/env bash
@@ -439,60 +422,18 @@ INSTALL_PKGS['xclip'] = r"""
 sudo apt-get install -y xclip
 """
 
-#INSTALL_PKGS['gtk_themes'] = r"""
-##!/usr/bin/env bash
-
-#SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-
-## if [[ ${SCOPE} = "SYSTEM" ]]; 
-## then    
-## 	echo "Installing system-wide wallpapers";
-##         IMG_DIR=/usr/local/share/wallpapers/;
-## 	# System-wide install requires sudo
-## 	CP_CMD='sudo cp';
-## else   
-## 	echo "Installing wallpapers for user $USER";
-## 	IMG_DIR=~/Images/;
-## 	CP_CMD='cp';
-## fi;
-## In general for setting themes:
-#sudo apt-get install -y lxappearance gtk-chtheme qt4-qtconfig
-## Use sudo lxappearance and gtk-chteme for GTK2.0 and GTK+ 
-## Use qtconfig and qtconfig-q4 to set the qt themes
-## Note, for the qtconfig themes, delete this first (otherwise the changes don't stick!)
-## rm -y ~/.config/Trolltech.conf
-
-## From: https://www.ubuntupit.com/materia-theme-a-material-design-theme-for-gnome-gtk/
-## Install Material theme requirements
-#sudo apt install -y gnome-themes-standard gtk2-engines-murrine libglib2.0-dev libxml2-utils;
-#sudo apt install -y materia-gtk-theme
-## Remove with: 
-## sudo rm -rf /usr/share/themes/Materia{,-compact,-dark,-dark-compact,-light,-light-compact}
-
-#sudo mkdir -p ${IMG_DIR};
-
-#echo ${WALLPAPER_URL};
-
-## if [[ -z "${WALLPAPER_URL}" ]]; 
-## then    
-## 	echo "NO WLLPAPER";
-##         # FONT_DIR=/usr/share/fonts/opentype
-## 	# System-wide install requires sudo
-## 	# FONT_CMD='sudo cp'
-## else   
-## 	echo "set url_ ${WALLPAPER_URL}";
-
-## 	# FONT_DIR=~/.fonts/
-## 	# FONT_CMD='cp'
-## fi;
-
-## export GIO_EXTRA_MODULES=/usr/lib/x86_64-linux-gnu/gio/modules/
-## Otherwise the set wallpaper command (gsettings) fails, see:
-## https://stackoverflow.com/questions/44934641/glib-gio-message-using-the-memory-gsettings-backend-your-settings-will-not-b
-## https://github.com/conda-forge/glib-feedstock/issues/19
-#"""
 
 
+DEPENDENCY_MAP['neovim'] = ['python3', 'nodejs', 'networking','xclip']
+DEPENDENCY_MAP['ssh'] = ['xclip']
+DEPENDENCY_MAP['calibre'] = ['networking']
+DEPENDENCY_MAP['docker'] = ['networking']
+DEPENDENCY_MAP['docker_compose'] = ['networking']
+DEPENDENCY_MAP['nodejs'] = ['networking']
+DEPENDENCY_MAP['stretchly'] = ['networking']
+DEPENDENCY_MAP['clipster'] = ['git']
+DEPENDENCY_MAP['polybar'] = ['git']
+DEPENDENCY_MAP['goxel'] = ['git']
 
 if __name__ == '__main__':
     pass

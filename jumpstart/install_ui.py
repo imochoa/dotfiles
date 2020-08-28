@@ -73,29 +73,19 @@ sudo add-apt-repository -y ppa:numix/ppa
 sudo apt install -y numix-icon-theme-circle
 """
 
+INSTALL_UI['wallpaper'] = r"""
+#!/usr/bin/env bash
+BGDIR=/usr/share/backgrounds
+mkdir -p ${BGDIR}
+IMG_URL='https://unsplash.com/photos/VzRKG0piEp8/download?force=true'
+sudo wget ${IMG_URL} --continue --output-document=${BGDIR}/wallpaper.jpg
+sudo convert ${BGDIR}/wallpaper.jpg ${BGDIR}/wallpaper.png
 
-# TODO Wallpaper!
-# sudo mkdir -p ${IMG_DIR};
-# 
-# echo ${WALLPAPER_URL};
-# 
-# # if [[ -z "${WALLPAPER_URL}" ]]; 
-# # then    
-# # 	echo "NO WLLPAPER";
-# #         # FONT_DIR=/usr/share/fonts/opentype
-# # 	# System-wide install requires sudo
-# # 	# FONT_CMD='sudo cp'
-# # else   
-# # 	echo "set url_ ${WALLPAPER_URL}";
-# 
-# # 	# FONT_DIR=~/.fonts/
-# # 	# FONT_CMD='cp'
-# # fi;
-# 
 # # export GIO_EXTRA_MODULES=/usr/lib/x86_64-linux-gnu/gio/modules/
 # # Otherwise the set wallpaper command (gsettings) fails, see:
 # # https://stackoverflow.com/questions/44934641/glib-gio-message-using-the-memory-gsettings-backend-your-settings-will-not-b
 # # https://github.com/conda-forge/glib-feedstock/issues/19
+"""
 
 
 # TODO Included in nerdfonts?
