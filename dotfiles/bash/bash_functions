@@ -49,3 +49,17 @@ function pool() {
     cat "${1}" | xargs -P "${pcount}" -I % sh -c '%' 2>&1 | tee ${logfile};
     printf '\033[0;36m%s\033[0m\n' "Finished running ${1} [LOGFILE AT ${logfile}]!";
 }
+
+function py3venv() {
+    local venvname="${1:-venv}"
+    
+    printf '\033[0;36m%s\033[0m\n' "Making a py3 venv at ${1}!";
+    mkdir ${venvname} \
+    && python3 -m venv ${venvname}                                 \
+    && ${venvname}/bin/python -m pip install --upgrade pip         \
+    && ${venvname}/bin/python -m pip install --upgrade setuptools  \
+    && ${venvname}/bin/python -m pip install --upgrade wheel
+
+    printf '\033[0;36m%s\033[0m\n' "Done!";
+}
+
