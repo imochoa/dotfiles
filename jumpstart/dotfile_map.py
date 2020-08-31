@@ -28,6 +28,8 @@ DOTFILE_MAP = {
 
     'ImageMagick/policy.xml':           '/etc/ImageMagick-6/policy.xml',
 
+    'desktop_launchers/stretchly.desktop': '~/.local/share/applications/stretchly.desktop',
+
     # 'known_hosts':                   'path',
 
     # 'termite/config':                'path',
