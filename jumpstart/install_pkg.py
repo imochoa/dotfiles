@@ -26,6 +26,8 @@ DEPENDENCY_MAP=dict()
 INSTALL_PKGS = dict()
 REMOVE_PKGS = dict()
 
+INSTALL_PKGS['tmux'] = simple_install('tmux')
+REMOVE_PKGS['tmux'] = simple_remove('tmux')
 
 INSTALL_PKGS['fd'] = simple_install('fd-find')
 REMOVE_PKGS['fd'] = simple_remove('fd-find')
@@ -63,10 +65,93 @@ REMOVE_PKGS['neofetch'] = simple_remove('neofetch')
 #sudo apt remove -y neofetch
 #"""
 
+INSTALL_PKGS['networking'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y wget curl iputils-ping
+"""
+
+INSTALL_PKGS['entr'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y entr
+"""
+
+INSTALL_PKGS['xclip'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y xclip
+"""
+
 INSTALL_PKGS['disk_space'] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y baobab
 """
+
+INSTALL_PKGS['trash_cli'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y trash-cli
+"""
+
+INSTALL_PKGS['exfat'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y exfat-fuse exfat-utils
+"""
+
+INSTALL_PKGS['arandr'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y arandr
+"""
+
+INSTALL_PKGS['texstudio'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y texstudio texlive-latex-extra
+"""
+
+INSTALL_PKGS['git'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y git
+"""
+
+INSTALL_PKGS['tree'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y tree
+"""
+
+INSTALL_PKGS['firewall_gui'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y gufw
+"""
+# --fix-broken
+
+INSTALL_PKGS['gnome_tweak_tool'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y gnome-tweak-tool gnome-tweaks
+"""
+
+INSTALL_PKGS['checkinstall'] = r"""
+#!/usr/bin/env bash
+# https://help.ubuntu.com/community/CheckInstall
+sudo apt-get install -y checkinstall
+"""
+
+INSTALL_PKGS['mupdf'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y mupdf
+"""
+
+INSTALL_PKGS['cmus'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y cmus
+"""
+
+INSTALL_PKGS['pavucontrol'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y pavucontrol
+"""
+
+INSTALL_PKGS['vlc'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y vlc
+"""
+
 
 INSTALL_PKGS['nodejs'] = r"""
 #!/usr/bin/env bash
@@ -127,15 +212,6 @@ git checkout $latestTag
  ./build.sh --all-features --gcc -f --install-config --auto
 """
 
-INSTALL_PKGS['trash_cli'] = r"""
-#!/usr/bin/env bash
-sudo apt-get install -y trash-cli
-"""
-
-INSTALL_PKGS['exfat'] = r"""
-#!/usr/bin/env bash
-sudo apt-get install -y exfat-fuse exfat-utils
-"""
 
 INSTALL_PKGS['ssh'] = r"""
 #!/usr/bin/env bash
@@ -214,16 +290,6 @@ sudo apt-get install -y freecad freecad-common freecad-python3
 # sudo update-alternatives --config freecad
 """
 
-INSTALL_PKGS['arandr'] = r"""
-#!/usr/bin/env bash
-sudo apt-get install -y arandr
-"""
-
-INSTALL_PKGS['texstudio'] = r"""
-#!/usr/bin/env bash
-sudo apt-get install -y texstudio texlive-latex-extra
-"""
-
 INSTALL_PKGS['shutter'] = r"""
 #!/usr/bin/env bash
 
@@ -233,32 +299,6 @@ sudo apt-get install -y software-properties-common \
 && sudo apt-get install -y shutter
 """
 
-INSTALL_PKGS['git'] = r"""
-#!/usr/bin/env bash
-sudo apt-get install -y git
-"""
-
-INSTALL_PKGS['tree'] = r"""
-#!/usr/bin/env bash
-sudo apt-get install -y tree
-"""
-
-INSTALL_PKGS['firewall_gui'] = r"""
-#!/usr/bin/env bash
-sudo apt-get install -y gufw
-"""
-# --fix-broken
-
-INSTALL_PKGS['gnome_tweak_tool'] = r"""
-#!/usr/bin/env bash
-sudo apt-get install -y gnome-tweak-tool gnome-tweaks
-"""
-
-INSTALL_PKGS['checkinstall'] = r"""
-#!/usr/bin/env bash
-# https://help.ubuntu.com/community/CheckInstall
-sudo apt-get install -y checkinstall
-"""
 
 INSTALL_PKGS['xcwd'] = r"""
 #!/usr/bin/env bash
@@ -335,7 +375,6 @@ sudo wget https://github.com/hovancik/stretchly/releases/download/v${VER}/Stretc
 sudo chown ${USER}:${USER} /opt/stretchly.appimage
 sudo chmod u+x /opt/stretchly.appimage
 sudo ln -s /opt/stretchly.appimage /usr/local/bin/stretchly
-
 """
 
 INSTALL_PKGS['xournal'] = r"""
@@ -419,31 +458,17 @@ neovim +PackUpdate +qall
 neovim +CocInstall +qall
 """
 
-INSTALL_PKGS['mupdf'] = r"""
+
+INSTALL_PKGS['pycharm-community'] = r"""
 #!/usr/bin/env bash
-sudo apt-get install -y mupdf
+sudo snap install pycharm-community --classic
 """
 
-INSTALL_PKGS['cmus'] = r"""
+INSTALL_PKGS['pycharm-professional'] = r"""
 #!/usr/bin/env bash
-sudo apt-get install -y cmus
+sudo snap install pycharm-professional --classic
 """
-
-INSTALL_PKGS['pavucontrol'] = r"""
-#!/usr/bin/env bash
-sudo apt-get install -y pavucontrol
-"""
-
-INSTALL_PKGS['vlc'] = r"""
-#!/usr/bin/env bash
-sudo apt-get install -y vlc
-"""
-
-
-INSTALL_PKGS['pycharm'] = r"""
-#!/usr/bin/env bash
-echo 'TODO'
-"""
+# sudo snap install pycharm-educational --classic
 
 INSTALL_PKGS['calibre'] = r"""
 #!/usr/bin/env bash
@@ -477,21 +502,6 @@ mkdir -p ~/Applications \
 # cp roficlip-repo/roficlip roficlip
 # rm -rf roficlip-repo
 # sudo ln -s $(realpath roficlip) /usr/bin/roficlip
-"""
-
-INSTALL_PKGS['networking'] = r"""
-#!/usr/bin/env bash
-sudo apt-get install -y wget curl iputils-ping
-"""
-
-INSTALL_PKGS['entr'] = r"""
-#!/usr/bin/env bash
-sudo apt-get install -y entr
-"""
-
-INSTALL_PKGS['xclip'] = r"""
-#!/usr/bin/env bash
-sudo apt-get install -y xclip
 """
 
 
