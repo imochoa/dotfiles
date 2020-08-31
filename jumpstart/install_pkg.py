@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 # std imports
+from typing import Union, Sequence
 import pdb
 
 # local imports
@@ -8,24 +9,59 @@ import pdb
 # TODO ADD Visual studio code: sudo snap install --classic code
 # TODO ADD pycharm etc.
 
+BASH_SHEBANG="#!/usr/bin/env bash"
+
+def simple_install(pkgs:Union[str,Sequence[str]])->str:
+    if isinstance(pkgs,str):
+        pkgs=[pkgs]
+    return f"{BASH_SHEBANG}\nsudo apt-get install -y {' '.join(pkgs)}"
+
+def simple_remove(pkgs:Union[str,Sequence[str]])->str:
+    if isinstance(pkgs,str):
+        pkgs=[pkgs]
+    return f"{BASH_SHEBANG}\nsudo apt remove -y {' '.join(pkgs)}"
+
 # TODO Add dependencies?
 DEPENDENCY_MAP=dict()
 INSTALL_PKGS = dict()
+REMOVE_PKGS = dict()
 
-INSTALL_PKGS['fd'] = r"""
-#!/usr/bin/env bash
-sudo apt install -y fd-find
-"""
 
-INSTALL_PKGS['sxiv'] = r"""
-#!/usr/bin/env bash
-sudo apt-get install -y sxiv
-"""
+INSTALL_PKGS['fd'] = simple_install('fd-find')
+REMOVE_PKGS['fd'] = simple_remove('fd-find')
 
-INSTALL_PKGS['neofetch'] = r"""
-#!/usr/bin/env bash
-sudo apt-get install -y neofetch
-"""
+#INSTALL_PKGS['fd'] = r"""
+##!/usr/bin/env bash
+#sudo apt install -y fd-find
+#"""
+#REMOVE_PKGS['fd'] = r"""
+##!/usr/bin/env bash
+#sudo apt remove -y fd-find
+#"""
+
+INSTALL_PKGS['sxiv'] = simple_install('sxiv')
+REMOVE_PKGS['sxiv'] = simple_remove('sxiv')
+
+#INSTALL_PKGS['sxiv'] = r"""
+##!/usr/bin/env bash
+#sudo apt-get install -y sxiv
+#"""
+#REMOVE_PKGS['sxiv'] = r"""
+##!/usr/bin/env bash
+#sudo apt remove -y sxiv
+#"""
+
+INSTALL_PKGS['neofetch'] = simple_install('neofetch')
+REMOVE_PKGS['neofetch'] = simple_remove('neofetch')
+
+#INSTALL_PKGS['neofetch'] = r"""
+##!/usr/bin/env bash
+#sudo apt-get install -y neofetch
+#"""
+#REMOVE_PKGS['sxiv'] = r"""
+##!/usr/bin/env bash
+#sudo apt remove -y neofetch
+#"""
 
 INSTALL_PKGS['disk_space'] = r"""
 #!/usr/bin/env bash
@@ -55,7 +91,6 @@ sudo apt install -y libpq-dev python3-dev
 
 # Upgrade pip
 sudo -H pip3  install --upgrade pip
-
 """
 
 
@@ -131,6 +166,7 @@ INSTALL_PKGS['openvpn'] = r"""
 sudo apt-get install -y openvpn easy-rsa
 """
 
+# TODO Add checkinstall
 INSTALL_PKGS['goxel'] = r"""
 #!/usr/bin/env bash
 
@@ -142,14 +178,37 @@ sudo apt-get install -y scons pkg-config libglfw3-dev libgtk-3-dev git \
 && sudo ln -s /opt/goxel/goxel /usr/local/bin/goxel
 """
 
-# TODO Really slow install...
+## TODO Really slow install...
+#INSTALL_PKGS['freecad'] = r"""
+##!/usr/bin/env bash
+#VER=0.18.4
+#sudo apt-get install -y git software-properties-common apt-utils \
+#&& sudo mkdir -p /opt/ \
+#&& cd /opt/ \
+#&& sudo git clone https://github.com/FreeCAD/FreeCAD.git FreeCAD \
+#&& sudo chown -R ${USER}:${USER} /opt/FreeCAD \
+#&& cd FreeCAD/ \
+#&& git checkout ${VER} \
+#&& sudo add-apt-repository -y ppa:freecad-maintainers/freecad-stable \
+#&& sudo apt-get update -y \
+#&& sudo apt-get install -y cmake cmake-qt-gui libboost-date-time-dev libboost-dev libboost-filesystem-dev libboost-graph-dev libboost-iostreams-dev libboost-program-options-dev libboost-python-dev libboost-regex-dev libboost-serialization-dev libboost-signals-dev libboost-thread-dev libcoin-dev libeigen3-dev libgts-bin libgts-dev libkdtree++-dev libmedc-dev libocct-data-exchange-dev libocct-ocaf-dev libocct-visualization-dev libopencv-dev libproj-dev libpyside2-dev libqt5opengl5-dev libqt5svg5-dev libqt5webkit5-dev libqt5x11extras5-dev libqt5xmlpatterns5-dev libshiboken2-dev libspnav-dev libvtk7-dev libx11-dev libxerces-c-dev libzipios++-dev occt-draw pyside2-tools python3-dev python3-matplotlib python3-pivy python3-ply python3-pyside2.qtcore python3-pyside2.qtgui python3-pyside2.qtsvg python3-pyside2.qtwidgets python3-pyside2uic qtbase5-dev qttools5-dev swig \
+#&& make \
+#&& sudo checkinstall
+#"""
+## PROBLEMS WITH:
+##   python3-pyside2uic
+## sudo apt-get install -y cmake cmake-qt-gui libboost-date-time-dev        libboost-dev         libboost-filesystem-dev         libboost-graph-dev         libboost-iostreams-dev         libboost-program-options-dev         libboost-python-dev         libboost-regex-dev         libboost-serialization-dev         libboost-dev         libboost-thread-dev         libeigen3-dev         libgts-bin         libgts-dev         libkdtree++-dev         libmedc-dev         libopencv-dev         libproj-dev         libqt5opengl5-dev         libqt5svg5-dev         libqt5webkit5-dev         libqt5x11extras5-dev         libqt5xmlpatterns5-dev         libspnav-dev         libvtk7-dev         libx11-dev         libxerces-c-dev         libzipios++-dev         python3-dev         python3-matplotlib         python3-ply         qtbase5-dev         qttools5-dev         swig
+## ADD PPA
+## sudo apt-get install -y         libocct-data-exchange-dev         libocct-ocaf-dev         libocct-visualization-dev         occt-draw         libcoin-dev         python3-pyside2.qtgui         python3-pyside2.qtsvg         python3-pyside2.qtwidgets                pyside2-tools         libshiboken2-dev         python3-pivy         libpyside2-dev         python3-pyside2.qtcore
+## sudo apt-get install -y libsimage-dev
+
 INSTALL_PKGS['freecad'] = r"""
 #!/usr/bin/env bash
 
-# sudo apt-get install -y software-properties-common
-# sudo add-apt-repository -y ppa:freecad-maintainers/freecad-stable
-# sudo apt-get update -y
-# sudo apt-get install -y freecad freecad-common freecad-python2 freecad-python3
+sudo apt-get install -y software-properties-common
+sudo add-apt-repository -y ppa:freecad-maintainers/freecad-stable
+sudo apt-get update -y
+sudo apt-get install -y freecad freecad-common freecad-python3
 
 # Default to using py3! (TODO Does this work?)
 # sudo update-alternatives --config freecad
@@ -178,6 +237,7 @@ INSTALL_PKGS['git'] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y git
 """
+
 INSTALL_PKGS['tree'] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y tree
@@ -193,15 +253,24 @@ INSTALL_PKGS['gnome_tweak_tool'] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y gnome-tweak-tool gnome-tweaks
 """
+
+INSTALL_PKGS['checkinstall'] = r"""
+#!/usr/bin/env bash
+# https://help.ubuntu.com/community/CheckInstall
+sudo apt-get install -y checkinstall
+"""
+
 INSTALL_PKGS['xcwd'] = r"""
 #!/usr/bin/env bash
-sudo apt-get install -y wget unzip \
-&& wget https://github.com/schischi/xcwd/archive/master.zip -O xcwd.zip  \
-&& unzip -j xcwd.zip -d xcwd-unzipped \
-&& cd xcwd-unzipped/ \
+sudo apt-get install -y git \
+&& sudo mkdir -p /opt/ \
+&& cd /opt/ \
+&& sudo git clone https://github.com/schischi/xcwd.git xcwd \
+&& sudo chown -R ${USER}:${USER} /opt/xcwd \
+&& cd xcwd/ \
 && make \
-&& sudo make install
-# Use checkinstall instead of make install?
+&& sudo checkinstall
+# && sudo make install
 """
 
 INSTALL_PKGS['chrome'] = r"""
@@ -227,12 +296,15 @@ sudo apt-get install -y software-properties-common \
 && apt-get update -y \
 && sudo apt install -y tlpui
 """
+
 INSTALL_PKGS['slack'] = r"""
 #!/usr/bin/env bash
-sudo apt-get install -y slack
-# # With snaps that would be:
-# sudo snap install slack --classic
+# # Apt-get (was problematic)
+# sudo apt-get install -y slack
+# With snaps that would be:
+sudo snap install slack --classic
 """
+
 INSTALL_PKGS['docker'] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y curl \
@@ -433,7 +505,9 @@ DEPENDENCY_MAP['nodejs'] = ['networking']
 DEPENDENCY_MAP['stretchly'] = ['networking']
 DEPENDENCY_MAP['clipster'] = ['git']
 DEPENDENCY_MAP['polybar'] = ['git']
-DEPENDENCY_MAP['goxel'] = ['git']
+DEPENDENCY_MAP['goxel'] = ['git','checkinstall']
+DEPENDENCY_MAP['xcwd'] = ['git','checkinstall']
+DEPENDENCY_MAP['freecad'] = ['git','checkinstall']
 
 if __name__ == '__main__':
     pass
