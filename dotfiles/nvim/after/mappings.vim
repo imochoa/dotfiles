@@ -93,7 +93,9 @@ endif
 
 " Tab navigation
 nmap <silent> tt :tabnew<CR>
-imap <silent> tt :<Esc>tabnew<CR>
+" breaks 'tt' in insert mode!
+" imap <silent> tt :<Esc>tabnew<CR>
+
 " nmap <silent> <Leader><Tab> :tabnew<CR>
 " imap <silent> <Leader><Tab> :<Esc>tabnew<CR>
 

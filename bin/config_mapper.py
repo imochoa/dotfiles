@@ -231,6 +231,7 @@ if __name__ == "__main__":
             'nvim/after/mappings.vim',
             'nvim/after/visual.vim',
             'nvim/after/plugin/plugin-config.vim',
+            'nvim/after/plugin/plugin-overview.vim',
             'nvim/after/compiler/cpp.vim'            ,
             'nvim/after/compiler/dummy.vim'          ,
             'nvim/after/compiler/tardyscript.vim'    ,

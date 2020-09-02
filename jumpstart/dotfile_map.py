@@ -45,6 +45,7 @@ DOTFILE_MAP = {
     'nvim/after/visual.vim':           '~/.config/nvim/after/visual.vim',
 
     'nvim/after/plugin/plugin-config.vim':           '~/.config/nvim/after/plugin/plugin-config.vim',
+    'nvim/after/plugin/plugin-overview.vim':           '~/.config/nvim/after/plugin/plugin-overview.vim',
 
     'nvim/after/compiler/cpp.vim'            :  '~/.config/nvim/after/compiler/cpp.vim'                       ,
     'nvim/after/compiler/dummy.vim'          :  '~/.config/nvim/after/compiler/dummy.vim'                       ,
