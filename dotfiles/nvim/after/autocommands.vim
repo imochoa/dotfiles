@@ -24,9 +24,17 @@ autocmd BufWritePre,BufRead *.yaml :normal gg=G"
 " -----------------------------------
 " JSON
 " -----------------------------------
+" Comments in JSON files
 autocmd FileType json syntax match Comment +\/\/.\+$+
-autocmd BufWritePre,BufRead *.json :normal gg=G"
 " reindent the file whenever we read or write it
+autocmd BufWritePre,BufRead *.json :normal gg=G"
+
+
+" -----------------------------------
+" glTF
+" -----------------------------------
+" (has a json structure)
+autocmd BufNewFile,BufRead *.gltf set syntax=json
 
 " -----------------------------------
 " Python

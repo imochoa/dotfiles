@@ -1,4 +1,4 @@
-##!/usr/bin/env python3
+# !/usr/bin/env python3
 
 DOTFILE_MAP = {
     'bash/bashrc':                   '~/.bashrc',
@@ -46,13 +46,14 @@ DOTFILE_MAP = {
 
     'nvim/after/plugin/plugin-config.vim':           '~/.config/nvim/after/plugin/plugin-config.vim',
     'nvim/after/plugin/plugin-overview.vim':           '~/.config/nvim/after/plugin/plugin-overview.vim',
+    'nvim/after/plugin/coc.vim':           '~/.config/nvim/after/plugin/coc.vim',
 
-    'nvim/after/compiler/cpp.vim'            :  '~/.config/nvim/after/compiler/cpp.vim'                       ,
-    'nvim/after/compiler/dummy.vim'          :  '~/.config/nvim/after/compiler/dummy.vim'                       ,
-    'nvim/after/compiler/tardyscript.vim'    :  '~/.config/nvim/after/compiler/tardyscript.vim'                       ,
-    'nvim/after/compiler/tsconfig.vim'       :  '~/.config/nvim/after/compiler/tsconfig.vim'                       ,
-    'nvim/after/compiler/tslint.vim'         :  '~/.config/nvim/after/compiler/tslint.vim'                       ,
-    'nvim/after/compiler/typescript.vim'     :  '~/.config/nvim/after/compiler/typescript.vim'                       ,
+    'nvim/after/compiler/cpp.vim':  '~/.config/nvim/after/compiler/cpp.vim',
+    'nvim/after/compiler/dummy.vim':  '~/.config/nvim/after/compiler/dummy.vim',
+    'nvim/after/compiler/tardyscript.vim':  '~/.config/nvim/after/compiler/tardyscript.vim',
+    'nvim/after/compiler/tsconfig.vim':  '~/.config/nvim/after/compiler/tsconfig.vim',
+    'nvim/after/compiler/tslint.vim':  '~/.config/nvim/after/compiler/tslint.vim',
+    'nvim/after/compiler/typescript.vim':  '~/.config/nvim/after/compiler/typescript.vim',
 
     'gtk-2.0/gtkrc-2.0':             '~/.gtkrc-2.0',
     'gtk-3.0/gtk.css':               '~/.config/gtk-3.0/gtk.css',

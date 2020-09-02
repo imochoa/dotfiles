@@ -15,7 +15,6 @@
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "html",
-    "python",
     "markdown",
     "Markdown",
     "javascript",
@@ -23,7 +22,7 @@
     "typescript",
     "typescriptreact"
   ],
-    "snippets.ultisnips.directories": 
+  "snippets.ultisnips.directories": 
   [
     "UltiSnips",
     "~/.config/nvim/utils/snips"

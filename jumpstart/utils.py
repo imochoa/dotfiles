@@ -21,6 +21,7 @@ from urllib.request import urlopen
 # local imports
 from jumpstart import TMP
 
+
 class bcolors:
     HEADER = '\033[95m'
     INFO = '\033[94m'
@@ -31,6 +32,7 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+
 def echo(msg: collections.Iterable,
          color: bcolors = bcolors.INFO,
          sep: str = '',
@@ -39,7 +41,8 @@ def echo(msg: collections.Iterable,
         msg = sep.join(msg)
     print(f"{color}{msg}{bcolors.ENDC}", sep=sep)
 
-def dryrun_echo(msg:str)->None:
+
+def dryrun_echo(msg: str) -> None:
     echo(f"\t[DRY RUN]: {msg}", color=bcolors.DEBUG)
 
 
@@ -130,7 +133,7 @@ def decode(s: str) -> str:
 
 
 def run_shell_str(shell_str: str,
-                  dry_run:bool=True,
+                  dry_run: bool = True,
                   verbose: bool = False,
                   ) -> Tuple[int, str]:
 
@@ -156,7 +159,7 @@ def run_shell_str(shell_str: str,
                 # line = decode(fp_stream.readline().rstrip())
                 if not line:
                     break
-                
+
                 if verbose:
                     echo(f"\t\t{line}", color=bcolors.HEADER)
                 stdout += line

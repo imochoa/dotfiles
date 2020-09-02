@@ -1,3 +1,54 @@
+" Global extension names to install when they aren't installed.
+" " See a list here: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions#implemented-coc-extensions
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-eslint', 'coc-clangd', 'coc-html', 'coc-jedi', 'coc-json', 'coc-markdownlint', 'coc-python', 'coc-sh', 'coc-xml', 'coc-yaml', 'coc-css']
+
+
+" coc-floaterm for vim-floaterm integration
+" coc-explorer file explorer extension
+
+" coc-actions Actions menu for Neovim
+
+" coc-bookmark bookmark extension
+
+" coc-browser for browser words completion
+
+" coc-cmake for cmake code completion
+" coc-cssmodules css modules intellisense.
+
+" coc-fzf-preview provide powerful fzf integration.
+
+" coc-highlight provides default document symbol highlighting and color support.
+" coc-lists provides some basic lists like fzf.vim.
+" coc-stylelintplus for linting CSS and CSS preprocessed formats
+" coc-stylelint for linting CSS and CSS preprocessed formats
+" coc-snippets provides snippets solution.
+" coc-spell-checker A basic spell checker that works well with camelCase code
+" coc-sql for sql.
+" coc-svg for svg.
+" coc-tabnine for tabnine.
+" coc-tailwindcss for tailwindcss.
+" coc-tasks for asynctasks.vim integration
+" coc-template templates extension for file types
+" coc-texlab for LaTex using TexLab.
+" coc-tsserver for javascript and typescript.
+" coc-vimlsp for viml.
+" coc-yank provides yank highlights & history.
+
+
+
+" Opening the configuration file
+" Use the command :CocConfig to open your user configuration file, you can create a shortcut for the command like this:
+function! SetupCommandAbbrs(from, to)
+  exec 'cnoreabbrev <expr> '.a:from
+        \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
+        \ .'? ("'.a:to.'") : ("'.a:from.'"))'
+endfunction
+
+" Use C to open coc config
+call SetupCommandAbbrs('C', 'CocConfig')
+
+" --------------------
+
 " https://www.chrisatmachine.com/Neovim/04-vim-coc/
 " TextEdit might fail if hidden is not set.
 set hidden

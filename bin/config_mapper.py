@@ -32,13 +32,6 @@ from jumpstart.utils import (
         get_timestamp,
         )
 
-# CONSTANTS
-# DOTFILE_MAP = {
-#     'bash/bashrc':                   '~/.bashrc',
-#     'bash/bash_aliases':             '~/.bash_aliases',
-#     'bash/bash_functions':           '~/.bash_functions',
-#     'bash/inputrc':                  '~/.inputrc',
-#     'bash/bash_profile':             '~/.bash_profile',
 
 #     'debugging/pdbrc': '~/.pdbrc',
 

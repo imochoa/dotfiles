@@ -87,36 +87,19 @@ call minpac#add('joshdick/onedark.vim', {'type': 'opt'})
 call minpac#add('itchyny/lightline.vim', {'type': 'opt'})
 call minpac#add('mengelbrecht/lightline-bufferline', {'type': 'opt'})
 
-
-
-" git buffer
-call minpac#add('airblade/vim-gitgutter')
-" call minpac#add('josa42/vim-lightline-coc') " NOT WORKING!
-" call minpac#add('airblade/vim-gitgutter', {'type': 'opt'})
-
 " Add other plugins here.
 " call minpac#add('vim-jp/syntax-vim-ex')
 
 " Load the plugins right now. (optional)
 "packloadall
 
-" Install with
-" :call minpac#update()
-"
-" See messages with :messages
-" Uninstall with
-" :call minpac#clean()
-
-" command! PackUpdate call minpac#update()
+" For installing
 command! PackUpdate call minpac#update() 
-command! PackDocs silent helptags ALL
+" For uninstalling
 command! PackClean call minpac#clean()
-
-" function! PackList(...)
-"   call PackInit()
-"   return join(sort(keys(minpac#getpluglist())), "\n")
-" endfunction
-
+" Make tags
+command! PackDocs silent helptags ALL
+" List installed packages
 command! PackList :echo join(split(join(sort(keys(minpac#getpluglist())), "\n"), ','),"\n")
 " nnoremap  <leader>rt :echo join(split(&runtimepath, ','),"\n") <CR>
 

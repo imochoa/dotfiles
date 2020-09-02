@@ -9,7 +9,7 @@ import pdb
 # TODO ADD Visual studio code: sudo snap install --classic code
 # TODO ADD pycharm etc.
 
-BASH_SHEBANG="#!/usr/bin/env bash"
+BASH_SHEBANG = "#!/usr/bin/env bash"
 
 def simple_install(pkgs:Union[str,Sequence[str]], ppas:Union[None,str,Sequence[str]]=None)->str:
 

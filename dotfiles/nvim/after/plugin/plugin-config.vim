@@ -119,19 +119,9 @@ nmap <leader>y :History:<CR>
 
 
 " ---------
-" COC (move to the plugin config?)
+" COC (Conquer Of Completion)
 " ---------
-function! SetupCommandAbbrs(from, to)
-  exec 'cnoreabbrev <expr> '.a:from
-        \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
-        \ .'? ("'.a:to.'") : ("'.a:from.'"))'
-endfunction
-
-" Use C to open coc config
-call SetupCommandAbbrs('C', 'CocConfig')
-
 source $HOME/.config/nvim/after/plugin/coc.vim
-" source $HOME/.config/nvim/coc_config.vim 
 
 " nvim-editcommand 
 " -----------------
