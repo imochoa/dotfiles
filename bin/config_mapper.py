@@ -22,55 +22,21 @@ sys.path.append(str(REPO_DIR))
 import jumpstart
 from jumpstart.dotfile_map import DOTFILE_MAP
 from jumpstart.utils import (
-        bcolors,
-        echo,
-        rm,
-        cp,
-        ln,
-        rm,
-        mkdirs,
-        get_timestamp,
-        )
-
-
-#     'debugging/pdbrc': '~/.pdbrc',
-
-#     # 'i3/i3config':                   '~/.config/i3/config',
-#     # 'i3/polybar.sh':                 '~/.config/i3/polybar.sh',
-#     'polybar/colors.ini':            'path2',
-#     'polybar/config.ini':            'path',
-#     'polybar/bars.ini':              'path',
-#     'polybar/modules.ini':           'path',
-#     'polybar/user_modules.ini':      'path',
-#     # 'i3/i3blocks.conf':              'path',
-#     # 'rofi/config.rasi':              '~/.config/rasi/config.rasi',
-
-#     # 'vim/vimrc':                     '~/.vimrc',
-#     # 'vim/vimrc.local':               '~/.vimrc.local',
-
-#     # 'known_hosts':                   'path',
-
-#     # 'termite/config':                'path',
-#     # 'nvim/local_init.vim':           'path',
-#     # 'nvim/local_bundles.vim':        'path',
-
-#     'gtk-2.0/gtkrc-2.0':             '~/.gtkrc-2.0',
-#     'gtk-3.0/gtk.css':               '~/.config/gtk-3.0/gtk.css',
-#     'gtk-3.0/settings.ini':          '~/.config/gtk-3.0/settings.ini',
-#     'gtk-4.0/settings.ini':          '~/.config/gtk-4.0/settings.ini',
-
-#     # 'plantuml_style.iuml': 'path',
-
-#     # 'X/Xresources':                  '~/.Xresources',
-#     # 'X/default_screenlayout.sh':     '~/.screenlayout/default_screenlayout.sh',
-#     # 'X/xprofile':                    '~/.xprofile',
-# }
+    bcolors,
+    echo,
+    rm,
+    cp,
+    ln,
+    rm,
+    mkdirs,
+    get_timestamp,
+)
 
 
 def map_dotfiles_to_paths(
-        dotfile_map: Dict[str,str],
-        homedir: Optional[str] = None,
-                          ) -> Dict[str, pathlib.Path]:
+    dotfile_map: Dict[str, str],
+    homedir: Optional[str] = None,
+) -> Dict[str, pathlib.Path]:
     """
     Returns a mapping between each dotfile and its destination
     """
@@ -148,7 +114,7 @@ def config_copy(src: pathlib.Path,
         echo(f'{src} NOT FOUND!', color=bcolors.DEBUG)
         return False
 
-    if dest.is_file() and os.path.samefile(src,dest):
+    if dest.is_file() and os.path.samefile(src, dest):
         echo(f"Already hard-linked: {dest}\n", color=bcolors.DEBUG)
         # resolved dest hard-link points back to the source!
         return False
@@ -164,20 +130,20 @@ def config_copy(src: pathlib.Path,
     return True
 
 
-def apply_dotfiles(input_dotfiles:Set,
-        dry_run: bool = True,
+def apply_dotfiles(input_dotfiles: Set,
+                   dry_run: bool = True,
                    homedir: Optional[str] = None,
                    keep_backup: bool = True,
                    ):
 
     if not input_dotfiles:
-        echo("Empty dotfile input, skipping!",color=bcolors.WARNING)
+        echo("Empty dotfile input, skipping!", color=bcolors.WARNING)
 
-    if not isinstance(input_dotfiles,set):
-        input_dotfiles=set(input_dotfiles)
+    if not isinstance(input_dotfiles, set):
+        input_dotfiles = set(input_dotfiles)
 
-    invalid_keys={k for k in input_dotfiles 
-            if k not in DOTFILE_MAP}
+    invalid_keys = {k for k in input_dotfiles
+                    if k not in DOTFILE_MAP}
 
     if invalid_keys:
         echo(["Removing invalid install keys:"]+sorted(invalid_keys),
@@ -185,57 +151,55 @@ def apply_dotfiles(input_dotfiles:Set,
              sep='\n\t> ')
         input_dotfiles = input_dotfiles.difference(invalid_keys)
 
-    dotfile_map = {k:DOTFILE_MAP[k] for k in input_dotfiles}
+    dotfile_map = {k: DOTFILE_MAP[k] for k in input_dotfiles}
 
     matched_configs = map_dotfiles_to_paths(dotfile_map, homedir=homedir)
     for src_config_file, dest_config_file in matched_configs.items():
         if config_copy(src_config_file,
-                    dest_config_file,
-                    dry_run=dry_run,
-                    keep_backup=keep_backup,
-                    ):
+                       dest_config_file,
+                       dry_run=dry_run,
+                       keep_backup=keep_backup,
+                       ):
             echo(f"{src_config_file} -> {dest_config_file}", color=bcolors.INFO)
+
 
 if __name__ == "__main__":
 
-    dotfile_keys={
+    dotfile_keys = {
 
-            'bash/bashrc',
-            'bash/bash_aliases',
-            'bash/bash_functions',
-            'bash/inputrc',
-            'bash/bash_profile',
+        'bash/bashrc',
+        'bash/bash_aliases',
+        'bash/bash_functions',
+        'bash/inputrc',
+        'bash/bash_profile',
 
-            'i3/config',
+        'i3/config',
 
-            'i3/scripts/polybar.sh',
-            'i3/scripts/lock.sh',
-            'i3/polybar/config.ini',
-            'i3/polybar/colors.ini',
-            'i3/polybar/bars.ini',
-            'i3/polybar/modules.ini',
-            'i3/polybar/user_modules.ini',
+        'i3/scripts/polybar.sh',
+        'i3/scripts/lock.sh',
+        'i3/polybar/config.ini',
+        'i3/polybar/colors.ini',
+        'i3/polybar/bars.ini',
+        'i3/polybar/modules.ini',
+        'i3/polybar/user_modules.ini',
 
-            'nvim/init.vim',
-            'nvim/coc-settings.json',
-            'nvim/package-lock.json',
-            'nvim/after/autocommands.vim',
-            'nvim/after/general-settings.vim',
-            'nvim/after/mappings.vim',
-            'nvim/after/visual.vim',
-            'nvim/after/plugin/plugin-config.vim',
-            'nvim/after/plugin/plugin-overview.vim',
-            'nvim/after/compiler/cpp.vim'            ,
-            'nvim/after/compiler/dummy.vim'          ,
-            'nvim/after/compiler/tardyscript.vim'    ,
-            'nvim/after/compiler/tsconfig.vim'       ,
-            'nvim/after/compiler/tslint.vim'         ,
-            'nvim/after/compiler/typescript.vim'     ,
+        'nvim/init.vim',
+        'nvim/coc-settings.json',
+        'nvim/package-lock.json',
+        'nvim/after/autocommands.vim',
+        'nvim/after/general-settings.vim',
+        'nvim/after/mappings.vim',
+        'nvim/after/visual.vim',
+        'nvim/after/plugin/plugin-config.vim',
+        'nvim/after/plugin/plugin-overview.vim',
+        'nvim/after/plugin/coc.vim',
+        'nvim/after/compiler/cpp.vim',
+        'nvim/after/compiler/dummy.vim',
+        'nvim/after/compiler/tardyscript.vim',
+        'nvim/after/compiler/tsconfig.vim',
+        'nvim/after/compiler/tslint.vim',
+        'nvim/after/compiler/typescript.vim',
     }
-
-
-
 
     apply_dotfiles(dotfile_keys, dry_run=False)
     echo("\n\nDone!\n\n", color=bcolors.BOLD+bcolors.DEBUG)
-

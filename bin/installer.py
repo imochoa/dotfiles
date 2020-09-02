@@ -12,6 +12,7 @@ import subprocess
 import datetime
 from typing import Optional, Dict, Tuple, Set
 
+
 # Paths
 THIS_FILE = pathlib.Path(__file__).resolve()
 BIN_DIR = THIS_FILE.parent
@@ -21,20 +22,19 @@ DOTFILE_DIR = REPO_DIR / 'dotfiles'
 # local imports
 sys.path.append(str(REPO_DIR))
 import jumpstart
-# from jumpstart import InstallKeys
-from jumpstart.install_map import INSTALL_CMDS
 from jumpstart.utils import (
-        bcolors,
-        echo,
-        rm,
-        cp,
-        ln,
-        rm,
-        mkdirs,
-        decode,
-        run_shell_str,
-        tab,
-        )
+    bcolors,
+    echo,
+    rm,
+    cp,
+    ln,
+    rm,
+    mkdirs,
+    decode,
+    run_shell_str,
+    tab,
+)
+from jumpstart.install_map import INSTALL_CMDS
 
 
 def apply_installs(
@@ -43,16 +43,16 @@ def apply_installs(
         verbose: bool = False,
         homedir: Optional[str] = None,
         # keep_backup: bool = True,
-        )-> None:
+) -> None:
 
     if not input_installs:
-        echo("Empty install input, skipping!",color=bcolors.WARNING)
+        echo("Empty install input, skipping!", color=bcolors.WARNING)
 
-    if not isinstance(input_installs,set):
-        input_installs=set(input_installs)
+    if not isinstance(input_installs, set):
+        input_installs = set(input_installs)
 
-    invalid_keys={k for k in input_installs 
-            if k not in INSTALL_CMDS}
+    invalid_keys = {k for k in input_installs
+                    if k not in INSTALL_CMDS}
 
     if invalid_keys:
         echo(["Removing invalid install keys:"]+sorted(invalid_keys),
@@ -60,18 +60,17 @@ def apply_installs(
              sep='\n\t> ')
         input_installs = input_installs.difference(invalid_keys)
 
-
     total = len(input_installs)
-    failed_ks=[]
-    for idx,k in enumerate(input_installs, start=1):
+    failed_ks = []
+    for idx, k in enumerate(input_installs, start=1):
 
         echo(f"\n\t[{idx:>4}/{total}]: {k}\n\n", color=bcolors.INFO)
 
         if run_shell_str(
-                        shell_str=INSTALL_CMDS[k],
-                        dry_run=dry_run,
-                        verbose=verbose,
-                        ):
+            shell_str=INSTALL_CMDS[k],
+            dry_run=dry_run,
+            verbose=verbose,
+        ):
             echo(f"\n\t\t[OK!] [{k}]\n\n", color=bcolors.INFO)
         else:
             failed_ks.append(k)
@@ -86,22 +85,22 @@ def apply_installs(
 if __name__ == "__main__":
 
     install_keys = {
-            'ssh',
-            'trash_cli',
-            'exfat',
-            'slack',
-            'git',
-            'tree',
-            'firewall_gui',
-            'docker',
-            'docker_compose',
-            'pavucontrol',
-            'vlc',
-            'entr',
-            'i3',
-            'shutter',
-            'wrong_key_remove_this',
-            }
+        'ssh',
+        'trash_cli',
+        'exfat',
+        'slack',
+        'git',
+        'tree',
+        'firewall_gui',
+        'docker',
+        'docker_compose',
+        'pavucontrol',
+        'vlc',
+        'entr',
+        'i3',
+        'shutter',
+        'wrong_key_remove_this',
+    }
 
     echo("\n\nPreparing to install...\n\n", color=bcolors.BOLD+bcolors.INFO)
     apply_installs(install_keys, dry_run=False, verbose=True)
