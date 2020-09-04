@@ -1,0 +1,32 @@
+#~/.gitconfig
+
+# Reload the changes with: git init
+
+[user]
+	name = imochoa
+  email = nachomartinochoa@gmail.com
+
+; https://www.grzegorowski.com/using-vim-or-neovim-nvim-as-a-git-mergetool
+
+; define command which will be used when "nvim" is set as a merge tool
+[mergetool "nvim"]
+  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+  ; cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+
+; set "nvim" as tool for merging
+[merge]
+  tool = nvim
+; conflictstyle = diff3
+
+; https://www.reddit.com/r/neovim/comments/4m1ods/neovim_as_a_git_difftool/
+[diff]
+  tool = nvim
+
+; automatically launch merge tool without displaying a prompt
+[mergetool]
+  prompt = true
+
+[difftool]
+  prompt = false
+
+
