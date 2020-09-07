@@ -46,8 +46,10 @@ set ttimeoutlen=50   " FOR KEYCODES
 set formatoptions-=cro                  " Stop newline continution of comments
 "set autochdir                           " Your working directory will always be the same as your working directory
 
-set termguicolors " True colors?
-
+" True colors?
+if has('termguicolors')
+  set termguicolors
+endif
 
 " Keeping undo's between sessions
 set undofile

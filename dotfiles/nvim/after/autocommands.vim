@@ -21,6 +21,13 @@ autocmd BufWritePre,BufRead *.html :normal gg=G"
 " -----------------------------------
 autocmd BufWritePre,BufRead *.yaml :normal gg=G"
 
+
+" -----------------------------------
+" GIT
+" -----------------------------------
+autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
+
+
 " -----------------------------------
 " JSON
 " -----------------------------------

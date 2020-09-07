@@ -122,16 +122,14 @@ if ! shopt -oq posix; then
   fi
 fi
 
+
+# CONFIGURE EDITOR
+# --------------------------------------------------------------------------------
 # Swaps caps-lock and ESC keys
 setxkbmap -option caps:swapescape
 
-export PATH=$HOME/tools/nvim:$PATH
-# the default nvr executable is in local/bin
-export PATH="~/.local/bin:$PATH"
-
-# Configure editors
-# WORKING
-# Emacs so that <C-x><C-e> works
+# Emacs vs vim mode
+# Emacs so that <C-x><C-e> activates vim editing-mode
 set -o emacs
 # set -o vi
 
@@ -140,120 +138,31 @@ set -o emacs
 # export VISUAL="nvim"
 # export EDITOR="$VISUAL"
 
-#  if [ -x "$(command -v nvr)" ]; then
+# NVR (detect terminals within neovim)
+# the default nvr executable is in local/bin
+export PATH=$HOME/tools/nvim:$PATH
+export PATH="~/.local/bin:$PATH"
+
 if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
-  # TERMINAL WITHIN NEOVIM!
+  # INSIDE OF NEOVIM!
   export PS1="[nvr]${PS1}"
-  # VISUAL should be set by ~/.config/nvim/init.vim!
+  # VISUAL should be set by ~/.config/nvim/init.vim!  (dotfiles/nvim/after/general-settings.vim)
 else
-  # IN NORMAL TERMINAL!
-  alias vim=nvim
-  alias vi=nvim
   export VISUAL="nvim"
-  neofetch
 fi
+
+# Propagate the results
 export EDITOR="${VISUAL}"
 alias v="${VISUAL}"
-
-
-
-# if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
-#  # Running inside of neovim!
-#   export PS1="in neovim » "
-#   set -o emacs # Otherwise <C-x><C-e> won't work
-#   alias nvim="~/.config/nvim/py3-provider/bin/nvr -cc tabedit --remote-wait +'set bufhidden=wipe'"
-#   # export VISUAL="nvr -cc tabedit --remote-wait +'set bufhidden=wipe'"
-# fi
-
-# if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
-#   # If you're using nvim then you already have the vim mappings! Don't nest them!
-#   set -o emacs
-
-#   if [ -x "$(command -v ~/.config/nvim/py3-provider/bin/nvr)" ]; then
-#     # alias nvim=nvr # might not find nvr
-#     alias nvim=~/.config/nvim/py3-provider/bin/nvr 
-#   else
-#     alias nvim='echo "No nesting without neovim-remote!"'
-#   fi
-# fi
-
-
+alias vim="${VISUAL}"
+alias vi="${VISUAL}"
 
 # "\C-o": operate-and-get-next
-# With this, once you have selected a command from history (e.g. via Vim search) hit Ctrl-O instead of Enter and Bash will run the command and insert the next command from history, ready to run.
-# See Readline Command Names section in the Bash manpage for complete list.
+# With this, once you have selected a command from history (e.g. via Vim search) 
+# hit Ctrl-O instead of Enter and Bash will run the command and insert the next 
+# command from history, ready to run.  See Readline Command Names section in the Bash manpage for 
+# complete list.
 
 bind -x '"\C-l": clear'
 
-# HAS TO BE AT THE END
-# if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
-#   # If you're using nvim then you already have the vim mappings! Don't nest them!
-#   set -o emacs
-#   export PS1="in neovim » "
-# fi
-
-# if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
-#   # If you're using nvim then you already have the vim mappings! Don't nest them!
-#   set -o emacs
-#   export PS1="in neovim » "
-
-#   if [ -x "$(command -v ~/.config/nvim/py3-provider/bin/nvr)" ]; then
-#     # alias nvim=nvr # might not find nvr
-#     alias nvim=~/.config/nvim/py3-provider/bin/nvr 
-#     export VISUAL="nvim"
-#     export EDITOR="$VISUAL"
-#   else
-#     alias nvim='echo "No nesting without neovim-remote!"'
-#   fi
-# fi
-
-# FINALLY WORKING
-# # Move to using nvr on local install....
-# if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
-
-#   set -o emacs
-#   export PS1="in neovim » "
-#   # alias nvim=~/.config/nvim/py3-provider/bin/nvr 
-#   alias nvim=nvr 
-#   export VISUAL="nvim -cc tabedit --remote-wait +'set bufhidden=wipe'"
-#   # export VISUAL="nvr -cc tabedit --remote-wait +'set bufhidden=wipe'"
-# else
-#   set -o vi
-#   export VISUAL="nvim"
-# fi
-# export EDITOR="$VISUAL"
-# alias v="$VISUAL"
-
-# Improved
-# Move to using nvr on local install....
-
-# # the default nvr executable is in local/bin
-# export PATH="~/.local/bin:$PATH"
-
-# if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
-#   # Terminal within neovim!
-#   set -o emacs # So that <C-x><C-e> works
-#   # export PS1="in neovim » "
-#   # export PS1="in neovim » "
-#   export PS1="[nvr]$PS1"
-
-#   # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-#   # export PS1="[NVR]\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-
-
-#   if [ -x "$(command -v nvr)" ]; then
-#       # Use neovim-remote to avoid nested neovim instances
-#       alias nvim=nvr
-#       export VISUAL="nvim -cc tabedit --remote-wait +'set bufhidden=wipe'"
-#     else
-#       alias nvim='echo "No nesting without neovim-remote!"'
-#     fi
-# else
-#   # Normal terminal
-#   set -o vi
-#   # export VISUAL="nvim"
-#   neofetch
-# fi
-# export EDITOR="$VISUAL"
-# alias v="$VISUAL"
-
+# neofetch
