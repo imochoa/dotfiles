@@ -15,7 +15,7 @@ DOTFILE_MAP = {
     'bash/inputrc':                                      '~/.inputrc',
     'bash/bash_profile':                                 '~/.bash_profile',
 
-    'debugging/pdbrc': '~/.pdbrc',
+    'debugging/pdbrc':                                   '~/.pdbrc',
 
     'i3/config':                                         '~/.config/i3/config',
 
@@ -80,5 +80,115 @@ DOTFILE_MAP = {
 }
 
 
+# TODO fcn to substitute home dir!
+# def resolve_homedir(homedir: Union[str, pathlib.Path] = None) -> str:
+#     if not homedir:
+#         return os.path.expanduser('~')
+#     elif os.path.isdir(homedir):
+#         return str(homedir)
+#     elif (pathlib.Path('~') / homedir).is_dir():
+#         # Relative dir from the default dir?
+#         return str(pathlib.Path('~') / homedir)
+#     else:
+#         raise OSError(f"Invalid home directory: {homedir}")
+
+
+def map_dotfiles_to_paths(
+        dotfile_map: Dict[str, str] = None,
+        dotfile_keys: Sequence[str] = None,
+        homedir: Optional[str] = None,
+        dotfile_dir: Union[str, pathlib.Path] = DOTFILE_DIR,
+) -> Dict[str, pathlib.Path]:
+    """
+    Returns a mapping between each dotfile in *dotfile_map* and its destination, based on the *homedir*
+    """
+    if dotfile_map is None:
+        dotfile_map = DOTFILE_MAP
+
+    if dotfile_keys:
+        echo(["Filtering selected dotfile keys:"] + sorted(dotfile_keys),
+             color=bcolors.INFO,
+             sep='\n\t> ')
+        dotfile_map = {k: v for k, v in dotfile_map.items() if k in dotfile_keys}
+
+    if not dotfile_map:
+        echo("No dotfiles to map!", color=bcolors.WARNING, sep='\n\t> ')
+        return dict()
+
+    if not isinstance(dotfile_dir, pathlib.Path):
+        dotfile_dir = pathlib.Path(dotfile_dir)
+
+    # -------------------------------------------------------------------------- #
+    # Clean up the dotfile map
+    # -------------------------------------------------------------------------- #
+    missing_fs = {k for k in dotfile_map if not (dotfile_dir / k).is_file()}
+
+    if missing_fs:
+        echo(["Ignoring dotfile mappings with missing src files:"] + sorted(missing_fs),
+             color=bcolors.WARNING,
+             sep='\n\t> ')
+        dotfile_map = {k: v for k, v in dotfile_map.items()
+                       if k not in missing_fs}
+
+    # Better logic
+    if not homedir:
+        homedir = os.path.expanduser('~')
+        echo(f"Expanding '~' to '{homedir}'\n", color=bcolors.INFO)
+        dotfile_map = {k: pathlib.Path(v).expanduser().resolve()
+                       for k, v in dotfile_map.items()}
+    elif os.path.isdir(homedir):
+        echo(f"Using input home directory: {homedir}\n")
+        dotfile_map = {k: pathlib.Path(v.replace('~', str(homedir))).resolve()
+                       for k, v in dotfile_map.items()}
+    elif (pathlib.Path('~') / homedir).is_dir():
+        homedir = pathlib.Path('~') / homedir
+        echo(f"Using input home directory: {homedir}\n")
+        dotfile_map = {k: pathlib.Path(v.replace('~', str(homedir))).resolve()
+                       for k, v in dotfile_map.items()}
+    else:
+        raise OSError(f"Invalid home directory: {homedir}")
+
+    # -------------------------------------------------------------------------- #
+    # Match them
+    # -------------------------------------------------------------------------- #
+    repo_files = {str(f.relative_to(dotfile_dir)): f.resolve() for f in dotfile_dir.rglob('*')}
+
+    matched_ks = set(repo_files).intersection(dotfile_map)
+    missed_ks = set(repo_files).difference(repo_files)
+
+    if missed_ks:
+        echo(["files without mappings:"] + sorted(missed_ks),
+             sep='\n\t> ',
+             color=bcolors.WARNING,
+             )
+
+    bad_map_ks = {k for k in matched_ks if REPO_DIR in dotfile_map[k].parents}
+
+    if bad_map_ks:
+        echo(["invalid dest mappings:"] + sorted(bad_map_ks),
+             sep='\n\t> ',
+             color=bcolors.WARNING,
+             )
+        matched_ks = matched_ks.difference(bad_map_ks)
+
+    if not matched_ks:
+        echo(f"No known dotfiles were found!", color=bcolors.FAIL)
+        raise ValueError(f"No matched_ks found!")
+
+    return {dotfile_dir / k: dotfile_map[k] for k in repo_files if k in matched_ks}
+
+
+def report_dotmap(m: Dict[Union[str, pathlib.Path], Union[str, pathlib.Path]]) -> str:
+    report = '\n'.join(['DOTFILES WITH THEIR MAPPINGS'] + [f'{str(k):>50} -> {str(m[k])}' for k in sorted(m)])
+    return f"\n{report}\n"
+
+
 if __name__ == "__main__":
-    pass
+    # # TESTING
+    d1 = map_dotfiles_to_paths(homedir=None, dotfile_keys=["poop"])
+    # d1 = map_dotfiles_to_paths(homedir=None)
+    # d2 = map_dotfiles_to_paths(homedir='/root')
+    # d2 = map_dotfiles_to_paths(homedir='/root')
+    # report_dotmap(d2)
+
+    print(report_dotmap(DOTFILE_MAP))

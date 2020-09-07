@@ -94,10 +94,6 @@ def get_release_tag(user_and_repo: str) -> str:
         # html = fp.read().decode('utf8')
         return fp.url.split('/')[-1]
 
-#     def __enter__(self):
-#         # os.makedirs(self.tmpdir, exist_ok=True)
-#         os.makedirs(self.tmpdir)
-#         return self.tmpdir
 
 def get_release_tags(user_and_repos: Union[str, List[str]], max_workers: int = 4) -> List[str]:
     """
@@ -128,16 +124,6 @@ def tab(s: str) -> str:
 #     return itertools.chain(
 #         *(glob.iglob(p, recursive=True)
 #           for p in paths))
-
-
-# def cp(src: str, dst: str, verbose: bool = True) -> str:
-
-#     new_dst = shutil.copy(src, dst)
-
-#     if verbose:
-#         print(f"\t> cp {os.path.basename(src)} -> {new_dst}")
-
-#     return new_dst
 
 
 def decode(s: str) -> str:

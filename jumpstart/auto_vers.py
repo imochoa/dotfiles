@@ -9,7 +9,10 @@ from jumpstart.utils import get_release_tags
 
 NAME_TO_REPO_MAP = dict(
     stretchly='hovancik/stretchly',
-    neovim='neovim/neovim'
+    neovim='neovim/neovim',
+    fontawesome='FortAwesome/Font-Awesome',
+    nordic='EliverLara/Nordic',
+    nerdfonts='ryanoasis/nerd-fonts',
 )
 
 # AUTO
