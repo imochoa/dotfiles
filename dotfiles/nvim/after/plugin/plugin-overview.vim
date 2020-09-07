@@ -14,6 +14,9 @@ call minpac#add('k-takata/minpac', {'type': 'opt'})
 " Lots of shortcuts, see :help unimpaired
 call minpac#add('tpope/vim-unimpaired')
 
+" Git wrapper
+call minpac#add('tpope/vim-fugitive')
+
 " Better comments
 call minpac#add('tpope/vim-commentary')
 
