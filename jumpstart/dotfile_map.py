@@ -55,10 +55,12 @@ DOTFILE_MAP = {
     'nvim/after/compiler/tslint.vim':  '~/.config/nvim/after/compiler/tslint.vim',
     'nvim/after/compiler/typescript.vim':  '~/.config/nvim/after/compiler/typescript.vim',
 
-    'gtk-2.0/gtkrc-2.0':             '~/.gtkrc-2.0',
-    'gtk-3.0/gtk.css':               '~/.config/gtk-3.0/gtk.css',
-    'gtk-3.0/settings.ini':          '~/.config/gtk-3.0/settings.ini',
-    'gtk-4.0/settings.ini':          '~/.config/gtk-4.0/settings.ini',
+    'gtk-2.0/gtkrc-2.0':                                 '~/.gtkrc-2.0',
+    'gtk-3.0/gtk.css':                                   '~/.config/gtk-3.0/gtk.css',
+    'gtk-3.0/settings.ini':                              '~/.config/gtk-3.0/settings.ini',
+    'gtk-4.0/settings.ini':                              '~/.config/gtk-4.0/settings.ini',
+
+    'alacritty/alacritty.yml':                           '~/.config/alacritty/alacritty.yml'
 
     # 'plantuml_style.iuml': 'path',
 
