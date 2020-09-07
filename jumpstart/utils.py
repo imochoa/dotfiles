@@ -17,6 +17,10 @@ from zipfile import ZipFile
 import shutil
 import tempfile
 from urllib.request import urlopen
+from urllib.parse import quote
+
+from concurrent.futures import ThreadPoolExecutor
+import threading
 
 # local imports
 from jumpstart import TMP
@@ -80,38 +84,50 @@ def get_timestamp() -> str:
     return datetime.datetime.now().strftime('backup_%Y_%m_%d_T_%H_%M_%s')
 
 
-# class TempDir:
-#     def __init__(self, dirname: Union[None, str] = None):
-#         self.tmpdir = \
-#             os.path.join(TMP,
-#                          dirname or f'{uuid.uuid4()}')
+def get_release_tag(user_and_repo: str) -> str:
+    """
+    >>> get_latest_release_tag('pdfminer/pdfminer.six')
+    """
+    url = f"https://github.com/{quote(user_and_repo)}/releases/latest"
+
+    with urlopen(url) as fp:
+        # html = fp.read().decode('utf8')
+        return fp.url.split('/')[-1]
 
 #     def __enter__(self):
 #         # os.makedirs(self.tmpdir, exist_ok=True)
 #         os.makedirs(self.tmpdir)
 #         return self.tmpdir
 
-#     def __exit__(self, type, value, traceback):
-#         shutil.rmtree(self.tmpdir)
+def get_release_tags(user_and_repos: Union[str, List[str]], max_workers: int = 4) -> List[str]:
+    """
+    Same as *get_release_tag*, but multi-threaded
+    """
+    if isinstance(user_and_repos, str):
+        user_and_repos = [user_and_repos]
+
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        future = executor.map(get_release_tag, user_and_repos)
+
+        return list(future)
 
 
 def tab(s: str) -> str:
     return '\n\t'.join(s.split('\n'))
 
 
-def find_files_with_exts(topdir: str,
-                         exts: Iterable[str],
-                         ) -> Iterable[str]:
-
-    if isinstance(exts, str):
-        exts = [exts]
-
-    paths = (e if e.startwith('.') else f'.{e}' for e in exts)
-    paths = (os.path.join(topdir, f'**/*{e}') for e in exts)
-
-    return itertools.chain(
-        *(glob.iglob(p, recursive=True)
-          for p in paths))
+# def find_files_with_exts(topdir: str,
+#                          exts: Iterable[str],
+#                          ) -> Iterable[str]:
+#     if isinstance(exts, str):
+#         exts = [exts]
+#
+#     paths = (e if e.startwith('.') else f'.{e}' for e in exts)
+#     paths = (os.path.join(topdir, f'**/*{e}') for e in exts)
+#
+#     return itertools.chain(
+#         *(glob.iglob(p, recursive=True)
+#           for p in paths))
 
 
 # def cp(src: str, dst: str, verbose: bool = True) -> str:
@@ -136,7 +152,6 @@ def run_shell_str(shell_str: str,
                   dry_run: bool = True,
                   verbose: bool = False,
                   ) -> Tuple[int, str]:
-
     returncode, stdout = 0, ''
 
     if dry_run:
@@ -171,7 +186,6 @@ def run_shell_str(shell_str: str,
 def download_and_unzip(zip_url: str,
                        outdir: str,
                        ) -> List[str]:
-
     resp = urlopen(zip_url)
     zipped = ZipFile(BytesIO(resp.read()))
     # for line in zipped.open(filepath).readlines():

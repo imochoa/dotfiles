@@ -1,23 +1,31 @@
 # !/usr/bin/env python3
 
+# std imports
+import os
+import pathlib
+from typing import Dict, Optional, Union, Sequence
+
+from jumpstart import DOTFILE_DIR, REPO_DIR
+from jumpstart.utils import echo, bcolors
+
 DOTFILE_MAP = {
-    'bash/bashrc':                   '~/.bashrc',
-    'bash/bash_aliases':             '~/.bash_aliases',
-    'bash/bash_functions':           '~/.bash_functions',
-    'bash/inputrc':                  '~/.inputrc',
-    'bash/bash_profile':             '~/.bash_profile',
+    'bash/bashrc':                                       '~/.bashrc',
+    'bash/bash_aliases':                                 '~/.bash_aliases',
+    'bash/bash_functions':                               '~/.bash_functions',
+    'bash/inputrc':                                      '~/.inputrc',
+    'bash/bash_profile':                                 '~/.bash_profile',
 
     'debugging/pdbrc': '~/.pdbrc',
 
-    'i3/config':                  '~/.config/i3/config',
+    'i3/config':                                         '~/.config/i3/config',
 
-    'i3/scripts/polybar.sh':            '~/.config/i3/scripts/polybar.sh',
-    'i3/scripts/lock.sh':               '~/.config/i3/scripts/lock.sh',
-    'i3/polybar/config.ini':            '~/.config/polybar/config.ini',
-    'i3/polybar/colors.ini':            '~/.config/polybar/colors.ini',
-    'i3/polybar/bars.ini':              '~/.config/polybar/bars.ini',
-    'i3/polybar/modules.ini':           '~/.config/polybar/modules.ini',
-    'i3/polybar/user_modules.ini':      '~/.config/polybar/user_modules.ini',
+    'i3/scripts/polybar.sh':                             '~/.config/i3/scripts/polybar.sh',
+    'i3/scripts/lock.sh':                                '~/.config/i3/scripts/lock.sh',
+    'i3/polybar/config.ini':                             '~/.config/polybar/config.ini',
+    'i3/polybar/colors.ini':                             '~/.config/polybar/colors.ini',
+    'i3/polybar/bars.ini':                               '~/.config/polybar/bars.ini',
+    'i3/polybar/modules.ini':                            '~/.config/polybar/modules.ini',
+    'i3/polybar/user_modules.ini':                       '~/.config/polybar/user_modules.ini',
 
     # 'i3/scripts/Lock_icon.png':         'path',
     # 'i3/i3blocks.conf':              'path',
@@ -26,9 +34,11 @@ DOTFILE_MAP = {
     # 'vim/vimrc':                     '~/.vimrc',
     # 'vim/vimrc.local':               '~/.vimrc.local',
 
-    'ImageMagick/policy.xml':           '/etc/ImageMagick-6/policy.xml',
+    'ImageMagick/policy.xml':                            '/etc/ImageMagick-6/policy.xml',
 
-    'desktop_launchers/stretchly.desktop': '~/.local/share/applications/stretchly.desktop',
+    'desktop_launchers/stretchly.desktop':               '~/.local/share/applications/stretchly.desktop',
+    'desktop_launchers/neovim.desktop':                  '~/.local/share/applications/neovim.desktop',
+    'desktop_launchers/scripts/nvim_desktop_wrapper.py': '/usr/local/bin/nvim_desktop_wrapper.py',
 
     # 'known_hosts':                   'path',
 
@@ -36,24 +46,24 @@ DOTFILE_MAP = {
     # 'nvim/local_init.vim':           'path',
     # 'nvim/local_bundles.vim':        'path',
 
-    'nvim/init.vim':                    '~/.config/nvim/init.vim',
-    'nvim/coc-settings.json':           '~/.config/nvim/coc-settings.json',
-    'nvim/package-lock.json':           '~/.config/nvim/package-lock.json',
-    'nvim/after/autocommands.vim':           '~/.config/nvim/after/autocommands.vim',
-    'nvim/after/general-settings.vim':           '~/.config/nvim/after/general-settings.vim',
-    'nvim/after/mappings.vim':           '~/.config/nvim/after/mappings.vim',
-    'nvim/after/visual.vim':           '~/.config/nvim/after/visual.vim',
+    'nvim/init.vim':                                     '~/.config/nvim/init.vim',
+    'nvim/coc-settings.json':                            '~/.config/nvim/coc-settings.json',
+    'nvim/package-lock.json':                            '~/.config/nvim/package-lock.json',
+    'nvim/after/autocommands.vim':                       '~/.config/nvim/after/autocommands.vim',
+    'nvim/after/general-settings.vim':                   '~/.config/nvim/after/general-settings.vim',
+    'nvim/after/mappings.vim':                           '~/.config/nvim/after/mappings.vim',
+    'nvim/after/visual.vim':                             '~/.config/nvim/after/visual.vim',
 
-    'nvim/after/plugin/plugin-config.vim':           '~/.config/nvim/after/plugin/plugin-config.vim',
-    'nvim/after/plugin/plugin-overview.vim':           '~/.config/nvim/after/plugin/plugin-overview.vim',
-    'nvim/after/plugin/coc.vim':           '~/.config/nvim/after/plugin/coc.vim',
+    'nvim/after/plugin/plugin-config.vim':               '~/.config/nvim/after/plugin/plugin-config.vim',
+    'nvim/after/plugin/plugin-overview.vim':             '~/.config/nvim/after/plugin/plugin-overview.vim',
+    'nvim/after/plugin/coc.vim':                         '~/.config/nvim/after/plugin/coc.vim',
 
-    'nvim/after/compiler/cpp.vim':  '~/.config/nvim/after/compiler/cpp.vim',
-    'nvim/after/compiler/dummy.vim':  '~/.config/nvim/after/compiler/dummy.vim',
-    'nvim/after/compiler/tardyscript.vim':  '~/.config/nvim/after/compiler/tardyscript.vim',
-    'nvim/after/compiler/tsconfig.vim':  '~/.config/nvim/after/compiler/tsconfig.vim',
-    'nvim/after/compiler/tslint.vim':  '~/.config/nvim/after/compiler/tslint.vim',
-    'nvim/after/compiler/typescript.vim':  '~/.config/nvim/after/compiler/typescript.vim',
+    'nvim/after/compiler/cpp.vim':                       '~/.config/nvim/after/compiler/cpp.vim',
+    'nvim/after/compiler/dummy.vim':                     '~/.config/nvim/after/compiler/dummy.vim',
+    'nvim/after/compiler/tardyscript.vim':               '~/.config/nvim/after/compiler/tardyscript.vim',
+    'nvim/after/compiler/tsconfig.vim':                  '~/.config/nvim/after/compiler/tsconfig.vim',
+    'nvim/after/compiler/tslint.vim':                    '~/.config/nvim/after/compiler/tslint.vim',
+    'nvim/after/compiler/typescript.vim':                '~/.config/nvim/after/compiler/typescript.vim',
 
     'gtk-2.0/gtkrc-2.0':                                 '~/.gtkrc-2.0',
     'gtk-3.0/gtk.css':                                   '~/.config/gtk-3.0/gtk.css',

@@ -292,7 +292,6 @@ sudo apt-get install -y nodejs
 sudo apt-get install -y build-essential
 """
 
-
 INSTALL_PKGS['python3'] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y python3 python3-pip python3-venv python3-dev  build-essential libssl-dev libffi-dev  libxml2-dev libxslt1-dev zlib1g-dev
@@ -304,7 +303,6 @@ sudo apt install -y libpq-dev python3-dev
 # Upgrade pip
 sudo -H pip3  install --upgrade pip
 """
-
 
 INSTALL_PKGS['polybar'] = r"""
 #!/usr/bin/env bash
@@ -339,7 +337,6 @@ git checkout $latestTag
  ./build.sh --all-features --gcc -f --install-config --auto
 """
 
-
 # TODO libreoffice broken!
 INSTALL_PKGS['libreoffice'] = r"""
 ##!/usr/bin/env bash
@@ -349,7 +346,6 @@ INSTALL_PKGS['libreoffice'] = r"""
 #sudo apt-get update -y
 #sudo apt-get install -y libreoffice
 """
-
 
 # TODO Add checkinstall
 INSTALL_PKGS['goxel'] = r"""
@@ -399,7 +395,6 @@ sudo apt-get install -y freecad freecad-common freecad-python3
 # sudo update-alternatives --config freecad
 """
 
-
 INSTALL_PKGS['xcwd'] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y git \
@@ -422,7 +417,6 @@ sudo apt-get install -y wget
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb --continue --output-document=${TMP_DEB}
 sudo apt install ${TMP_DEB}
 """
-
 
 INSTALL_PKGS['slack'] = r"""
 #!/usr/bin/env bash
@@ -492,7 +486,6 @@ sudo apt-get install -y software-properties-common \
 && sudo apt-get install -y fonts-source-code-pro-ttf nordic moka-icon-theme
 """
 
-
 INSTALL_PKGS['vim'] = r"""
 #!/usr/bin/env bash
 sudo apt-get remove -y vim-tiny gvim \
@@ -513,7 +506,9 @@ mkdir -p /opt/
 sudo wget https://github.com/neovim/neovim/releases/download/v${VER}/nvim.appimage --continue --output-document=/opt/nvim.appimage
 sudo chown ${USER}:${USER} /opt/nvim.appimage
 sudo chmod u+x /opt/nvim.appimage
-sudo update-alternatives --install /usr/bin/neovim  editor /opt/nvim.appimage 100
+# sudo update-alternatives --install /usr/bin/neovim  editor /opt/nvim.appimage 100
+# nvr expects "nvim" not "neovim"!
+sudo update-alternatives --install /usr/bin/nvim  editor /opt/nvim.appimage 100
 
 
 # py3
@@ -551,7 +546,6 @@ sudo npm install -g eslint
 neovim +PackUpdate +qall
 neovim +CocInstall +qall
 """
-
 
 INSTALL_PKGS['pycharm-community'] = r"""
 #!/usr/bin/env bash
@@ -598,7 +592,6 @@ mkdir -p ~/Applications \
 # sudo ln -s $(realpath roficlip) /usr/bin/roficlip
 """
 
-
 DEPENDENCY_MAP['neovim'] = ['python3', 'nodejs', 'networking', 'xclip']
 DEPENDENCY_MAP['ssh'] = ['xclip']
 DEPENDENCY_MAP['calibre'] = ['networking']
@@ -613,4 +606,13 @@ DEPENDENCY_MAP['xcwd'] = ['git', 'checkinstall']
 DEPENDENCY_MAP['freecad'] = ['git', 'checkinstall']
 
 if __name__ == '__main__':
-    pass
+    sep = 80 * '-'
+    print('\n'.join(
+        ['PKGs WITH THEIR INSTALL COMMANDS']
+        + [f'{sep}\n\tINSTALLING [{k}]\n{sep}\n{INSTALL_PKGS[k]}\n' for k in sorted(INSTALL_PKGS)])
+    )
+
+    print('\n'.join(
+        ['PKGs WITH THEIR REMOVE COMMANDS']
+        + [f'{sep}\n\tREMOVING [{k}]\n{sep}\n{REMOVE_PKGS[k]}\n' for k in sorted(REMOVE_PKGS)])
+    )
