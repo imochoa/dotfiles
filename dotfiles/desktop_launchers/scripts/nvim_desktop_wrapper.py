@@ -9,12 +9,15 @@ import dbus
 
 session_bus = dbus.SessionBus()
 
+# Use the default term? update-alternatives --list x-terminal-emulator | head -n1
+
+
 # launch the terminal server with a custom app-id and window class (so the .desktop file gets associated)
 Popen("/usr/lib/gnome-terminal/gnome-terminal-server --app-id org.neovim --class=neovim".split())
 # wait until the name is registered
-timeout = time() + 1
+timeout = time() + 1  # [s]
 while not session_bus.name_has_owner('org.neovim') and time() <= timeout:
     pass
 # launch nvim in a gnome-terminal instance
 if session_bus.name_has_owner('org.neovim'):
-    Popen("gnome-terminal --app-id org.neovim -x nvim".split() + argv[1:])
+    Popen("gnome-terminal --app-id org.neovim -- nvim".split() + argv[1:])
