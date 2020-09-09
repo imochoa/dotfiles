@@ -30,6 +30,12 @@ call minpac#add('radenling/vim-dispatch-neovim') " Adapter for vim-dispatch
 " For tests
 call minpac#add('janko-m/vim-test')
 
+" snippet engine
+call minpac#add('SirVer/ultisnips')
+
+" Comprehensive list of snippets for each file type
+call minpac#add('honza/vim-snippets')
+
 " Asynchronous linting engine
 " call minpac#add('w0rp/ale')
 
@@ -41,6 +47,9 @@ call minpac#add('puremourning/vimspector')
 " Adds the 'line' text object 'l' (like 'w')
 call minpac#add('kana/vim-textobj-user')
 call minpac#add('kana/vim-textobj-line')
+
+" easier aligning 
+call minpac#add('godlygeek/tabular')
 
 " ?
 call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
@@ -69,8 +78,8 @@ call minpac#add('neoclide/coc.nvim', {'branch':'release'})
 " Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'} " mru and stuff
 " Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'} " color highlighting
-" requires nodejs:
-" curl -sL install-node.now.sh/lts | sudo bash
+
+
 " Visuals.....
 
 " Rainbow parentheses
@@ -82,8 +91,8 @@ call minpac#add('junegunn/rainbow_parentheses.vim')
 " Icons on things (netrw not yet supported but there's an issue for it!)
 call minpac#add('ryanoasis/vim-devicons')
 
-" Themes should be OPTIONAL. 
-" They have to be explicitly loaded with 'packadd!' in the theme section!
+" Themes should be OPTIONAL -> {'type': 'opt'}
+"     They have to be explicitly loaded with 'packadd!' in the theme section!
 call minpac#add('joshdick/onedark.vim', {'type': 'opt'})
 
 " lightline + themes
