@@ -1,6 +1,6 @@
 " Global extension names to install when they aren't installed.
 " " See a list here: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions#implemented-coc-extensions
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-eslint', 'coc-clangd', 'coc-html', 'coc-jedi', 'coc-json', 'coc-markdownlint', 'coc-python', 'coc-sh', 'coc-xml', 'coc-yaml', 'coc-css']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-eslint', 'coc-clangd', 'coc-html', 'coc-jedi', 'coc-json', 'coc-markdownlint', 'coc-python', 'coc-sh', 'coc-xml', 'coc-yaml', 'coc-css', 'coc-snippets']
 
 
 " coc-floaterm for vim-floaterm integration
@@ -71,14 +71,15 @@ set shortmess+=c
 " diagnostics appear/become resolved.
 set signcolumn=yes
 
+" Just use the defaults... <c-n><c-p>
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -156,8 +157,9 @@ omap af <Plug>(coc-funcobj-a)
 " Use <TAB> for selections ranges.
 " NOTE: Requires 'textDocument/selectionRange' support from the language server.
 " coc-tsserver, coc-python are the examples of servers that support it.
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
+" <TAB> is the same as <c-i>! https://github.com/neoclide/coc.nvim/issues/1089
+" nmap <silent> <TAB> <Plug>(coc-range-select)
+" xmap <silent> <TAB> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')

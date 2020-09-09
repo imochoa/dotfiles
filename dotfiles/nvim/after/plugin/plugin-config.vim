@@ -71,6 +71,28 @@ nmap <leader>y :History:<CR>
 " You need to make a .projections JSON file. Go back to this in the future...
 " Tips 8 & 9
 
+
+" ---------
+" Ultisnips
+" ---------
+" Where should it look for snippet files (coc-snippets also has paths)
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "mycoolsnippets"]
+
+" Trigger configuration. You need to change this to something else than <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+
 " ---------
 " ALE
 " ---------

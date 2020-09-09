@@ -21,6 +21,10 @@ alias tree='tree -C'
 alias trls='tree -C | less -R'	# -C outputs colour, -R makes less understand color
 alias mode='(set -o | grep emacs.*on >/dev/null 2>&1 && echo "emacs mode" || echo "vi mode")'
 
+# git
+# Ignore changes to already tracked files
+alias untrack='git update-index --assume-unchanged'
+alias retrack='git update-index --no-assume-unchanged'
 
 # Like rm, but safer since it uses trash-cli
 alias tp=trash-put
