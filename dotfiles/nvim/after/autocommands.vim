@@ -1,16 +1,37 @@
 
-" -----------------------------------
+
+" ----------------------------------------------------
 " Autocommands
-" -----------------------------------
-au! BufWritePost $MYVIMRC ++nested source % " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
+" ----------------------------------------------------
+
+" augroup GROPU
+"     " Clears all of the autocommands defined IN THIS GROUP
+"     autocmd!
+"     autocmd BufCreate * echom "New buffer!"
+" augroup end"
+
+
+
+
+" ----------------------------------------------------
+" VIM rc
+" ----------------------------------------------------
+" au! BufWritePost $MYVIMRC ++nested source % " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
+au! BufWritePost ~/.config/nvim/init.vim ++nested source % " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
 " ++nested required for bufferline
 " " Stops highlighting after saving!
 " https://github.com/itchyny/lightline.vim/issues/406
 
+" ----------------------------------------------------
+" Dockerfile
+" -------------------------------- # vim: set ft=dockerfile
+" # vi: ft=dockerfile
+" Vertially align all \ cmds
+" :Tabularize /.*\zs\
 
-" -----------------------------------
+" ----------------------------------------------------
 " HTML
-" -----------------------------------
+" -------------------------------- # vim: set ft=html
 autocmd BufNewFile,BufRead *.html setlocal nowrap
 " This will turn line wrapping off whenever you're working on an HTML file.
 autocmd BufWritePre,BufRead *.html :normal gg=G"
@@ -18,7 +39,7 @@ autocmd BufWritePre,BufRead *.html :normal gg=G"
 
 " -----------------------------------
 " YAML
-" -----------------------------------
+" -------------------------------- # vim: set ft=yaml
 autocmd BufWritePre,BufRead *.yaml :normal gg=G"
 
 
@@ -30,7 +51,7 @@ autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
 
 " -----------------------------------
 " JSON
-" -----------------------------------
+" -------------------------------- # vim: set ft=json
 " Comments in JSON files
 autocmd FileType json syntax match Comment +\/\/.\+$+
 " reindent the file whenever we read or write it
@@ -39,13 +60,13 @@ autocmd BufWritePre,BufRead *.json :normal gg=G"
 
 " -----------------------------------
 " glTF
-" -----------------------------------
+" -------------------------------- # vim: set ft=json
 " (has a json structure)
 autocmd BufNewFile,BufRead *.gltf set syntax=json
 
 " -----------------------------------
 " Python
-" -----------------------------------
+" -------------------------------- # vim: set ft=python
 autocmd BufNewFile,BufRead *.py set foldmethod=indent
 
 

@@ -91,6 +91,12 @@ endif
 " Don't start nested nvim instances!
 if has('nvim') && executable('nvr')
   let $VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+
+  " from https://github.com/toggle-corp/alacritty-colorscheme
+  " nvr -cc "source ~/.config/nvim/init.vim
+
+
+  " OLD
   " let $VISUAL="nvr -cc tabedit --remote-wait +'set bufhidden=wipe'"
   "# export VISUAL="nvim -cc tabedit --remote-wait +'set bufhidden=wipe'"
   " let $EDITOR="$VISUAL"
