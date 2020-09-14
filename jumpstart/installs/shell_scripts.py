@@ -162,11 +162,13 @@ INSTALL_PKGS['stretchly'] = r"""
 #!/usr/bin/env bash
 
 sudo apt-get install -y wget
-VER=1.0.0
+VER=1.1.0
 sudo mkdir -p /opt/
+sudo rm -f /opt/stretchly.appimage
 sudo wget https://github.com/hovancik/stretchly/releases/download/v${VER}/Stretchly-${VER}.AppImage --continue --output-document=/opt/stretchly.appimage
 sudo chown ${USER}:${USER} /opt/stretchly.appimage
 sudo chmod u+x /opt/stretchly.appimage
+sudo rm -f /usr/local/bin/stretchly
 sudo ln -s /opt/stretchly.appimage /usr/local/bin/stretchly
 """
 
