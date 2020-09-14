@@ -78,6 +78,7 @@ sudo add-apt-repository -y ppa:numix/ppa
 sudo apt install -y numix-icon-theme-circle
 """
 
+# https://c.wallhere.com/photos/f4/de/1920x1080_px_Brume_Hills_Mount_Everest_mountains-1214842.jpg!d
 INSTALL_UI['wallpaper'] = r"""
 #!/usr/bin/env bash
 BGDIR=/usr/share/backgrounds

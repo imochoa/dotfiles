@@ -159,6 +159,37 @@ def apply_dotfiles(input_dotfiles: Set,
 if __name__ == "__main__":
     echo(f"Possible keys:\n{report_dotmap(DOTFILE_MAP)}", color=bcolors.INFO)
 
+    # possible_pkg_report = '\n\t> '.join(["Possible keys:"] + sorted(possible_pkg_keys))
+    parser = argparse.ArgumentParser(description=f'Choose what config files to link')
+
+    parser.add_argument("dotfiles",
+                        type=str,
+                        nargs='*',
+                        help=("Which dotfiles to link, separated by spaces (e.g. 'ssh xclip sxiv')."
+                              "Run the command without any inputs to see all possibilities, or with 'all' to configure "
+                              "everything.")
+                        )
+
+    parser.add_argument('-d', '--dry',
+                        action='store_true',
+                        help="For debugging. When set, the script won't actually install anything, just report back")
+
+    parser.add_argument('-c', '--copy',
+                        action='store_true',
+                        help=("Copy the config files instead of linking to them (by default)."
+                              " That way, you can delete the repo and keep the dotfiles"))
+
+    parser.add_argument('-v', '--verbose',
+                        action='store_true',
+                        help="More output")
+
+    parser.add_argument('-y', '--yes',
+                        action='store_true',
+                        help="Don't ask for confirmation")
+
+    args = parser.parse_args()
+    pkgs = args.pkgs
+
     parser = argparse.ArgumentParser()
 
     parser.add_argument("square",
@@ -170,6 +201,7 @@ if __name__ == "__main__":
         'bash/bashrc',
         'bash/bash_aliases',
         'bash/bash_functions',
+        'alacritty/alacritty.yml',
         # 'bash/inputrc',
         # 'bash/bash_profile',
         #

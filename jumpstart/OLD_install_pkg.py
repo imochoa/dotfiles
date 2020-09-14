@@ -12,8 +12,10 @@ import pdb
 BASH_SHEBANG = "#!/usr/bin/env bash"
 
 
-def simple_install(pkgs: Union[str, Sequence[str]], ppas: Union[None, str, Sequence[str]] = None) -> str:
+def aptget_install(pkgs: Union[str, Sequence[str]], ppas: Union[None, str, Sequence[str]] = None) -> str:
+    """
 
+    """
     cmd_str = f"{BASH_SHEBANG}\n"
 
     if ppas is not None:
@@ -28,8 +30,10 @@ def simple_install(pkgs: Union[str, Sequence[str]], ppas: Union[None, str, Seque
     return f"{cmd_str}\nsudo apt-get install -y {' '.join(pkgs)}"
 
 
-def simple_remove(pkgs: Union[str, Sequence[str]], ppas: Union[None, str, Sequence[str]] = None) -> str:
+def aptget_remove(pkgs: Union[str, Sequence[str]], ppas: Union[None, str, Sequence[str]] = None) -> str:
+    """
 
+    """
     cmd_str = f"{BASH_SHEBANG}\n"
 
     if ppas is not None:
@@ -49,226 +53,106 @@ DEPENDENCY_MAP = dict()
 INSTALL_PKGS = dict()
 REMOVE_PKGS = dict()
 
-INSTALL_PKGS['7zip'] = simple_install('p7zip-full')
-REMOVE_PKGS['7zip'] = simple_remove('p7zip-full')
+INSTALL_PKGS['7zip'] = aptget_install('p7zip-full')
+REMOVE_PKGS['7zip'] = aptget_remove('p7zip-full')
 
-INSTALL_PKGS['bashtop'] = simple_install('bashtop',
-                                         ppas='ppa:bashtop-monitor/bashtop')
-REMOVE_PKGS['bashtop'] = simple_remove('bashtop',
-                                       ppas='ppa:bashtop-monitor/bashtop')
+INSTALL_PKGS['bashtop'] = aptget_install('bashtop', ppas='ppa:bashtop-monitor/bashtop')
+REMOVE_PKGS['bashtop'] = aptget_remove('bashtop', ppas='ppa:bashtop-monitor/bashtop')
 
-INSTALL_PKGS['tmux'] = simple_install('tmux')
-REMOVE_PKGS['tmux'] = simple_remove('tmux')
+INSTALL_PKGS['tmux'] = aptget_install('tmux')
+REMOVE_PKGS['tmux'] = aptget_remove('tmux')
 
-INSTALL_PKGS['fd'] = simple_install('fd-find')
-REMOVE_PKGS['fd'] = simple_remove('fd-find')
-# INSTALL_PKGS['fd'] = r"""
-# !/usr/bin/env bash
-# sudo apt install -y fd-find
-# """
+INSTALL_PKGS['fd'] = aptget_install('fd-find')
+REMOVE_PKGS['fd'] = aptget_remove('fd-find')
 
-INSTALL_PKGS['sxiv'] = simple_install('sxiv')
-REMOVE_PKGS['sxiv'] = simple_remove('sxiv')
-# INSTALL_PKGS['sxiv'] = r"""
-# !/usr/bin/env bash
-# sudo apt-get install -y sxiv
-# """
-# REMOVE_PKGS['sxiv'] = r"""
-# !/usr/bin/env bash
-# sudo apt remove -y sxiv
-# """
+INSTALL_PKGS['sxiv'] = aptget_install('sxiv')
+REMOVE_PKGS['sxiv'] = aptget_remove('sxiv')
 
-INSTALL_PKGS['neofetch'] = simple_install('neofetch')
-REMOVE_PKGS['neofetch'] = simple_remove('neofetch')
-# INSTALL_PKGS['neofetch'] = r"""
-# !/usr/bin/env bash
-# sudo apt-get install -y neofetch
+INSTALL_PKGS['neofetch'] = aptget_install('neofetch')
+REMOVE_PKGS['neofetch'] = aptget_remove('neofetch')
 
-INSTALL_PKGS['networking'] = simple_install(['wget', 'curl', 'iputils-ping', ])
-REMOVE_PKGS['networking'] = simple_remove(['wget', 'curl', 'iputils-ping', ])
-# INSTALL_PKGS['networking'] = r"""
-# !/usr/bin/env bash
-# sudo apt-get install -y wget curl iputils-ping
-# """
+INSTALL_PKGS['networking'] = aptget_install(['wget', 'curl', 'iputils-ping', ])
+REMOVE_PKGS['networking'] = aptget_remove(['wget', 'curl', 'iputils-ping', ])
 
-INSTALL_PKGS['entr'] = simple_install('entr')
-REMOVE_PKGS['entr'] = simple_remove('entr')
-# INSTALL_PKGS['entr'] = r"""
-# !/usr/bin/env bash
-# sudo apt-get install -y entr
-# """
+INSTALL_PKGS['entr'] = aptget_install('entr')
+REMOVE_PKGS['entr'] = aptget_remove('entr')
 
-INSTALL_PKGS['xclip'] = simple_install('xclip')
-REMOVE_PKGS['xclip'] = simple_remove('xclip')
-# INSTALL_PKGS['xclip'] = r"""
-# !/usr/bin/env bash
-# sudo apt-get install -y xclip
-# """
+INSTALL_PKGS['xclip'] = aptget_install('xclip')
+REMOVE_PKGS['xclip'] = aptget_remove('xclip')
 
-INSTALL_PKGS['disk_space'] = simple_install('baobab')
-REMOVE_PKGS['disk_space'] = simple_remove('baobab')
-# INSTALL_PKGS['disk_space'] = r"""
-# !/usr/bin/env bash
-# sudo apt-get install -y baobab
-# """
+INSTALL_PKGS['disk_space'] = aptget_install('baobab')
+REMOVE_PKGS['disk_space'] = aptget_remove('baobab')
 
-INSTALL_PKGS['trash_cli'] = simple_install('trash-cli')
-REMOVE_PKGS['trash_cli'] = simple_remove('trash-cli')
-# INSTALL_PKGS['trash_cli'] = r"""
-# !/usr/bin/env bash
-# sudo apt-get install -y trash-cli
-# """
+INSTALL_PKGS['trash_cli'] = aptget_install('trash-cli')
+REMOVE_PKGS['trash_cli'] = aptget_remove('trash-cli')
 
-INSTALL_PKGS['exfat'] = simple_install(['exfat-fuse', 'exfat-utils'])
-REMOVE_PKGS['exfat'] = simple_remove(['exfat-fuse', 'exfat-utils'])
-# INSTALL_PKGS['exfat'] = r"""
-# !/usr/bin/env bash
-# sudo apt-get install -y exfat-fuse exfat-utils
-# """
+INSTALL_PKGS['exfat'] = aptget_install(['exfat-fuse', 'exfat-utils'])
+REMOVE_PKGS['exfat'] = aptget_remove(['exfat-fuse', 'exfat-utils'])
 
-INSTALL_PKGS['arandr'] = simple_install('arandr')
-REMOVE_PKGS['arandr'] = simple_remove('arandr')
-# INSTALL_PKGS['arandr'] = r"""
-# !/usr/bin/env bash
-# sudo apt-get install -y arandr
-# """
+INSTALL_PKGS['arandr'] = aptget_install('arandr')
+REMOVE_PKGS['arandr'] = aptget_remove('arandr')
 
-INSTALL_PKGS['texstudio'] = simple_install(
-    ['texstudio', 'texlive-latex-extra', ])
-REMOVE_PKGS['texstudio'] = simple_remove(
-    ['texstudio', 'texlive-latex-extra', ])
-# INSTALL_PKGS['texstudio'] = r"""
-# !/usr/bin/env bash
-# sudo apt-get install -y texstudio texlive-latex-extra
-# """
+INSTALL_PKGS['texstudio'] = aptget_install(['texstudio', 'texlive-latex-extra', ])
+REMOVE_PKGS['texstudio'] = aptget_remove(['texstudio', 'texlive-latex-extra', ])
 
-INSTALL_PKGS['git'] = simple_install('git')
-REMOVE_PKGS['git'] = simple_remove('git')
-# INSTALL_PKGS['git'] = r"""
-# !/usr/bin/env bash
-# sudo apt-get install -y git
-# """
+INSTALL_PKGS['git'] = aptget_install('git')
+REMOVE_PKGS['git'] = aptget_remove('git')
 
-INSTALL_PKGS['tree'] = simple_install('tree')
-REMOVE_PKGS['tree'] = simple_remove('tree')
-# INSTALL_PKGS['tree'] = r"""
-# !/usr/bin/env bash
-# sudo apt-get install -y tree
-# """
+INSTALL_PKGS['tree'] = aptget_install('tree')
+REMOVE_PKGS['tree'] = aptget_remove('tree')
 
-INSTALL_PKGS['firewall_gui'] = simple_install('gufw')
-REMOVE_PKGS['firewall_gui'] = simple_remove('gufw')
-# INSTALL_PKGS['firewall_gui'] = r"""
-# !/usr/bin/env bash
-# sudo apt-get install -y gufw
-# """
+INSTALL_PKGS['firewall_gui'] = aptget_install('gufw')
+REMOVE_PKGS['firewall_gui'] = aptget_remove('gufw')
 # --fix-broken
 
-INSTALL_PKGS['gnome_tweak_tool'] = simple_install(
-    ['gnome-tweak-tool', 'gnome-tweaks'])
-REMOVE_PKGS['gnome_tweak_tool'] = simple_remove(
-    ['gnome-tweak-tool', 'gnome-tweaks'])
-# INSTALL_PKGS['gnome_tweak_tool'] = r"""
-# !/usr/bin/env bash
-# sudo apt-get install -y gnome-tweak-tool gnome-tweaks
-# """
+INSTALL_PKGS['gnome_tweak_tool'] = aptget_install(['gnome-tweak-tool', 'gnome-tweaks'])
+REMOVE_PKGS['gnome_tweak_tool'] = aptget_remove(['gnome-tweak-tool', 'gnome-tweaks'])
 
 # https://help.ubuntu.com/community/CheckInstall
-INSTALL_PKGS['checkinstall'] = simple_install('checkinstall')
-REMOVE_PKGS['checkinstall'] = simple_remove('checkinstall')
-# INSTALL_PKGS['checkinstall'] = r"""
-# !/usr/bin/env bash
-# https://help.ubuntu.com/community/CheckInstall
-# sudo apt-get install -y checkinstall
-# """
+INSTALL_PKGS['checkinstall'] = aptget_install('checkinstall')
+REMOVE_PKGS['checkinstall'] = aptget_remove('checkinstall')
 
-INSTALL_PKGS['mupdf'] = simple_install('mupdf')
-REMOVE_PKGS['mupdf'] = simple_remove('mupdf')
-# INSTALL_PKGS['mupdf'] = r"""
-# !/usr/bin/env bash
-# sudo apt-get install -y mupdf
-# """
+INSTALL_PKGS['mupdf'] = aptget_install('mupdf')
+REMOVE_PKGS['mupdf'] = aptget_remove('mupdf')
 
-INSTALL_PKGS['cmus'] = simple_install('cmus')
-REMOVE_PKGS['cmus'] = simple_remove('cmus')
-# INSTALL_PKGS['cmus'] = r"""
-# !/usr/bin/env bash
-# sudo apt-get install -y cmus
-# """
+INSTALL_PKGS['cmus'] = aptget_install('cmus')
+REMOVE_PKGS['cmus'] = aptget_remove('cmus')
 
-INSTALL_PKGS['pavucontrol'] = simple_install('pavucontrol')
-REMOVE_PKGS['pavucontrol'] = simple_remove('pavucontrol')
-# INSTALL_PKGS['pavucontrol'] = r"""
-# !/usr/bin/env bash
-# sudo apt-get install -y pavucontrol
-# """
+INSTALL_PKGS['pavucontrol'] = aptget_install('pavucontrol')
+REMOVE_PKGS['pavucontrol'] = aptget_remove('pavucontrol')
 
-INSTALL_PKGS['vlc'] = simple_install('vlc')
-REMOVE_PKGS['vlc'] = simple_remove('vlc')
-# INSTALL_PKGS['vlc'] = r"""
-# !/usr/bin/env bash
-# sudo apt-get install -y vlc
-# """
+INSTALL_PKGS['vlc'] = aptget_install('vlc')
+REMOVE_PKGS['vlc'] = aptget_remove('vlc')
 
 # TODO Required to add app reps?
-INSTALL_PKGS['software-properties-common'] = simple_install(
-    'software-properties-common')
-REMOVE_PKGS['software-properties-common'] = simple_remove(
-    'software-properties-common')
+INSTALL_PKGS['software-properties-common'] = aptget_install('software-properties-common')
+REMOVE_PKGS['software-properties-common'] = aptget_remove('software-properties-common')
 
-INSTALL_PKGS['shutter'] = simple_install(
-    'shutter', ppas='ppa:linuxuprising/shutter')
-REMOVE_PKGS['shutter'] = simple_remove(
-    'shutter', ppas='ppa:linuxuprising/shutter')
-# INSTALL_PKGS['shutter'] = r"""
-# !/usr/bin/env bash
+INSTALL_PKGS['shutter'] = aptget_install('shutter', ppas='ppa:linuxuprising/shutter')
+REMOVE_PKGS['shutter'] = aptget_remove('shutter', ppas='ppa:linuxuprising/shutter')
 
-# sudo apt-get install -y software-properties-common \
-# && sudo add-apt-repository -y ppa:linuxuprising/shutter \
-# && sudo apt-get update -y \
-# && sudo apt-get install -y shutter
-# """
+INSTALL_PKGS['openvpn'] = aptget_install(['openvpn', 'easy-rsa'])
+REMOVE_PKGS['openvpn'] = aptget_remove(['openvpn', 'easy-rsa'])
 
-INSTALL_PKGS['openvpn'] = simple_install(['openvpn', 'easy-rsa'])
-REMOVE_PKGS['openvpn'] = simple_remove(['openvpn', 'easy-rsa'])
-# INSTALL_PKGS['openvpn'] = r"""
-# !/usr/bin/env bash
-# sudo apt-get install -y openvpn easy-rsa
-# """
+INSTALL_PKGS['tlp'] = aptget_install('tlp')
+REMOVE_PKGS['tlp'] = aptget_remove('tlp')
 
-INSTALL_PKGS['tlp'] = simple_install('tlp')
-REMOVE_PKGS['tlp'] = simple_remove('tlp')
-# INSTALL_PKGS['tlp'] = r"""
-# !/usr/bin/env bash
-# sudo apt-get install -y tlp
-# """
+INSTALL_PKGS['tlp_gui'] = aptget_install('tlpui', ppas='ppa:linuxuprising/apps')
+REMOVE_PKGS['tlp_gui'] = aptget_remove('tlpui', ppas='ppa:linuxuprising/apps')
 
-
-INSTALL_PKGS['tlp_gui'] = simple_install(
-    'tlpui', ppas='ppa:linuxuprising/apps')
-REMOVE_PKGS['tlp_gui'] = simple_remove('tlpui', ppas='ppa:linuxuprising/apps')
-# INSTALL_PKGS['tlp_gui'] = r"""
-# !/usr/bin/env bash
-
-# sudo apt-get install -y software-properties-common \
-# && sudo add-apt-repository -y ppa:linuxuprising/apps \
-# && apt-get update -y \
-# && sudo apt install -y tlpui
-# """
-
-INSTALL_PKGS['ssh'] = simple_install(['openssh-server', 'xclip', 'xauth'])
-REMOVE_PKGS['ssh'] = simple_remove(['openssh-server', 'xclip', 'xauth'])
+INSTALL_PKGS['ssh'] = aptget_install(['openssh-server', 'xclip', 'xauth'])
+REMOVE_PKGS['ssh'] = aptget_remove(['openssh-server', 'xclip', 'xauth'])
 # INSTALL_PKGS['ssh'] = r"""
-# !/usr/bin/env bash
+##!/usr/bin/env bash
 # sudo apt install -y openssh-server xclip xauth
-# xsel, xauth -> so that you can share the clipboard (prefer xclip over xsel)
-# using ssh -Y yourserver
-# or by setting that as the default config in ~/.ssh/config
-# https://superuser.com/questions/326871/using-clipboard-through-ssh-in-vim
-# ~/.ssh/config
-# Host myserver
-# ForwardX11 yes
-# ForwardX11Trusted yes
+## xsel, xauth -> so that you can share the clipboard (prefer xclip over xsel)
+## using ssh -Y yourserver
+## or by setting that as the default config in ~/.ssh/config
+## https://superuser.com/questions/326871/using-clipboard-through-ssh-in-vim
+## ~/.ssh/config
+## Host myserver
+##    ForwardX11 yes
+##    ForwardX11Trusted yes
 # """
 # TODO ## xsel, xauth -> so that you can share the clipboard (prefer xclip over xsel)
 # using ssh -Y yourserver
@@ -362,9 +246,9 @@ sudo apt-get install -y scons pkg-config libglfw3-dev libgtk-3-dev git \
 && sudo ln -s /opt/goxel/goxel /usr/local/bin/goxel
 """
 
-# TODO Really slow install...
+## TODO Really slow install...
 # INSTALL_PKGS['freecad'] = r"""
-# !/usr/bin/env bash
+##!/usr/bin/env bash
 # VER=0.18.4
 # sudo apt-get install -y git software-properties-common apt-utils \
 # && sudo mkdir -p /opt/ \
@@ -379,12 +263,12 @@ sudo apt-get install -y scons pkg-config libglfw3-dev libgtk-3-dev git \
 # && make \
 # && sudo checkinstall
 # """
-# PROBLEMS WITH:
-# python3-pyside2uic
-# sudo apt-get install -y cmake cmake-qt-gui libboost-date-time-dev        libboost-dev         libboost-filesystem-dev         libboost-graph-dev         libboost-iostreams-dev         libboost-program-options-dev         libboost-python-dev         libboost-regex-dev         libboost-serialization-dev         libboost-dev         libboost-thread-dev         libeigen3-dev         libgts-bin         libgts-dev         libkdtree++-dev         libmedc-dev         libopencv-dev         libproj-dev         libqt5opengl5-dev         libqt5svg5-dev         libqt5webkit5-dev         libqt5x11extras5-dev         libqt5xmlpatterns5-dev         libspnav-dev         libvtk7-dev         libx11-dev         libxerces-c-dev         libzipios++-dev         python3-dev         python3-matplotlib         python3-ply         qtbase5-dev         qttools5-dev         swig
-# ADD PPA
-# sudo apt-get install -y         libocct-data-exchange-dev         libocct-ocaf-dev         libocct-visualization-dev         occt-draw         libcoin-dev         python3-pyside2.qtgui         python3-pyside2.qtsvg         python3-pyside2.qtwidgets                pyside2-tools         libshiboken2-dev         python3-pivy         libpyside2-dev         python3-pyside2.qtcore
-# sudo apt-get install -y libsimage-dev
+## PROBLEMS WITH:
+##   python3-pyside2uic
+## sudo apt-get install -y cmake cmake-qt-gui libboost-date-time-dev        libboost-dev         libboost-filesystem-dev         libboost-graph-dev         libboost-iostreams-dev         libboost-program-options-dev         libboost-python-dev         libboost-regex-dev         libboost-serialization-dev         libboost-dev         libboost-thread-dev         libeigen3-dev         libgts-bin         libgts-dev         libkdtree++-dev         libmedc-dev         libopencv-dev         libproj-dev         libqt5opengl5-dev         libqt5svg5-dev         libqt5webkit5-dev         libqt5x11extras5-dev         libqt5xmlpatterns5-dev         libspnav-dev         libvtk7-dev         libx11-dev         libxerces-c-dev         libzipios++-dev         python3-dev         python3-matplotlib         python3-ply         qtbase5-dev         qttools5-dev         swig
+## ADD PPA
+## sudo apt-get install -y         libocct-data-exchange-dev         libocct-ocaf-dev         libocct-visualization-dev         occt-draw         libcoin-dev         python3-pyside2.qtgui         python3-pyside2.qtsvg         python3-pyside2.qtwidgets                pyside2-tools         libshiboken2-dev         python3-pivy         libpyside2-dev         python3-pyside2.qtcore
+## sudo apt-get install -y libsimage-dev
 
 INSTALL_PKGS['freecad'] = r"""
 #!/usr/bin/env bash

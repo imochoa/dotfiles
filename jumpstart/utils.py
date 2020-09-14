@@ -10,7 +10,7 @@ import logging
 import collections
 from enum import Enum, auto
 import subprocess
-from typing import Tuple, Union, List, Iterable
+from typing import Tuple, Union, List, Iterable, Optional, Dict
 import uuid
 from io import BytesIO
 from zipfile import ZipFile
@@ -64,6 +64,24 @@ def ln(src: pathlib.Path, dest: pathlib.Path, dry_run: bool = True) -> None:
         if dest.is_file():
             rm(dest, dry_run=dry_run)
         os.link(src=src.resolve(), dst=dest.resolve())
+        # os.symlink(src=src.resolve(), dst=dest.resolve())
+
+
+def is_symlink(linkfile: Union[str, pathlib.Path],
+               src: Union[None, str, pathlib.Path] = None,
+               ) -> bool:
+    """
+    Checks if *linkfile* is a symlink.
+    If a *src* is provided, it also checks to make sure that *linkfile* links to *src*
+    """
+    linkfile = pathlib.Path(linkfile)
+    if not linkfile.is_symlink():
+        return False
+
+    if src is None:
+        return True
+
+    return linkfile.resolve() == pathlib.Path(src).resolve()
 
 
 def mkdirs(src: pathlib.Path, dry_run: bool = True) -> None:
@@ -141,7 +159,7 @@ def run_shell_str(shell_str: str,
     returncode, stdout = 0, ''
 
     if dry_run:
-        echo(f"Would have run:\n\t{shell_str}", color=bcolors.DEBUG)
+        echo(f"Would have run:\n{shell_str}", color=bcolors.DEBUG)
         return (0, 'DRY RUN -> NO OUTPUT')
 
     # TODO Use fp_stream?
