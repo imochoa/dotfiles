@@ -48,20 +48,25 @@ TRIVIAL_PGKS = [
     'gnome_tweak_tool',
     'shutter',
     'i3',
+    'dunst',
     # virtual packages
     'networking',
     'ssh',
 ]
 
+# For packages with intrinsic dependencies
 MULTIPLE_PKGs = {
     'networking':       ['wget', 'curl', 'iputils-ping', ],
     'exfat':            ['exfat-fuse', 'exfat-utils', ],
     'texstudio':        ['texstudio', 'texlive-latex-extra', ],
     'ssh':              ['openssh-server', 'xclip', 'xauth'],
+    'tlp-gui':          ['tlp'],
     'openvpn':          ['openvpn', 'easy-rsa'],
     'gnome_tweak_tool': ['gnome-tweak-tool', 'gnome-tweaks'],
     'i3':               ['i3', 'arandr', 'lxappearance', 'dmenu', 'rofi', 'compton', 'i3blocks', 'xbacklight', 'htop',
                          'feh', 'i3lock-fancy', 'i3-snapshot', ],
+    # https://www.digitalocean.com/community/tutorials/installing-and-using-ranger-a-terminal-file-manager-on-a-ubuntu-vps
+    'ranger':           ['ranger', 'caca-utils', 'highlight', 'atool', 'w3m', 'poppler-utils', 'mediainfo', 'xclip'],
 }
 
 RENAMED_PKGs = {
@@ -75,14 +80,11 @@ RENAMED_PKGs = {
 PKG_PPAs = {
     'bashtop': 'ppa:bashtop-monitor/bashtop',
     'tlp-gui': 'ppa:linuxuprising/apps',
-    'shutter': 'ppa:linuxuprising/shutter'
+    'shutter': 'ppa:linuxuprising/shutter',
 }
 
-# TODO Add dependencies?
+# Handle dependencies in the 'MULTIPLE_PGKs' dict
 DEPENDENCY_MAP = dict()
-
-DEPENDENCY_MAP['ssh'] = ['xclip']
-DEPENDENCY_MAP['tlp-gui'] = ['tlp']
 
 
 # --fix-broken

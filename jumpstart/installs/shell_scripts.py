@@ -6,6 +6,7 @@ import pdb
 
 # local imports
 INSTALL_PKGS = dict()
+REMOVE_PKGS = dict()
 
 # https://github.com/nodesource/distributions/blob/master/README.md
 INSTALL_PKGS['nodejs'] = r"""
@@ -138,6 +139,20 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -
 sudo apt install ${TMP_DEB}
 """
 
+INSTALL_PKGS['tmpmail'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y curl w3m jq
+sudo wget https://raw.githubusercontent.com/sdushantha/tmpmail/master/tmpmail --continue --output-document=/usr/local/bin/tmpmail
+sudo chown -R ${USER}:${USER} /usr/local/bin/tmpmail
+sudo chmod +x /usr/local/bin/tmpmail
+# Prepare first email
+/usr/local/bin/tmpmail --generate
+"""
+REMOVE_PKGS['tmpmail'] = r"""
+#!/usr/bin/env bash
+sudo rm -f /usr/local/bin/tmpmail
+"""
+
 INSTALL_PKGS['docker'] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y curl \
@@ -161,15 +176,10 @@ sudo apt-get install -y curl \
 INSTALL_PKGS['stretchly'] = r"""
 #!/usr/bin/env bash
 
-sudo apt-get install -y wget
 VER=1.1.0
-sudo mkdir -p /opt/
-sudo rm -f /opt/stretchly.appimage
-sudo wget https://github.com/hovancik/stretchly/releases/download/v${VER}/Stretchly-${VER}.AppImage --continue --output-document=/opt/stretchly.appimage
-sudo chown ${USER}:${USER} /opt/stretchly.appimage
-sudo chmod u+x /opt/stretchly.appimage
 sudo rm -f /usr/local/bin/stretchly
-sudo ln -s /opt/stretchly.appimage /usr/local/bin/stretchly
+sudo wget https://github.com/hovancik/stretchly/releases/download/v${VER}/Stretchly-${VER}.AppImage --continue --output-document=/usr/local/bin/stretchly
+sudo chmod +x /usr/local/bin/stretchly
 """
 
 INSTALL_PKGS['xournal'] = r"""
@@ -181,11 +191,12 @@ sudo apt-get install -y software-properties-common \
 && sudo apt-get install -y xournalpp
 """
 
-INSTALL_PKGS['i3'] = r"""
-#!/usr/bin/env bash
-sudo apt-get install -y i3 arandr lxappearance dmenu rofi compton i3blocks xbacklight htop feh i3lock-fancy
-# install  i3-snapshot?
-"""
+# In the apt-get section?
+# INSTALL_PKGS['i3'] = r"""
+# #!/usr/bin/env bash
+# sudo apt-get install -y i3 arandr lxappearance dmenu rofi compton i3blocks xbacklight htop feh i3lock-fancy
+# # install  i3-snapshot?
+# """
 
 # TODO the second i3gaps line probably belongs somewhere else...
 INSTALL_PKGS['i3_gaps'] = r"""
@@ -216,13 +227,13 @@ sudo apt-get install -y wget curl git xclip exuberant-ctags ncurses-term python3
 # DEPENDS ON NODEJS (install it as well)
 
 VER=0.4.4
-mkdir -p /opt/
-sudo wget https://github.com/neovim/neovim/releases/download/v${VER}/nvim.appimage --continue --output-document=/opt/nvim.appimage
-sudo chown ${USER}:${USER} /opt/nvim.appimage
-sudo chmod u+x /opt/nvim.appimage
+sudo rm -f /usr/local/bin/nvim
+sudo wget https://github.com/neovim/neovim/releases/download/v${VER}/nvim.appimage --continue --output-document=/usr/local/bin/nvim
+# sudo chown ${USER}:${USER} /usr/local/bin/nvim
+sudo chmod +x /usr/local/bin/nvim
 # sudo update-alternatives --install /usr/bin/neovim  editor /opt/nvim.appimage 100
 # nvr expects "nvim" not "neovim"!
-sudo update-alternatives --install /usr/bin/nvim  editor /opt/nvim.appimage 100
+sudo update-alternatives --install /usr/bin/nvim  editor /usr/local/bin/nvim 100
 
 
 # py3
@@ -298,6 +309,7 @@ DEPENDENCY_MAP = dict()
 DEPENDENCY_MAP['neovim'] = ['python3', 'nodejs', 'networking', 'xclip', 'git']
 DEPENDENCY_MAP['calibre'] = ['networking']
 DEPENDENCY_MAP['docker'] = ['networking']
+DEPENDENCY_MAP['tmpmail'] = ['networking']
 DEPENDENCY_MAP['docker_compose'] = ['networking']
 DEPENDENCY_MAP['nodejs'] = ['networking']
 DEPENDENCY_MAP['stretchly'] = ['networking']
