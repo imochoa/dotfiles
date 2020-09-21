@@ -114,20 +114,13 @@ if ! shopt -oq posix; then
 fi
 
 
+# If running within Ranger, modify the PS1
+if [ -n "$RANGER_LEVEL" ]; then export PS1="[ranger]$PS1"; fi
+
 # CONFIGURE EDITOR
 # --------------------------------------------------------------------------------
 # Swaps caps-lock and ESC keys
 setxkbmap -option caps:swapescape
-
-# Emacs vs vim mode
-# Emacs so that <C-x><C-e> activates vim editing-mode
-set -o emacs
-# set -o vi
-
-# alias vim=nvim
-# alias vi=nvim
-# export VISUAL="nvim"
-# export EDITOR="$VISUAL"
 
 # NVR (detect terminals within neovim)
 # the default nvr executable is in local/bin
@@ -137,16 +130,30 @@ export PATH="~/.local/bin:$PATH"
 if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
   # INSIDE OF NEOVIM!
   export PS1="[nvr]${PS1}"
-  # VISUAL should be set by ~/.config/nvim/init.vim!  (dotfiles/nvim/after/general-settings.vim)
+  # VISUAL used to be set by ~/.config/nvim/init.vim!  (dotfiles/nvim/after/general-settings.vim)
+  export $VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+
+  alias v="nvr"
+  alias vi="nvr"
+  alias vim="nvr"
+  alias nvim="nvr"
+  alias neovim="nvr"
 else
   export VISUAL="nvim"
+
+  alias v="${VISUAL}"
+  alias vi="${VISUAL}"
+  alias vim="${VISUAL}"
+  alias neovim="${VISUAL}"
 fi
 
 # Propagate the results
 export EDITOR="${VISUAL}"
-alias v="${VISUAL}"
-alias vim="${VISUAL}"
-alias vi="${VISUAL}"
+
+# Emacs vs vim mode
+# Emacs so that <C-x><C-e> activates vim editing-mode within nvr
+set -o emacs
+# set -o vi
 
 # "\C-o": operate-and-get-next
 # With this, once you have selected a command from history (e.g. via Vim search) 
