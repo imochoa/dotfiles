@@ -36,12 +36,11 @@ function server() {
     python3 -m http.server "$port"
 }
 
-#@pool
-#+this command runs a file with one command per line using a pool of "P" workers
+# run a file with one command per line using a pool of "P" workers
 #
 # It takes 1 mandatory argument:               pool /file/to/be/run.txt
 #      and optionally, the worker count:       pool /file/to/be/run.txt 5
-#
+# TODO add a command and use a file of input args?
 function pool() {
     local pcount="${2:-4}"
     local logfile=$(mktemp --suffix=.log)
@@ -50,6 +49,7 @@ function pool() {
     printf '\033[0;36m%s\033[0m\n' "Finished running ${1} [LOGFILE AT ${logfile}]!";
 }
 
+# Create a python3 virtual environment with all of the standard reqs 
 function py3venv() {
     local venvname="${1:-venv}"
     

@@ -34,8 +34,8 @@ au! BufWritePost ~/.config/nvim/init.vim ++nested source % " auto source when wr
 " -------------------------------- # vim: set ft=html
 autocmd BufNewFile,BufRead *.html setlocal nowrap
 " This will turn line wrapping off whenever you're working on an HTML file.
-autocmd BufWritePre,BufRead *.html :normal gg=G"
-" reindent the code whenever we read an HTML file as well as when we write it
+" autocmd BufWritePre,BufRead *.html :normal gg=G"
+" " reindent the code whenever we read an HTML file as well as when we write it
 
 " -----------------------------------
 " YAML

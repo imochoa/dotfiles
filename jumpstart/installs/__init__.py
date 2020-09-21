@@ -21,3 +21,7 @@ def build_pkg_maps(pkg_keys: Optional[Sequence[str]] = None) -> Tuple[Dict[str, 
         full_remove_map.update(r_map)
 
     return full_install_map, full_remove_map
+
+
+# Removing
+# sudo dpkg --remove --force-depends
