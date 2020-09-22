@@ -1,6 +1,33 @@
 " Global extension names to install when they aren't installed.
 " " See a list here: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions#implemented-coc-extensions
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-eslint', 'coc-clangd', 'coc-html', 'coc-jedi', 'coc-json', 'coc-markdownlint', 'coc-python', 'coc-sh', 'coc-xml', 'coc-yaml', 'coc-css', 'coc-snippets']
+let g:coc_global_extensions = [
+      \'coc-git', 
+      \'coc-html',
+      \'coc-css',
+      \'coc-eslint', 
+      \'coc-clangd',
+      \'coc-jedi',
+      \'coc-markdownlint',
+      \'coc-python',
+      \'coc-sh',
+      \'coc-json', 
+      \'coc-yaml',
+      \'coc-xml',
+      \'coc-snippets',
+      \'coc-lists',
+      \'coc-highlight',
+      \'coc-prettier',
+      \]
+
+" Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
+
+" Plug 'neoclide/coc-tslint', {'do': 'yarn install --frozen-lockfile'}
+
+" Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+" Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'} " mru and stuff
+" Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'} " color highlighting
+
 
 
 " coc-floaterm for vim-floaterm integration

@@ -1,10 +1,10 @@
 
-" -----------------------------------
-" Plugins!
-" -----------------------------------
-
 packadd minpac
 call minpac#init()
+
+" -----------------------------------
+" Plugins!
+" ----------------------------------- 
 
 " Optional packages have to be loaded explicitly with `packadd`.
 
@@ -69,21 +69,19 @@ call minpac#add('junegunn/fzf.vim')
 
 "COC
 call minpac#add('neoclide/coc.nvim', {'branch':'release'})
-" Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-" Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-tslint', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'} " mru and stuff
-" Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'} " color highlighting
 
 
-" Visuals.....
+
+" -----------------------------------
+" Visual Plugins
+" ----------------------------------- 
+
+" Rainbow CSVs
+call minpac#add('mechatroner/rainbow_csv')
 
 " Rainbow parentheses
 call minpac#add('junegunn/rainbow_parentheses.vim')
+
 
 " See colors on color codes!
 " call minpac#add('norcalli/nvim-colorizer.lua') " Not working...
