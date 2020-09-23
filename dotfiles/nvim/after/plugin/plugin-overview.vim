@@ -1,6 +1,24 @@
+" vim: filetype=vim
 
+" -----------------------------------
+" minpac
+" ----------------------------------- 
 packadd minpac
 call minpac#init()
+
+" Load the plugins right now. (optional)
+"packloadall
+
+" For installing
+command! PackUpdate call minpac#update() 
+" For uninstalling
+command! PackClean call minpac#clean()
+" Make tags
+command! PackDocs silent helptags ALL
+" List installed packages
+command! PackList :echo join(split(join(sort(keys(minpac#getpluglist())), "\n"), ','),"\n")
+" nnoremap  <leader>rt :echo join(split(&runtimepath, ','),"\n") <CR>
+
 
 " -----------------------------------
 " Plugins!
@@ -65,6 +83,7 @@ call minpac#add('tpope/vim-obsession')
 " File finding using fzf (install it separately with apt)
 call minpac#add('junegunn/fzf')
 call minpac#add('junegunn/fzf.vim')
+
 " Displate
 
 "COC
@@ -99,17 +118,4 @@ call minpac#add('mengelbrecht/lightline-bufferline', {'type': 'opt'})
 
 " Add other plugins here.
 " call minpac#add('vim-jp/syntax-vim-ex')
-
-" Load the plugins right now. (optional)
-"packloadall
-
-" For installing
-command! PackUpdate call minpac#update() 
-" For uninstalling
-command! PackClean call minpac#clean()
-" Make tags
-command! PackDocs silent helptags ALL
-" List installed packages
-command! PackList :echo join(split(join(sort(keys(minpac#getpluglist())), "\n"), ','),"\n")
-" nnoremap  <leader>rt :echo join(split(&runtimepath, ','),"\n") <CR>
 

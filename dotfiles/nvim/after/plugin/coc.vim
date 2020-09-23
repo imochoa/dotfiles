@@ -4,6 +4,7 @@ let g:coc_global_extensions = [
       \'coc-git', 
       \'coc-html',
       \'coc-css',
+      \'coc-prettier',
       \'coc-eslint', 
       \'coc-clangd',
       \'coc-jedi',
@@ -16,18 +17,19 @@ let g:coc_global_extensions = [
       \'coc-snippets',
       \'coc-lists',
       \'coc-highlight',
-      \'coc-prettier',
       \]
 
+      " only works with  
+      " conflicts with <leader>f for fzf
+
+
+" Other extensions to explore...
 " Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
 
 " Plug 'neoclide/coc-tslint', {'do': 'yarn install --frozen-lockfile'}
 
-" Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-" Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'} " mru and stuff
-" Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'} " color highlighting
-
+" 'neoclide/coc-lists' mru and stuff
+" 'neoclide/coc-highlight'" color highlighting
 
 
 " coc-floaterm for vim-floaterm integration
@@ -50,8 +52,6 @@ let g:coc_global_extensions = [
 " coc-stylelint for linting CSS and CSS preprocessed formats
 " coc-snippets provides snippets solution.
 " coc-spell-checker A basic spell checker that works well with camelCase code
-" coc-sql for sql.
-" coc-svg for svg.
 " coc-tabnine for tabnine.
 " coc-tailwindcss for tailwindcss.
 " coc-tasks for asynctasks.vim integration
@@ -71,7 +71,7 @@ function! SetupCommandAbbrs(from, to)
         \ .'? ("'.a:to.'") : ("'.a:from.'"))'
 endfunction
 
-" Use C to open coc config
+" Use ':C' to open coc config
 call SetupCommandAbbrs('C', 'CocConfig')
 
 " --------------------
@@ -219,3 +219,18 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+
+" ---------------------------------------------------------------------------- "
+" Prettier config
+" ---------------------------------------------------------------------------- "
+" Supports only: javascript, javascriptreact, typescript, typescriptreact, json and graphql
+
+" Use ':Prettier' to format current buffer
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+" Remap keys
+vmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  :CocCommand prettier.formatFile<cr>
+

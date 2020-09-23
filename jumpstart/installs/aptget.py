@@ -48,6 +48,7 @@ TRIVIAL_PGKS = [
     'gnome_tweak_tool',
     'shutter',
     'i3',
+    'lmms',
     'dunst',
     # virtual packages
     'networking',

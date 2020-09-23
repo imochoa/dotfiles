@@ -1,3 +1,4 @@
+" vim: filetype=vim
 
 source $HOME/.config/nvim/after/plugin/plugin-overview.vim
 
