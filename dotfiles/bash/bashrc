@@ -119,6 +119,8 @@ if [ -n "$RANGER_LEVEL" ]; then export PS1="[ranger]$PS1"; fi
 
 # CONFIGURE EDITOR
 # --------------------------------------------------------------------------------
+
+
 # Swaps caps-lock and ESC keys
 setxkbmap -option caps:swapescape
 
@@ -164,3 +166,8 @@ set -o emacs
 bind -x '"\C-l": clear'
 
 # neofetch
+
+# for debugging nautilus...
+# G_DEBUG="all" NAUTILUS_DEBUG="All" nautilus
+
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash

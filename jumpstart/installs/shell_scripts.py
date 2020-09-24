@@ -6,6 +6,7 @@ import pdb
 
 # local imports
 INSTALL_PKGS = dict()
+UPDATE_PGKS = dict()
 REMOVE_PKGS = dict()
 
 # https://github.com/nodesource/distributions/blob/master/README.md
@@ -215,6 +216,15 @@ sudo rm -f /usr/local/bin/stretchly
 sudo wget https://github.com/hovancik/stretchly/releases/download/v${VER}/Stretchly-${VER}.AppImage --continue --output-document=/usr/local/bin/stretchly
 sudo chmod +x /usr/local/bin/stretchly
 """
+
+# https://github.com/jrfonseca/gprof2dot
+INSTALL_PKGS['gprof2dot'] = r"""
+#!/usr/bin/env bash
+sudo rm -f /usr/local/bin/gprof2dot.py
+sudo wget https://raw.githubusercontent.com/jrfonseca/gprof2dot/master/gprof2dot.py --continue --output-document=/usr/local/bin/gprof2dot.py
+sudo chmod +x /usr/local/bin/gprof2dot.py
+"""
+UPDATE_PGKS['gprof2dot'] = INSTALL_PKGS['gprof2dot']
 
 INSTALL_PKGS['xournal'] = r"""
 #!/usr/bin/env bash
