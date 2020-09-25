@@ -58,6 +58,9 @@ DOTFILE_MAP = {
     'nvim/after/plugin/plugin-overview.vim':             '~/.config/nvim/after/plugin/plugin-overview.vim',
     'nvim/after/plugin/coc.vim':                         '~/.config/nvim/after/plugin/coc.vim',
 
+    'nvim/after/plugin/ftplugin/json.vim':               '~/.config/nvim/after/plugin/ftplugin/json.vim',
+    'nvim/after/plugin/ftplugin/python.vim':             '~/.config/nvim/after/plugin/ftplugin/python.vim',
+
     'nvim/after/compiler/cpp.vim':                       '~/.config/nvim/after/compiler/cpp.vim',
     'nvim/after/compiler/dummy.vim':                     '~/.config/nvim/after/compiler/dummy.vim',
     'nvim/after/compiler/tardyscript.vim':               '~/.config/nvim/after/compiler/tardyscript.vim',

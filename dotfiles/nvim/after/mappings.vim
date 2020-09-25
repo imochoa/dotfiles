@@ -1,3 +1,5 @@
+" vim: filetype=vim
+
 " set leader key
 let g:mapleader=','
 
@@ -175,7 +177,10 @@ noremap <Leader>Q :q!<CR>
 " nnoremap <leader>sc :CloseSession<CR>
 
 "" Set working directory
-nnoremap <leader>. :lcd %:p:h<CR>
+" nnoremap <leader>. :lcd %:p:h<CR>
+"" Set working directory (and print the result)
+nnoremap <leader>. :lcd %:p:h<CR>:pwd<CR>
+
 
 "" Opens an edit command with the path of the currently edited file filled in
 noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>

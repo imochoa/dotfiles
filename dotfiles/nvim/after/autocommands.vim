@@ -3,6 +3,8 @@
 " ----------------------------------------------------
 " Autocommands
 " ----------------------------------------------------
+" File-specific configs are available in ~/.config/nvim/after/ftplugin/
+" (e.g. ~/.config/nvim/after/ftplugin/python.vim)
 
 " augroup GROPU
 "     " Clears all of the autocommands defined IN THIS GROUP
@@ -52,10 +54,32 @@ autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
 " -----------------------------------
 " JSON
 " -------------------------------- # vim: set ft=json
-" Comments in JSON files
-autocmd FileType json syntax match Comment +\/\/.\+$+
+" TODO Move to the augroup?
+" autocmd FileType json syntax match Comment +\/\/.\+$+
+" Handled automatically by the 'prettier' CoC extension
 " reindent the file whenever we read or write it
-autocmd BufWritePre,BufRead *.json :normal gg=G"
+" autocmd BufWritePre,BufRead *.json :normal gg=G"
+
+
+" necessary?
+" :syntax on
+augroup filetype_json
+
+
+  " Comments in JSON files
+  autocmd FileType json syntax match Comment +\/\/.\+$+
+
+  " " Folding
+  " autocmd FileType json :setlocal foldmethod=syntax
+
+  " The first autocommand sets 'indent' as the fold method before a file is loaded, so that indent-based folds will be defined.
+  " au BufReadPre * setlocal foldmethod=syntax
+  " au BufRead * setlocal foldmethod=syntax
+  " The second one allows you to manually create folds while editing. It's executed after the modeline is read, so it won't 
+  " change the fold method if the modeline set the fold method to something else like 'marker' or 'syntax'.
+  " au BufWinEnter * if &fdm == 'syntax' | setlocal foldmethod=manual | endif
+
+augroup END
 
 
 " -----------------------------------
@@ -67,7 +91,10 @@ autocmd BufNewFile,BufRead *.gltf set syntax=json
 " -----------------------------------
 " Python
 " -------------------------------- # vim: set ft=python
-autocmd BufNewFile,BufRead *.py set foldmethod=indent
+" TODO
+" SET THIS IN ~/.vim/after/ftplugin/python.vim
+" https://vi.stackexchange.com/questions/18231/what-is-the-difference-of-using-au-bufnewfile-bufread-py-and-au-filetype-py
+" autocmd BufNewFile,BufRead *.py set foldmethod=indent
 
 
 ""  ---- Minimal configuration:
