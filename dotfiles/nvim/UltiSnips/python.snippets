@@ -1,0 +1,41 @@
+
+# Function decorator
+snippet fdec
+def ${1:fcn_decorator}(fn):
+	argspec = inspect.getfullargspec(fn)
+	positional_count = len(argspec.args) - len(argspec.defaults)
+	defaults = dict(zip(argspec.args[positional_count:], argspec.defaults))
+	
+	@functools.wraps(fn)
+	def wrapper(*args, **kwargs):
+		used_kwargs = kwargs.copy()
+		used_kwargs.update(zip(argspec.args[positional_count:], args[positional_count:]))
+	
+		dict2print = {k: used_kwargs.get(k, d) for k, d in defaults.items()}
+		print(f'function {fn.__name__} '
+			f'called with positional args {args[:positional_count]} '
+			f'and keyword args {dict2print}',
+			)
+		return fn(*args, **kwargs)
+	return wrapper
+$0
+endsnippet
+
+# def document_call(fn):
+#     argspec = inspect.getfullargspec(fn)
+#     positional_count = len(argspec.args) - len(argspec.defaults)
+#     defaults = dict(zip(argspec.args[positional_count:], argspec.defaults))
+
+#     @functools.wraps(fn)
+#     def wrapper(*args, **kwargs):
+#         used_kwargs = kwargs.copy()
+#         used_kwargs.update(zip(argspec.args[positional_count:], args[positional_count:]))
+
+#         dict2print = {k: used_kwargs.get(k, d) for k, d in defaults.items()}
+#         print(f'function {fn.__name__} '
+#               f'called with positional args {args[:positional_count]} '
+#               f'and keyword args {dict2print}',
+#               )
+#         return fn(*args, **kwargs)
+
+#     return wrapper

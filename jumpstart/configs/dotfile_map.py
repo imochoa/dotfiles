@@ -49,6 +49,10 @@ DOTFILE_MAP = {
     'nvim/init.vim':                                     '~/.config/nvim/init.vim',
     'nvim/coc-settings.json':                            '~/.config/nvim/coc-settings.json',
     'nvim/package-lock.json':                            '~/.config/nvim/package-lock.json',
+
+    'nvim/UltiSnips/python.snippets':                    '~/.config/nvim/UltiSnips/python.snippets',
+    'nvim/UltiSnips/markdown.snippets':                  '~/.config/nvim/UltiSnips/markdown.snippets',
+
     'nvim/after/autocommands.vim':                       '~/.config/nvim/after/autocommands.vim',
     'nvim/after/general-settings.vim':                   '~/.config/nvim/after/general-settings.vim',
     'nvim/after/mappings.vim':                           '~/.config/nvim/after/mappings.vim',
