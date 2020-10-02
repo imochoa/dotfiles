@@ -26,23 +26,26 @@ au! BufWritePost ~/.config/nvim/init.vim ++nested source % " auto source when wr
 
 " ----------------------------------------------------
 " Dockerfile
-" -------------------------------- # vim: set ft=dockerfile
-" # vi: ft=dockerfile
+" -------------------------------- # vim:set ft=dockerfile:
+
+
 " Vertially align all \ cmds
 " :Tabularize /.*\zs\
 
 " ----------------------------------------------------
 " HTML
-" -------------------------------- # vim: set ft=html
-autocmd BufNewFile,BufRead *.html setlocal nowrap
+" -------------------------------- # vim:set ft=html:
+" autocmd BufNewFile,BufRead *.html setlocal nowrap
 " This will turn line wrapping off whenever you're working on an HTML file.
 " autocmd BufWritePre,BufRead *.html :normal gg=G"
 " " reindent the code whenever we read an HTML file as well as when we write it
 
 " -----------------------------------
 " YAML
-" -------------------------------- # vim: set ft=yaml
-autocmd BufWritePre,BufRead *.yaml :normal gg=G"
+" -------------------------------- # vim:set ft=yaml:
+
+" necessary?
+" autocmd BufWritePre,BufRead *.yaml :normal gg=G"
 
 
 " -----------------------------------
@@ -53,7 +56,8 @@ autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
 
 " -----------------------------------
 " JSON
-" -------------------------------- # vim: set ft=json
+" -------------------------------- # vim:set ft=json:
+
 " TODO Move to the augroup?
 " autocmd FileType json syntax match Comment +\/\/.\+$+
 " Handled automatically by the 'prettier' CoC extension

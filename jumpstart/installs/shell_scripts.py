@@ -140,6 +140,16 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -
 sudo apt install ${TMP_DEB}
 """
 
+INSTALL_PKGS["duf"] = r"""
+#!/usr/bin/env bash
+
+TMP_DEB=/tmp/duf.deb
+VER=0.3.1
+sudo apt-get install -y wget
+wget https://github.com/muesli/duf/releases/download/v${VER}/duf_${VER}_linux_amd64.deb --continue --output-document=${TMP_DEB}
+sudo apt install ${TMP_DEB}
+"""
+
 INSTALL_PKGS['tmpmail'] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y curl w3m jq

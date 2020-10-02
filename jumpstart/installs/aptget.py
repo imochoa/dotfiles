@@ -38,24 +38,26 @@ TRIVIAL_PGKS = [
     'entr',
     'xclip',
     'trash-cli',
-    'exfat',
     'disk_space',
     'arandr',
-    'texstudio',
     'tlp',
+    'shutter',
+    'lmms',
+    'mutt',
+    'pinta',
+    'peek',
+    # virtual packages (mapped in *MULTIPLE_PKGs* or *RENAMED_PKGs*)
+    'networking',
+    'exfat',
+    'texstudio',
+    'ssh',
     'tlp-gui',
     'openvpn',
     'gnome_tweak_tool',
-    'shutter',
     'i3',
-    'lmms',
-    'dunst',
-    # virtual packages
-    'networking',
-    'ssh',
 ]
 
-# For packages with intrinsic dependencies
+# [1st STEP] Expand packages with dependencies
 MULTIPLE_PKGs = {
     'networking':       ['wget', 'curl', 'iputils-ping', ],
     'exfat':            ['exfat-fuse', 'exfat-utils', ],
@@ -70,6 +72,15 @@ MULTIPLE_PKGs = {
     'ranger':           ['ranger', 'caca-utils', 'highlight', 'atool', 'w3m', 'poppler-utils', 'mediainfo', 'xclip'],
 }
 
+# [2nd STEP] Add any PPAs
+PKG_PPAs = {
+    'bashtop': 'ppa:bashtop-monitor/bashtop',
+    'tlp-gui': 'ppa:linuxuprising/apps',
+    'shutter': 'ppa:linuxuprising/shutter',
+    'peek':    'ppa:peek-developers/stable',
+}
+
+# [3rd STEP] get the REAL names
 RENAMED_PKGs = {
     '7zip':         'p7zip-full',
     'fd':           'fd-find',
@@ -77,15 +88,6 @@ RENAMED_PKGs = {
     'firewall_gui': 'gufw',
     'tlp-gui':      'tlpui',
 }
-
-PKG_PPAs = {
-    'bashtop': 'ppa:bashtop-monitor/bashtop',
-    'tlp-gui': 'ppa:linuxuprising/apps',
-    'shutter': 'ppa:linuxuprising/shutter',
-}
-
-# Handle dependencies in the 'MULTIPLE_PGKs' dict
-DEPENDENCY_MAP = dict()
 
 
 # --fix-broken

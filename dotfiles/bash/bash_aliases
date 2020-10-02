@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # ~/.bash_aliases
 
+
+# Shell helpers
 # update & upgrade & autoremove
 alias uua='sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get autoremove -y'
 
@@ -8,6 +10,9 @@ alias uua='sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get aut
 alias restart-audio='systemctl --user restart pulseaudio'
 # bad way to restart
 # pulseaudio -k && sudo alsa force-reload
+
+# rerun last command as root
+alias please='sudo !!'
 
 # some more aliases
 alias ..='cd ..'
@@ -27,7 +32,7 @@ alias untrack='git update-index --assume-unchanged'
 alias retrack='git update-index --no-assume-unchanged'
 
 
-# dusnt
+# Reload dusnt config file
 alias dunst-reload='killall dunst; notify-send "reloaded the dunstrc file!"'
 
 # Like rm, but safer since it uses trash-cli
@@ -66,5 +71,5 @@ alias audio-laptop='pacmd set-card-profile 0 output:analog-stereo+input:analog-s
 # xrandr --output <other screen> --same-as <main screen>
 
 
-# For programs
+# Shorthand for programs
 alias r='ranger'

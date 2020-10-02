@@ -2,17 +2,21 @@
 
 
 " tabstop:          Width of tab character
-set tabstop=4
+" set tabstop=2
 " softtabstop:      Fine tunes the amount of white space to be added
-set softtabstop=4
+" set softtabstop=2
 " shiftwidth        Determines the amount of whitespace to add in normal mode
-set shiftwidth=4
+" set shiftwidth=2
 " expandtab:        When this option is enabled, vi will use spaces instead of tabs
-set expandtab
+" set expandtab
+
+" set foldmethod=indent
+" set foldmethod=syntax
 
 " set textwidth=79
 
-set foldmethod=indent
-" set foldmethod=syntax
-
-" autocmd BufNewFile,BufRead *.py set foldmethod=indent
+" " Fix auto-indentation for YAML files
+" augroup yaml_fix
+"     autocmd!
+"     autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentkeys-=<:>
+" augroup END

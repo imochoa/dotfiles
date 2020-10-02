@@ -46,6 +46,8 @@ DOTFILE_MAP = {
     # 'nvim/local_init.vim':           'path',
     # 'nvim/local_bundles.vim':        'path',
 
+    'sxiv/key-handler':                                  '~/.config/sxiv/exec/key-handler',
+
     'nvim/init.vim':                                     '~/.config/nvim/init.vim',
     'nvim/coc-settings.json':                            '~/.config/nvim/coc-settings.json',
     'nvim/package-lock.json':                            '~/.config/nvim/package-lock.json',
@@ -64,6 +66,8 @@ DOTFILE_MAP = {
 
     'nvim/after/plugin/ftplugin/json.vim':               '~/.config/nvim/after/plugin/ftplugin/json.vim',
     'nvim/after/plugin/ftplugin/python.vim':             '~/.config/nvim/after/plugin/ftplugin/python.vim',
+    'nvim/after/plugin/ftplugin/html.vim':               '~/.config/nvim/after/plugin/ftplugin/html.vim',
+    'nvim/after/plugin/ftplugin/yaml.vim':               '~/.config/nvim/after/plugin/ftplugin/yaml.vim',
 
     'nvim/after/compiler/cpp.vim':                       '~/.config/nvim/after/compiler/cpp.vim',
     'nvim/after/compiler/dummy.vim':                     '~/.config/nvim/after/compiler/dummy.vim',
