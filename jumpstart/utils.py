@@ -17,7 +17,7 @@ from zipfile import ZipFile
 import shutil
 import tempfile
 from urllib.request import urlopen
-from urllib.parse import quote
+from urllib.parse import quote, urlparse
 
 from concurrent.futures import ThreadPoolExecutor
 import threading
@@ -106,6 +106,13 @@ def get_release_tag(user_and_repo: str) -> str:
     """
     >>> get_latest_release_tag('pdfminer/pdfminer.six')
     """
+
+    # If the input was a URL, parse it
+    user_and_repo = urlparse(user_and_repo).path
+    user_and_repo = user_and_repo[:-1] if user_and_repo.endswith('/') else user_and_repo
+    user_and_repo = user_and_repo[:-9] if user_and_repo.endswith('/releases') else user_and_repo
+
+    # Make the query URL
     url = f"https://github.com/{quote(user_and_repo)}/releases/latest"
 
     with urlopen(url) as fp:
