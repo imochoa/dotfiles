@@ -9,6 +9,21 @@ INSTALL_PKGS = dict()
 UPDATE_PGKS = dict()
 REMOVE_PKGS = dict()
 
+# https://stackoverflow.com/questions/10649814/get-last-git-tag-from-a-remote-repo-without-cloning
+
+# Get last tag using newer versions of git that support --sort:
+# git -c 'versionsort.suffix=-' \
+#     ls-remote --exit-code --refs --sort='version:refname' --tags <repository> '*.*.*' \
+#     | tail --lines=1 \
+#     | cut --delimiter='/' --fields=3
+
+# For older versions of git that support --version-sort
+# git ls-remote --refs --tags <repository> \
+#     | cut --delimiter='/' --fields=3     \
+#     | tr '-' '~'                         \
+#     | sort --version-sort                \
+#     | tail --lines=1
+
 # https://github.com/nodesource/distributions/blob/master/README.md
 INSTALL_PKGS['nodejs'] = r"""
 #!/usr/bin/env bash
@@ -221,11 +236,18 @@ sudo apt-get install -y curl \
 INSTALL_PKGS['stretchly'] = r"""
 #!/usr/bin/env bash
 
-VER=1.1.0
-sudo rm -f /usr/local/bin/stretchly
-sudo wget https://github.com/hovancik/stretchly/releases/download/v${VER}/Stretchly-${VER}.AppImage --continue --output-document=/usr/local/bin/stretchly
-sudo chmod +x /usr/local/bin/stretchly
+VER=$(git ls-remote --refs --tags https://github.com/hovancik/stretchly \
+    | cut --delimiter='/' --fields=3     \
+    | tr '-' '~'                         \
+    | sort --version-sort                \
+    | tail --lines=1);
+# e.g. VER=v1.2.0
+sudo rm -f /usr/local/bin/stretchly \
+&& sudo wget https://github.com/hovancik/stretchly/releases/download/${VER}/Stretchly-${VER:1}.AppImage \
+    --output-document=/usr/local/bin/stretchly \
+&& sudo chmod +x /usr/local/bin/stretchly;
 """
+UPDATE_PGKS['stretchly'] = INSTALL_PKGS['stretchly']
 
 # https://github.com/jrfonseca/gprof2dot
 INSTALL_PKGS['gprof2dot'] = r"""
