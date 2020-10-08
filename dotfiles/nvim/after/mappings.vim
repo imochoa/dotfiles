@@ -1,7 +1,15 @@
 " vim: filetype=vim
 
-" set leader key
-let g:mapleader=','
+" -------------------- "
+" leader key shortcuts "
+" -------------------- "
+
+"" Close buffer
+" noremap <leader>c :bd<CR>
+nnoremap <Leader>d :bp\|bd #<CR>
+nnoremap <Leader>D :bp\|bd! #<CR>
+noremap <Leader>q :q<CR>
+noremap <Leader>Q :q!<CR>
 
 
 " See the runtimepath

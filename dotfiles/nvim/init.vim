@@ -1,5 +1,20 @@
 " vim: filetype=vim
 
+" ---------- "
+" leader key "
+" ---------- "
+" set leader key
+" let g:mapleader=','
+
+" Remove any possible mapping beforehand
+nnoremap <SPACE> <Nop>
+let g:mapleader = " "
+
+
+" ----- "
+" VIMRC "
+" ----- "
+
 source $HOME/.config/nvim/after/plugin/plugin-overview.vim
 
 source $HOME/.config/nvim/after/general-settings.vim
