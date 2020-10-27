@@ -3,7 +3,7 @@
 # Reload the changes with: git init
 
 [user]
-	name = imochoa
+  name = imochoa
   email = nachomartinochoa@gmail.com
 
 ; https://www.grzegorowski.com/using-vim-or-neovim-nvim-as-a-git-mergetool
@@ -30,3 +30,5 @@
   prompt = false
 
 
+[help]
+	autocorrect = 1

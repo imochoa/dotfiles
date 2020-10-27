@@ -33,6 +33,7 @@ DOTFILE_MAP = {
 
     # 'vim/vimrc':                     '~/.vimrc',
     # 'vim/vimrc.local':               '~/.vimrc.local',
+    'git/gitconfig':                                     '~/.gitconfig',
 
     'ImageMagick/policy.xml':                            '/etc/ImageMagick-6/policy.xml',
 
