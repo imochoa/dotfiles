@@ -133,7 +133,9 @@ if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
   # INSIDE OF NEOVIM!
   export PS1="[nvr]${PS1}"
   # VISUAL used to be set by ~/.config/nvim/init.vim!  (dotfiles/nvim/after/general-settings.vim)
-  export $VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+  export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'";
+  # INCORRECT!
+  # export $VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'";
 
   alias v="nvr"
   alias vi="nvr"
