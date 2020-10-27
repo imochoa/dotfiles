@@ -1,5 +1,4 @@
-#~/.gitconfig
-
+# ~/.config/git/config
 # Reload the changes with: git init
 
 [user]
@@ -28,7 +27,6 @@
 
 [difftool]
   prompt = false
-
 
 [help]
 	autocorrect = 1
