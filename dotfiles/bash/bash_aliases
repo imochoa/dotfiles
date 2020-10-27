@@ -5,7 +5,7 @@
 # Shell helpers
 # update & upgrade & autoremove
 alias uua='sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get autoremove -y'
-
+alias uvim='neovim +PackUpdate +qall ; neovim +CocInstall +qall';
 # audio restart (from Ubuntu podcast)
 alias restart-audio='systemctl --user restart pulseaudio'
 # bad way to restart

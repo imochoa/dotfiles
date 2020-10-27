@@ -112,6 +112,20 @@ ranger() {
         exit
     fi
 }
+
+# 
+function pyprofile() {
+    local scriptname="${1}"
+    local basename=""${scriptname%.py}""
+    
+    printf '\033[0;36m%s\033[0m\n' "Running the profiler...";
+    python -m cProfile -o ${basename}.stats ${scriptname}
+    gprof2dot ${basename}.stats -f pstats > ${basename}.dot
+
+    printf '\033[0;36m%s\033[0m\n' "Done!";
+}
+
+
 # function pdfmerge(){
 
 #     local input_dir="${1:-.}"
