@@ -35,16 +35,30 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 
-" Better window navigation
-" splits
+" ----------- "
+" new buffer! "
+" ------------ "
+
+nmap <silent> <Leader>ee :enew<CR>
+" ------ "
+" splits "
+" ------ "
+" split MIRRORING current buffer...
 " nmap <silent> vv :vsplit<CR>
 " nmap <silent> ss :split<CR>
-nmap <silent> vv :vnew<CR>
-nmap <silent> ss :new<CR>
-" :vertical ball " Rearrange splits VERTICALLY
-" :ball " Rearrange splits HORIZONTALLY
+
+" nmap <silent> vv :vnew<CR>
+" nmap <silent> ss :new<CR>
+
+" split  AND make a new buffer
+nmap <silent> <Leader>vv :vnew<CR>
+nmap <silent> <Leader>ss :new<CR>
+
+" split positions
 set splitright " When splitting vertically, split to the right
 set splitbelow " When splitting horizontally, split below
+" :vertical ball " Rearrange splits VERTICALLY
+" :ball " Rearrange splits HORIZONTALLY
 
 " Resize the widows
 " nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
@@ -101,10 +115,15 @@ if has('nvim')
   tnoremap <M-L> <C-\><C-n><C-w>L
 endif
 
-" Tab navigation
-nmap <silent> tt :tabnew<CR>
+" ------- "
+" tabs "
+" ------- "
+" nmap <silent> tt :tabnew<CR>
 " breaks 'tt' in insert mode!
 " imap <silent> tt :<Esc>tabnew<CR>
+
+nmap <silent> <Leader>tt :tabnew<CR>
+imap <silent> <Leader>tt :tabnew<CR>
 
 " nmap <silent> <Leader><Tab> :tabnew<CR>
 " imap <silent> <Leader><Tab> :<Esc>tabnew<CR>
@@ -130,16 +149,16 @@ nmap <silent> <Leader><Tab> :tabs<CR>
 " nnoremap <Leader>o o<Esc>^Da
 " nnoremap <Leader>O O<Esc>^Da
 
-"*****************************************************************************
-" Folding
-"*****************************************************************************
-nnoremap <space> za
-vnoremap <space> zf
+" ------- "
+" Folding "
+" ------- "
+" nnoremap <space> za
+" vnoremap <space> zf
 
 
-" -----------------------------------
-" Terminal mode
-" -----------------------------------
+" ------------- "
+" Terminal mode "
+" ------------- "
 
 " terminal emulation
 nnoremap <silent> <leader>sh :terminal<CR>

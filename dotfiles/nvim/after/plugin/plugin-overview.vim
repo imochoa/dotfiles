@@ -19,7 +19,10 @@ command! PackDocs silent helptags ALL
 command! PackList :echo join(split(join(sort(keys(minpac#getpluglist())), "\n"), ','),"\n")
 " nnoremap  <leader>rt :echo join(split(&runtimepath, ','),"\n") <CR>
 
-
+" command to update everything:
+" neovim +PackUpdate +qall; neovim +PackClean +qall; neovim +PackDocks +qall; neovim +CocInstall +qall
+" As a loop:
+" for x in "PackUpdate" "PackClean" "PackDocs" "CocInstall"; do neovim +${x} +qall; done
 " -----------------------------------
 " Plugins!
 " ----------------------------------- 
@@ -80,9 +83,15 @@ call minpac#add('tpope/vim-vinegar')
 call minpac#add('tpope/vim-obsession')
 ", {'type': 'opt'})
 
-" File finding using fzf (install it separately with apt)
-call minpac#add('junegunn/fzf')
+" File finding using fzf 
+" option1: (install it separately with apt)
+" option2: install it as a git repository!
+" mkdir -p ~/.config/nvim/pack/minpac/start/
+" git clone --depth 1 https://github.com/junegunn/fzf.git ~/.config/nvim/pack/minpac/start/fzf
+" ~/.config/nvim/pack/minpac/start/fzf/install
+call minpac#add('junegunn/fzf', {'do': { -> fzf#install() } })
 call minpac#add('junegunn/fzf.vim')
+
 
 " Displate
 

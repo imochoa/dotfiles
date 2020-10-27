@@ -1,6 +1,8 @@
 
 # Function decorator
 snippet fdec
+import inspect
+import functools
 def ${1:fcn_decorator}(fn):
 	argspec = inspect.getfullargspec(fn)
 	positional_count = len(argspec.args) - len(argspec.defaults)
@@ -21,6 +23,8 @@ def ${1:fcn_decorator}(fn):
 $0
 endsnippet
 
+# import inspect
+# import functools
 # def document_call(fn):
 #     argspec = inspect.getfullargspec(fn)
 #     positional_count = len(argspec.args) - len(argspec.defaults)
@@ -39,3 +43,39 @@ endsnippet
 #         return fn(*args, **kwargs)
 
 #     return wrapper
+
+
+# import tempfile
+# import subprocess
+# import typing as T
+# 
+# def safe_run(cmd:T.Sequence[str],
+#              env:T.Optional[T.Dict[str,str]]=None, 
+#              cwd:T.Optional[str]=None,
+#              )->T.Tuple[int,str]:
+#     with tempfile.NamedTemporaryFile(suffix='.txt') as fp:
+#         p = subprocess.run(cmd,
+#                            sdtout=fp,
+#                            stderr=subprocess.STDOUT,
+#                            cwd=cwd,
+#                            env=env,
+#                            )
+#         with open(fp.name, 'rb') as fp_out:
+#             output = fp_out.read().decode('utf8', 'ignore')
+#     
+#     return p.returncode,output
+
+
+
+# class with repr 
+#     def __repr__(self):
+#         return (
+#             "<"
+#             f"{self.__class__.__name__}, "
+#             f"loc=({hex(id(self))}), "
+#             f"thread_type_str={self.thread_type_str}, "
+#             f"thread_size_str={self.thread_size_str}]"
+#             ">"
+#         )
+# 
+# 
