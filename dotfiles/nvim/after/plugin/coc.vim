@@ -1,6 +1,7 @@
 " Global extension names to install when they aren't installed.
 " " See a list here: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions#implemented-coc-extensions
 let g:coc_global_extensions = [
+      \'coc-actions', 
       \'coc-git', 
       \'coc-html',
       \'coc-css',

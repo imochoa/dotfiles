@@ -12,8 +12,26 @@ noremap <Leader>q :q<CR>
 noremap <Leader>Q :q!<CR>
 
 
+"" Set working directory
+" nnoremap <leader>. :lcd %:p:h<CR>
+"" Set working directory (and print the result)
+nnoremap <leader>. :lcd %:p:h<CR>:pwd<CR>
+
+" terminal emulation
+nnoremap <silent> <Leader>sh :terminal<CR>
+" nnoremap <silent> <Leader>! :terminal<CR>
+
+"" Opens an edit command with the path of the currently edited file filled in
+noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+
+"" Opens a tab edit command with the path of the currently edited file filled
+noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
+
 " See the runtimepath
 nnoremap  <leader>rt :echo join(split(&runtimepath, ','),"\n") <CR>
+
+
+
 
 " Expand %% to the directory of the current file
 cabbr <expr> %% expand('%:p:h')
@@ -160,8 +178,6 @@ nmap <silent> <Leader><Tab> :tabs<CR>
 " Terminal mode "
 " ------------- "
 
-" terminal emulation
-nnoremap <silent> <leader>sh :terminal<CR>
 
 if has('nvim')
 " Leaving terminal emulation with Esc as well
@@ -169,23 +185,19 @@ if has('nvim')
   " For sending a literal <Esc> to the running process
   tnoremap <C-v><Esc> <Esc>
 
-  " Go to insert mode whenver opening a new terminal
-  " autocmd TermOpen * startinsert
-  autocmd TermOpen term://* startinsert
     
+  augroup neovim_terminal
+      autocmd!
+      " Enter Terminal-mode (insert) automatically
+    autocmd TermOpen term://* startinsert
+      " Disables number lines on terminal buffers
+      autocmd TermOpen * :set nonumber norelativenumber
+      " allows you to use Ctrl-c on terminal window
+      autocmd TermOpen * nnoremap <buffer> <C-c> i<C-c>
+  augroup END
+
 endif
 
-
-" Leader commands?
-
-
-
-"" Close buffer
-" noremap <leader>c :bd<CR>
-nnoremap <Leader>d :bp\|bd #<CR>
-nnoremap <Leader>D :bp\|bd! #<CR>
-noremap <Leader>q :q<CR>
-noremap <Leader>Q :q!<CR>
 
 " "" Git
 " noremap <Leader>ga :Gwrite<CR>
