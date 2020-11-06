@@ -139,16 +139,15 @@ if [ -n "$RANGER_LEVEL" ]; then export PS1="[ranger]$PS1"; fi
 # Swaps caps-lock and ESC keys
 setxkbmap -option caps:swapescape
 
-# NVR (detect terminals within neovim)
-# the default nvr executable is in local/bin
-export PATH=$HOME/tools/nvim:$PATH
-export PATH="~/.local/bin:$PATH"
+# NEOVIM REMOTE /usr/local/bin/nvr (detect terminals within neovim) 
 
 if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
   # INSIDE OF NEOVIM!
   export PS1="[nvr]${PS1}"
-  # VISUAL used to be set by ~/.config/nvim/init.vim!  (dotfiles/nvim/after/general-settings.vim)
+  # VISUAL can also be set by ~/.config/nvim/init.vim!  (dotfiles/nvim/after/general-settings.vim)
+  # but this way the VISUAL & EDITOR env vars are updated
   export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'";
+
   # INCORRECT!
   # export $VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'";
 
@@ -186,5 +185,9 @@ bind -x '"\C-l": clear'
 
 # for debugging nautilus...
 # G_DEBUG="all" NAUTILUS_DEBUG="All" nautilus
+
+# For some programs?
+# export LC_CTYPE="en_US.utf8"
+
 
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
