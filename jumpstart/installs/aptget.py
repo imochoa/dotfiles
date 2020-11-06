@@ -20,7 +20,13 @@ from jumpstart.installs.cmd_builders import aptget_install, aptget_remove
 # https://help.ubuntu.com/community/CheckInstall
 # What is 'software-properties-common'? is it required to add ppas?
 
+# For trash-put, the files need a place to go to. Which can be problematic if you're on a separate partition:
+# https://askubuntu.com/questions/677396/trash-cannot-trash-regular-file
+# Run this command at the root of the other partition
+# sudo mkdir .Trash-$UID && sudo chown $USER:$USER .Trash-$UID
+
 TRIVIAL_PGKS = [
+    # real packages
     'vlc',
     'pavucontrol',
     'cmus',
@@ -42,6 +48,7 @@ TRIVIAL_PGKS = [
     'arandr',
     'tlp',
     'shutter',
+    'flameshot',
     'lmms',
     'mutt',
     'pinta',
