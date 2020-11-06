@@ -14,6 +14,8 @@
 
 # Icon=/home/felipe/images/misc/neovim-mark.png
 
+# Improve from github: https://github.com/fmoralesc/neovim-gnome-terminal-wrapper
+
 [Desktop Entry]
 Version=1.0
 Type=Application
