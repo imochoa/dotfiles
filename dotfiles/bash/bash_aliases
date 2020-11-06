@@ -30,7 +30,7 @@ alias mode='(set -o | grep emacs.*on >/dev/null 2>&1 && echo "emacs mode" || ech
 # Ignore changes to already tracked files
 alias untrack='git update-index --assume-unchanged'
 alias retrack='git update-index --no-assume-unchanged'
-
+alias backup-untracked='git ls-files --others --exclude-standard -z | xargs -0 tar rvf ~/backup-untracked.zip'
 
 # Reload dusnt config file
 alias dunst-reload='killall dunst; notify-send "reloaded the dunstrc file!"'

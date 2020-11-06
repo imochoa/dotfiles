@@ -1,0 +1,15 @@
+! ~/.config/regolith/Xresources
+
+! References:
+! https://regolith-linux.org/docs/reference/xresources/
+! https://regolith-linux.org/docs/howto/override-xres/
+
+! update with:
+! regolith-look refresh
+
+! keybindings:
+! https://regolith-linux.org/docs/reference/keybindings/
+
+i3-wm.bar.position: top
+
+i3-wm.bar.trayoutput:	primary
