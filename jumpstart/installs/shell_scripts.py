@@ -158,10 +158,17 @@ sudo apt install ${TMP_DEB}
 INSTALL_PKGS["duf"] = r"""
 #!/usr/bin/env bash
 
+sudo apt-get install -y wget git
+
+VER=$(git ls-remote --refs --tags https://github.com/muesli/duf \
+    | cut --delimiter='/' --fields=3     \
+    | tr '-' '~'                         \
+    | sort --version-sort                \
+    | tail --lines=1);
+# e.g. VER=v0.3.1
+
 TMP_DEB=/tmp/duf.deb
-VER=0.3.1
-sudo apt-get install -y wget
-wget https://github.com/muesli/duf/releases/download/v${VER}/duf_${VER}_linux_amd64.deb --continue --output-document=${TMP_DEB}
+wget https://github.com/muesli/duf/releases/download/${VER}/duf_${VER:1}_linux_amd64.deb --continue --output-document=${TMP_DEB}
 sudo apt install ${TMP_DEB}
 """
 
