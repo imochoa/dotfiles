@@ -230,6 +230,12 @@ sudo ln -s "${BEEKEEPER_DIR}/beekeeper-studio" /usr/local/bin/beekeeper-studio
 # sudo chmod +x /usr/local/bin/beekeeper-studio
 # """
 
+# TODO add
+# bpytop
+# INSTALL_PKGS['bpytop'] = r"""
+# pip3 install bpytop --upgrade
+# """
+# UPDATE_PGKS['bpytop'] = INSTALL_PKGS['bpytop']
 
 INSTALL_PKGS['docker_compose'] = r"""
 #!/usr/bin/env bash
