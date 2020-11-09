@@ -452,7 +452,7 @@ mkdir -p ~/Applications \
 && git clone https://github.com/mrichar1/clipster.git clipster-repo \
 && cp clipster-repo/clipster clipster \
 && rm -rf clipster-repo \
-&& sudo ln -s $(realpath clipster) /usr/bin/clipster
+&& sudo ln -s $(realpath clipster) /usr/local/bin/clipster
 
 
 # Roficlip
