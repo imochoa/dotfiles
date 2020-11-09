@@ -298,6 +298,20 @@ sudo apt-get remove -y vim-tiny gvim \
 # Update!
 """
 
+INSTALL_PKGS['dunst'] = r"""
+#!/usr/bin/env bash
+sudo apt-get install -y dunst
+# Enable and configure it in systemd
+systemctl restart --user dunst.service
+"""
+
+REMOVE_PKGS['dunst'] = r"""
+#!/usr/bin/env bash
+sudo apt-get remove -y dunst
+# Enable and configure it in systemd
+systemctl disable --user dunst.service
+"""
+
 INSTALL_PKGS['neovim'] = r"""
 #!/usr/bin/env bash
 
