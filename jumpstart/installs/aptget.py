@@ -49,6 +49,7 @@ TRIVIAL_PGKS = [
     'tlp',
     'shutter',
     'flameshot',
+    'nomacs',
     'lmms',
     'mutt',
     'pinta',
