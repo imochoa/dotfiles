@@ -344,15 +344,25 @@ sudo apt-get install -y wget curl git xclip exuberant-ctags ncurses-term python3
 
 # DEPENDS ON NODEJS (install it as well)
 
-VER=0.4.4
+VER=$(git ls-remote --refs --tags https://github.com/neovim/neovim \
+    | cut --delimiter='/' --fields=3     \
+    | tr '-' '~'                         \
+    | sort --version-sort                \
+    | tail --lines=1);
+# e.g. VER=v0.4.4
+
 sudo rm -f /usr/local/bin/nvim
-sudo wget https://github.com/neovim/neovim/releases/download/v${VER}/nvim.appimage --continue --output-document=/usr/local/bin/nvim
+sudo wget https://github.com/neovim/neovim/releases/download/${VER}/nvim.appimage --output-document=/usr/local/bin/nvim
 # sudo chown ${USER}:${USER} /usr/local/bin/nvim
 sudo chmod +x /usr/local/bin/nvim
 # sudo update-alternatives --install /usr/bin/neovim  editor /opt/nvim.appimage 100
 # nvr expects "nvim" not "neovim"!
 sudo update-alternatives --install /usr/bin/nvim  editor /usr/local/bin/nvim 100
 
+# TODO FZF!
+# mkdir -p ~/.config/nvim/pack/minpac/start/
+# git clone --depth 1 https://github.com/junegunn/fzf.git ~/.config/nvim/pack/minpac/start/fzf
+# ~/.config/nvim/pack/minpac/start/fzf/install
 
 # py3
 sudo -H pip3  install --upgrade pip
@@ -387,6 +397,35 @@ sudo npm install -g eslint
 # Update!
 neovim +PackUpdate +qall
 neovim +CocInstall +qall
+"""
+
+UPDATE_PGKS['neovim'] = r"""
+
+VER=$(git ls-remote --refs --tags https://github.com/neovim/neovim \
+    | cut --delimiter='/' --fields=3     \
+    | tr '-' '~'                         \
+    | sort --version-sort                \
+    | tail --lines=1);
+# e.g. VER=v0.4.4
+
+sudo rm -f /usr/local/bin/nvim
+sudo wget https://github.com/neovim/neovim/releases/download/${VER}/nvim.appimage --output-document=/usr/local/bin/nvim
+# sudo chown ${USER}:${USER} /usr/local/bin/nvim
+sudo chmod +x /usr/local/bin/nvim
+
+# python
+sudo -H pip3  install --upgrade pip
+sudo -H pip3  install --upgrade neovim pynvim flake8 jedi autopep8 neovim-remote
+
+# Update npm
+sudo npm install -g npm
+
+" command to update everything: (The "Pack..." commands are my custom mappings for minpac's cmds... replace?)
+/usr/local/bin/nvim +PackUpdate +qall
+/usr/local/bin/nvim +PackClean +qall
+/usr/local/bin/nvim +PackDocks +qall
+/usr/local/bin/nvim +CocInstall +qall
+
 """
 
 INSTALL_PKGS['calibre'] = r"""
