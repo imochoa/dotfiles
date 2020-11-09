@@ -312,6 +312,18 @@ sudo apt-get remove -y dunst
 systemctl disable --user dunst.service
 """
 
+INSTALL_PKGS['alacritty'] = r"""
+#!/usr/bin/env bash
+# TODO FROM https://github.com/alacritty/alacritty/blob/master/INSTALL.md
+
+# Default? 
+# sudo gsettings set org.gnome.desktop.default-applications.terminal exec /usr/bin/alacritty
+# sudo gsettings set org.gnome.desktop.default-applications.terminal exec-arg "-x"
+sudo update-alternatives --install /usr/local/bin/alacritty  x-terminal-emulator `realpath alacritty` 100
+# https://blog.arranfrance.com/post/alacritty-and-byobu/
+# apt-get install -y byobu
+"""
+
 INSTALL_PKGS['neovim'] = r"""
 #!/usr/bin/env bash
 
