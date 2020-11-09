@@ -62,6 +62,7 @@ TRIVIAL_PGKS = [
     'openvpn',
     'gnome_tweak_tool',
     'i3',
+    'regolith',
 ]
 
 # [1st STEP] Expand packages with dependencies
@@ -77,7 +78,11 @@ MULTIPLE_PKGs = {
                          'feh', 'i3lock-fancy', 'i3-snapshot', ],
     # https://www.digitalocean.com/community/tutorials/installing-and-using-ranger-a-terminal-file-manager-on-a-ubuntu-vps
     'ranger':           ['ranger', 'caca-utils', 'highlight', 'atool', 'w3m', 'poppler-utils', 'mediainfo', 'xclip'],
+    'regolith':         ['regolith', 'i3xrocks-battery', ],
 }
+
+# See more i3xrocks packages with:
+# apt list | grep i3xrocks-
 
 # [2nd STEP] Add any PPAs
 PKG_PPAs = {
