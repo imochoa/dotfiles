@@ -93,13 +93,17 @@ function pool() {
 # Create a python3 virtual environment with all of the standard reqs 
 function py3venv() {
     local venvname="${1:-venv}"
+    local venvdir="${2:-.}"
     
-    printf '\033[0;36m%s\033[0m\n' "Making a py3 venv at ${1}!";
-    mkdir ${venvname} \
+    printf '\033[0;36m%s\033[0m\n' "Making a py3 venv at ${venvname}!";
+    (cd ${venvdir} \
+    && mkdir ${venvname} \
     && python3 -m venv ${venvname}                                 \
     && ${venvname}/bin/python -m pip install --upgrade pip         \
     && ${venvname}/bin/python -m pip install --upgrade setuptools  \
-    && ${venvname}/bin/python -m pip install --upgrade wheel
+    && ${venvname}/bin/python -m pip install --upgrade wheel       \
+    && realpath ${venvdir} > $(find . -type d -name 'site-packages')/venv_parentdir.pth
+  )
 
     printf '\033[0;36m%s\033[0m\n' "Done!";
 }
