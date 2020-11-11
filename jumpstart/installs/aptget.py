@@ -42,6 +42,8 @@ TRIVIAL_PGKS = [
     'sxiv',
     'neofetch',
     'entr',
+    'rsync',
+    'grsync',
     'xclip',
     'trash-cli',
     'disk_space',
