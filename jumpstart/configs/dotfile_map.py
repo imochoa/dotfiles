@@ -65,10 +65,10 @@ DOTFILE_MAP = {
     'nvim/after/plugin/plugin-overview.vim':             '~/.config/nvim/after/plugin/plugin-overview.vim',
     'nvim/after/plugin/coc.vim':                         '~/.config/nvim/after/plugin/coc.vim',
 
-    'nvim/after/plugin/ftplugin/json.vim':               '~/.config/nvim/after/plugin/ftplugin/json.vim',
-    'nvim/after/plugin/ftplugin/python.vim':             '~/.config/nvim/after/plugin/ftplugin/python.vim',
-    'nvim/after/plugin/ftplugin/html.vim':               '~/.config/nvim/after/plugin/ftplugin/html.vim',
-    'nvim/after/plugin/ftplugin/yaml.vim':               '~/.config/nvim/after/plugin/ftplugin/yaml.vim',
+    'nvim/after/ftplugin/json.vim':               '~/.config/nvim/after/ftplugin/json.vim',
+    'nvim/after/ftplugin/python.vim':             '~/.config/nvim/after/ftplugin/python.vim',
+    'nvim/after/ftplugin/html.vim':               '~/.config/nvim/after/ftplugin/html.vim',
+    'nvim/after/ftplugin/yaml.vim':               '~/.config/nvim/after/ftplugin/yaml.vim',
 
     'nvim/after/compiler/cpp.vim':                       '~/.config/nvim/after/compiler/cpp.vim',
     'nvim/after/compiler/dummy.vim':                     '~/.config/nvim/after/compiler/dummy.vim',
