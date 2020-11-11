@@ -10,7 +10,7 @@ import logging
 import collections
 from enum import Enum, auto
 import subprocess
-from typing import Tuple, Union, List, Iterable, Optional, Dict
+import typing as T
 import uuid
 from io import BytesIO
 from zipfile import ZipFile
@@ -38,7 +38,7 @@ class bcolors:
 
 
 def echo(msg: collections.Iterable,
-         color: bcolors = bcolors.INFO,
+         color: str = bcolors.INFO,
          sep: str = '',
          ) -> None:
     if not isinstance(msg, str):
@@ -57,7 +57,7 @@ def cp(src: pathlib.Path, dest: pathlib.Path, dry_run: bool = True) -> None:
         shutil.copy2(src=src, dst=dest)
 
 
-def ln(src: pathlib.Path, dest: pathlib.Path, dry_run: bool = True) -> None:
+def soft_ln(src: pathlib.Path, dest: pathlib.Path, dry_run: bool = True) -> None:
     if dry_run:
         dryrun_echo(f"Would LINK:\n\t{src} -> {dest}")
     else:
@@ -66,9 +66,17 @@ def ln(src: pathlib.Path, dest: pathlib.Path, dry_run: bool = True) -> None:
         os.symlink(src=src.absolute(), dst=dest.absolute())
 
 
+def hard_ln(src: pathlib.Path, dest: pathlib.Path, dry_run: bool = True) -> None:
+    if dry_run:
+        dryrun_echo(f"Would LINK:\n\t{src} -> {dest}")
+    else:
+        if dest.is_file():
+            rm(dest, dry_run=dry_run)
+        os.link(src=src.absolute(), dst=dest.absolute())
 
-def is_symlink(linkfile: Union[str, pathlib.Path],
-               src: Union[None, str, pathlib.Path] = None,
+
+def is_symlink(linkfile: T.Union[str, pathlib.Path],
+               src: T.Union[None, str, pathlib.Path] = None,
                ) -> bool:
     """
     Checks if *linkfile* is a symlink.
@@ -84,11 +92,11 @@ def is_symlink(linkfile: Union[str, pathlib.Path],
     return linkfile.resolve() == pathlib.Path(src).resolve()
 
 
-def mkdirs(src: pathlib.Path, dry_run: bool = True) -> None:
+def mkdirs(src: pathlib.Path, exist_ok: bool = True, dry_run: bool = True, ) -> None:
     if dry_run:
         dryrun_echo(f"Would MKDIRS:\n\t{src}")
     else:
-        os.makedirs(src)
+        os.makedirs(src, exist_ok=exist_ok)
 
 
 def rm(src: pathlib.Path, dry_run: bool = True) -> None:
@@ -120,7 +128,9 @@ def get_release_tag(user_and_repo: str) -> str:
         return fp.url.split('/')[-1]
 
 
-def get_release_tags(user_and_repos: Union[str, List[str]], max_workers: int = 4) -> List[str]:
+def get_release_tags(user_and_repos: T.Union[str, T.List[str]],
+                     max_workers: int = 4,
+                     ) -> T.List[str]:
     """
     Same as *get_release_tag*, but multi-threaded
     """
@@ -162,7 +172,7 @@ def decode(s: str) -> str:
 def run_shell_str(shell_str: str,
                   dry_run: bool = True,
                   verbose: bool = False,
-                  ) -> Tuple[int, str]:
+                  ) -> T.Tuple[int, str]:
     returncode, stdout = 0, ''
 
     if dry_run:
@@ -196,7 +206,7 @@ def run_shell_str(shell_str: str,
 
 def download_and_unzip(zip_url: str,
                        outdir: str,
-                       ) -> List[str]:
+                       ) -> T.List[str]:
     resp = urlopen(zip_url)
     zipped = ZipFile(BytesIO(resp.read()))
     # for line in zipped.open(filepath).readlines():
