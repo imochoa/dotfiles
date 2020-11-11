@@ -6,31 +6,38 @@
 " set background=dark                     " tell vim what the background color looks like
 " set clipboard=unnamedplus               " Copy paste between vim and everything else
 
-" DEFAULTS
+" -------- "
+" defaults "
+" -------- "
 set hidden                              " Required to keep multiple buffers open multiple buffers
 
 set nowrap                              " Display long lines as just one line
 set fileformats=unix,dos,mac
-set encoding=utf-8                      " The encoding displayed 
+set encoding=utf-8                      " The encoding displayed
 set fileencoding=utf-8                  " The encoding written to file
 set fileencodings=utf-8
+set formatoptions-=cro                  " Stop newline continution of comments
 
-"tab & indenting
+" --------------- "
+" tab & indenting "
+" --------------- "
 set tabstop=2                           " Insert 2 spaces for a tab
 set shiftwidth=2                        " Change the number of space characters inserted for indentation
 set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
 set expandtab                           " Converts tabs to spaces
 set smartindent                         " Makes indenting smart
 set autoindent                          " Good auto indent
-set showtabline=2                       " Always show tabs 
+set showtabline=2                       " Always show tabs
+
+set nostartofline                       "With it, gg and G will keep the column if possible just like when going up/down with k/j
 
 set iskeyword+=-                      	" treat dash separated words as a word text object"
 set mouse=a                             " Enable your mouse
-set t_Co=256                            " Support 256 colors
 set conceallevel=0                      " So that I can see `` in markdown files
 set laststatus=0                        " Always display the status line
 set nobackup                            " This is recommended by coc
 set nowritebackup                       " This is recommended by coc
+
 set updatetime=300                      " Faster completion
 
 
@@ -43,14 +50,27 @@ set timeoutlen=300   " FOR MAPPINGS
 set ttimeoutlen=50   " FOR KEYCODES
 
 
-set formatoptions-=cro                  " Stop newline continution of comments
 "set autochdir                           " Your working directory will always be the same as your working directory
 
+" ------ "
+" colors "
+" ------ "
+set t_Co=256                            " Support 256 colors
 " True colors?
 if has('termguicolors')
   set termguicolors
 endif
 
+" Making the terminal cursor easier to see
+if has('nvim')
+  highlight! link TermCursor Cursor
+  highlight! TermCursorNC guibg=red guifg=white ctermbg=1 ctermfg=15
+endif
+
+
+" ------------ "
+" Undo history "
+" ------------ "
 " Keeping undo's between sessions
 set undofile
 " Default undo dir: ~/.config/nvim/undo (you have to create it)
@@ -60,8 +80,9 @@ augroup vimrc
   autocmd BufWritePre /tmp/* setlocal noundofile
 augroup END
 
-
-" Searching defaults
+" ------------------ "
+" Searching defaults "
+" ------------------ "
 set hlsearch
 set incsearch
 set ignorecase
@@ -74,27 +95,40 @@ else
 endif
 
 
-" COPY/PASTING
-"" Copy/Paste/Cut with the system clipboard!
+" ------------------ "
+" diff defaults      "
+" ------------------ "
+set diffopt+=iwhite
+set diffexpr=""
+
+
+" -------------- "
+" Copy/paste/cut "
+" -------------- "
+" use the system clipboard!
 set clipboard^=unnamed,unnamedplus
 noremap YY "+y<CR>
 noremap XX "+x<CR>
-"noremap <leader>p "+gP<CR>
 
 
-" Making the terminal cursor easier to see
-if has('nvim')
-  highlight! link TermCursor Cursor
-  highlight! TermCursorNC guibg=red guifg=white ctermbg=1 ctermfg=15
-endif
+" (Same as in ranger) copy: filepath, directory & filename
+nnoremap <Leader>yp :let @+=expand("%:p")<CR>    " Mnemonic: Copy File path
+nnoremap <Leader>yd :let @+=expand("%:p:h")<CR>    " Mnemonic: Copy File directory
+nnoremap <Leader>yn :let @+=expand("%")<CR>      " Mnemonic: Copy File Name
 
-" Don't start nested nvim instances!
+" What register to use?
+" VIM YANK -> Use the unamed register (") with @"
+" SYS COPY -> Use system registers (+ *) with @+ @*
+
+" ---------------------------------- "
+" Preventing nested neovim instances "
+" ---------------------------------- "
 if has('nvim') && executable('nvr')
-  let $VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+  " DONE IN THE BASHRC!
 
+  " let $VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
   " from https://github.com/toggle-corp/alacritty-colorscheme
   " nvr -cc "source ~/.config/nvim/init.vim
-
 
   " OLD
   " let $VISUAL="nvr -cc tabedit --remote-wait +'set bufhidden=wipe'"
@@ -106,9 +140,9 @@ if has('nvim') && executable('nvr')
 
 endif
 
-" -----------------------------------
-" NETRW
-" -----------------------------------
+" ----- "
+" NETRW "
+" ----- "
 
 " netrw problems closing buffer
 " https://vi.stackexchange.com/questions/14622/how-can-i-close-the-netrw-buffer
