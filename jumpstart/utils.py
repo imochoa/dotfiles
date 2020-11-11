@@ -63,8 +63,8 @@ def ln(src: pathlib.Path, dest: pathlib.Path, dry_run: bool = True) -> None:
     else:
         if dest.is_file():
             rm(dest, dry_run=dry_run)
-        os.link(src=src.resolve(), dst=dest.resolve())
-        # os.symlink(src=src.resolve(), dst=dest.resolve())
+        os.symlink(src=src.absolute(), dst=dest.absolute())
+
 
 
 def is_symlink(linkfile: Union[str, pathlib.Path],

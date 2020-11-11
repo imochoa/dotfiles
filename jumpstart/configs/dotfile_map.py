@@ -146,16 +146,16 @@ def map_dotfiles_to_paths(
     if not homedir:
         homedir = os.path.expanduser('~')
         echo(f"Expanding '~' to '{homedir}'\n", color=bcolors.INFO)
-        dotfile_map = {k: pathlib.Path(v).expanduser().resolve()
+        dotfile_map = {k: pathlib.Path(v).expanduser().absolute()
                        for k, v in dotfile_map.items()}
     elif os.path.isdir(homedir):
         echo(f"Using input home directory: {homedir}\n")
-        dotfile_map = {k: pathlib.Path(v.replace('~', str(homedir))).resolve()
+        dotfile_map = {k: pathlib.Path(v.replace('~', str(homedir))).absolute()
                        for k, v in dotfile_map.items()}
     elif (pathlib.Path('~') / homedir).is_dir():
         homedir = pathlib.Path('~') / homedir
         echo(f"Using input home directory: {homedir}\n")
-        dotfile_map = {k: pathlib.Path(v.replace('~', str(homedir))).resolve()
+        dotfile_map = {k: pathlib.Path(v.replace('~', str(homedir))).absolute()
                        for k, v in dotfile_map.items()}
     else:
         raise OSError(f"Invalid home directory: {homedir}")
@@ -163,7 +163,7 @@ def map_dotfiles_to_paths(
     # -------------------------------------------------------------------------- #
     # Match them
     # -------------------------------------------------------------------------- #
-    repo_files = {str(f.relative_to(dotfile_dir)): f.resolve() for f in dotfile_dir.rglob('*')}
+    repo_files = {str(f.relative_to(dotfile_dir)): f.absolute() for f in dotfile_dir.rglob('*')}
 
     matched_ks = set(repo_files).intersection(dotfile_map)
     missed_ks = set(repo_files).difference(repo_files)
