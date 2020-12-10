@@ -31,6 +31,9 @@ DOTFILE_MAP = {
     # 'i3/i3blocks.conf':              'path',
     # 'rofi/config.rasi':              '~/.config/rasi/config.rasi',
 
+    'regolith/i3/config':                                '~/.config/regolith/i3/config',
+    'regolith/Xresources':                               '~/.config/regolith/Xresources',
+
     # 'vim/vimrc':                     '~/.vimrc',
     # 'vim/vimrc.local':               '~/.vimrc.local',
     'git/gitconfig':                                     '~/.config/git/config',
