@@ -114,8 +114,6 @@ call minpac#add('junegunn/rainbow_parentheses.vim')
 " See colors on color codes!
 " call minpac#add('norcalli/nvim-colorizer.lua') " Not working...
 
-" Icons on things (netrw not yet supported but there's an issue for it!)
-call minpac#add('ryanoasis/vim-devicons')
 
 " Themes should be OPTIONAL -> {'type': 'opt'}
 "     They have to be explicitly loaded with 'packadd!' in the theme section!
@@ -127,4 +125,8 @@ call minpac#add('mengelbrecht/lightline-bufferline', {'type': 'opt'})
 
 " Add other plugins here.
 " call minpac#add('vim-jp/syntax-vim-ex')
+
+" Icons on things (netrw not yet supported but there's an issue for it!)
+call minpac#add('ryanoasis/vim-devicons')
+" devicons should go AFTER lightline
 
