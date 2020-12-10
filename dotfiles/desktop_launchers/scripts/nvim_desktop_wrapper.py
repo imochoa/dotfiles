@@ -1,4 +1,4 @@
-#! /usr/bin/python3.8
+#! /usr/bin/env python3
 """Run nvim inside gnome-terminal"""
 
 import sys
