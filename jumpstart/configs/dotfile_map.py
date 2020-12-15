@@ -15,6 +15,10 @@ DOTFILE_MAP = {
     'bash/inputrc':                                      '~/.inputrc',
     'bash/bash_profile':                                 '~/.bash_profile',
 
+
+    'texstudio/texstudio.ini':                           '~/.config/texstudio/texstudio.ini',
+    'texstudio/stylesheet.qss':                          '~/.config/texstudio/stylesheet.qss',
+
     'debugging/pdbrc':                                   '~/.pdbrc',
 
     'i3/config':                                         '~/.config/i3/config',
