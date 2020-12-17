@@ -5,6 +5,9 @@
   name = imochoa
   email = nachomartinochoa@gmail.com
 
+[core]
+	editor = nvim
+
 ; https://www.grzegorowski.com/using-vim-or-neovim-nvim-as-a-git-mergetool
 
 ; define command which will be used when "nvim" is set as a merge tool

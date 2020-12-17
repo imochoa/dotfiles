@@ -15,6 +15,10 @@ DOTFILE_MAP = {
     'bash/inputrc':                                      '~/.inputrc',
     'bash/bash_profile':                                 '~/.bash_profile',
 
+
+    'texstudio/texstudio.ini':                           '~/.config/texstudio/texstudio.ini',
+    'texstudio/stylesheet.qss':                          '~/.config/texstudio/stylesheet.qss',
+
     'debugging/pdbrc':                                   '~/.pdbrc',
 
     'i3/config':                                         '~/.config/i3/config',
@@ -30,6 +34,9 @@ DOTFILE_MAP = {
     # 'i3/scripts/Lock_icon.png':         'path',
     # 'i3/i3blocks.conf':              'path',
     # 'rofi/config.rasi':              '~/.config/rasi/config.rasi',
+
+    'regolith/i3/config':                                '~/.config/regolith/i3/config',
+    'regolith/Xresources':                               '~/.config/regolith/Xresources',
 
     # 'vim/vimrc':                     '~/.vimrc',
     # 'vim/vimrc.local':               '~/.vimrc.local',
