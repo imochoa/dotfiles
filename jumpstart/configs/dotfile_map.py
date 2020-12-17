@@ -34,6 +34,8 @@ DOTFILE_MAP = {
     # 'vim/vimrc':                     '~/.vimrc',
     # 'vim/vimrc.local':               '~/.vimrc.local',
     'git/gitconfig':                                     '~/.config/git/config',
+    'regolith/i3/config':                                '~/.config/regolith/i3/config',
+    'regolith/Xresources':                               '~/.config/regolith/Xresources',
 
     'ImageMagick/policy.xml':                            '/etc/ImageMagick-6/policy.xml',
 

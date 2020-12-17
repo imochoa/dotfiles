@@ -262,6 +262,15 @@ sudo rm -f /usr/local/bin/stretchly \
 """
 UPDATE_PGKS['stretchly'] = INSTALL_PKGS['stretchly']
 
+
+INSTALL_PKGS['miniconda'] = r"""
+#!/usr/bin/env bash
+# Asks for confirmations...
+curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+sh Miniconda3-latest-Linux-x86_64.sh
+"""
+
+
 # https://github.com/jrfonseca/gprof2dot
 INSTALL_PKGS['gprof2dot'] = r"""
 #!/usr/bin/env bash
@@ -329,10 +338,14 @@ INSTALL_PKGS['alacritty'] = r"""
 #!/usr/bin/env bash
 # TODO FROM https://github.com/alacritty/alacritty/blob/master/INSTALL.md
 
+sudo update-alternatives --remove-all alacritty
+
 # Default? 
 # sudo gsettings set org.gnome.desktop.default-applications.terminal exec /usr/bin/alacritty
 # sudo gsettings set org.gnome.desktop.default-applications.terminal exec-arg "-x"
-sudo update-alternatives --install /usr/local/bin/alacritty  x-terminal-emulator `realpath alacritty` 100
+sudo update-alternatives --remove-all alacritty || true
+sudo update-alternatives --install /usr/bin/alacritty x-terminal-emulator /usr/local/bin/alacritty 100
+# sudo update-alternatives --install /usr/local/bin/alacritty  x-terminal-emulator `realpath alacritty` 100
 # https://blog.arranfrance.com/post/alacritty-and-byobu/
 # apt-get install -y byobu
 """
