@@ -72,4 +72,5 @@ alias audio-laptop='pacmd set-card-profile 0 output:analog-stereo+input:analog-s
 
 
 # Shorthand for programs
+alias fd='fdfind'
 alias r='ranger'
