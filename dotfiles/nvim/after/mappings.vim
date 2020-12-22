@@ -32,6 +32,10 @@ nnoremap  <leader>rt :echo join(split(&runtimepath, ','),"\n") <CR>
 
 
 
+" Save as root!
+command! -nargs=0 Sw w !sudo tee % > /dev/null
+command! -nargs=0 W w !sudo tee % > /dev/null
+" command! -nargs=0 w\!\! w !sudo tee % > /dev/null
 
 " Expand %% to the directory of the current file
 cabbr <expr> %% expand('%:p:h')
