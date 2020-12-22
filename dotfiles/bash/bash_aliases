@@ -16,6 +16,7 @@ alias please='sudo !!'
 
 # some more aliases
 alias ..='cd ..'
+alias cd..='cd ..'
 alias l='ls -CF'
 # alias l='ls -l'
 alias ll='ls -AlF'
@@ -37,6 +38,7 @@ alias dunst-reload='killall dunst; notify-send "reloaded the dunstrc file!"'
 
 # Like rm, but safer since it uses trash-cli
 alias tp=trash-put
+alias rm=trash-put
 
 # Find big files/directories
 alias space-left=baobab
