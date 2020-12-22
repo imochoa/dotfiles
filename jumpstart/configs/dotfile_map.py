@@ -21,6 +21,8 @@ DOTFILE_MAP = {
 
     'debugging/pdbrc':                                   '~/.pdbrc',
 
+    'ranger/rc.conf':                                     '~/.config/ranger/rc.conf',
+
     'i3/config':                                         '~/.config/i3/config',
 
     'i3/scripts/polybar.sh':                             '~/.config/i3/scripts/polybar.sh',
