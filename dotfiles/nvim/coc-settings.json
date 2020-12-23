@@ -3,6 +3,7 @@
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
     "python.linting.mypyEnabled": false,
+    "python.formatting.provider": "black",
     // Tslint on save
     //"tslint.enable": true,
     //"tslint.autoFixOnSave": true,
