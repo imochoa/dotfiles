@@ -14,7 +14,9 @@ DOTFILE_MAP = {
     'bash/bash_functions':                               '~/.bash_functions',
     'bash/inputrc':                                      '~/.inputrc',
     'bash/bash_profile':                                 '~/.bash_profile',
-
+    'bash/bash_completion.d/docker-goinside.bashcomp':   '~/.bash_completion.d/docker-goinside.bashcomp',
+    'bash/bash_completion.d/known-hosts.bashcomp':       '~/.bash_completion.d/known-hosts.bashcomp',
+    'bash/bash_completion.d/sudo-alias.bashcomp':        '~/.bash_completion.d/sudo-alias.bashcomp',
 
     'texstudio/texstudio.ini':                           '~/.config/texstudio/texstudio.ini',
     'texstudio/stylesheet.qss':                          '~/.config/texstudio/stylesheet.qss',
