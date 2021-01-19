@@ -20,15 +20,17 @@ alias please='sudo !!'
 # some more aliases
 alias ..='cd ..'
 alias cd..='cd ..'
-alias l='ls -CF'
-# alias l='ls -l'
-alias ll='ls -AlF'
-alias la='ls -A'
-# alias la='ls -Al'
-alias lss='ls -lAsh'
 alias tree='tree -C'
 alias trls='tree -C | less -R'	# -C outputs colour, -R makes less understand color
 alias mode='(set -o | grep emacs.*on >/dev/null 2>&1 && echo "emacs mode" || echo "vi mode")'
+
+# ls shortcuts
+# alias l='ls -CF'
+# # alias l='ls -l'
+# alias ll='ls -AlF'
+# alias la='ls -A'
+# # alias la='ls -Al'
+# alias lss='ls -lAsh'
 
 # git
 # Ignore changes to already tracked files
@@ -42,6 +44,15 @@ alias dunst-reload='killall dunst; notify-send "reloaded the dunstrc file!"'
 # Like rm, but safer since it uses trash-cli
 alias tp=trash-put
 alias rm=trash-put
+
+# Like cat, but nicer
+alias cat='batcat --style=plain'
+
+# Like ls, but nicer
+alias l='exa'
+alias la='exa -a'
+alias ll='exa -lah'
+alias ls='exa --color=auto'
 
 # Find big files/directories
 alias space-left=baobab
@@ -75,6 +86,9 @@ alias audio-laptop='pacmd set-card-profile 0 output:analog-stereo+input:analog-s
 # alias audio-hdmi='pacmd set-card-profile 0 output:hdmi-stereo+input:analog-stereo'
 # xrandr --output <other screen> --same-as <main screen>
 
+# Docker
+# docker stop $(docker ps -a -q)
+# docker rm $(docker ps -a -q)
 
 # Shorthand for programs
 alias fd='fdfind'
