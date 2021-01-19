@@ -10,6 +10,7 @@ from jumpstart.installs.cmd_builders import snap_install, snap_remove
 
 TRIVIAL_PGKS = [
     'slack',
+    'inkscape',
     'pycharm-community',
     'pycharm-professional',
 ]

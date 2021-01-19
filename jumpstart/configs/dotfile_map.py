@@ -50,7 +50,7 @@ DOTFILE_MAP = {
 
     'ImageMagick/policy.xml':                            '/etc/ImageMagick-6/policy.xml',
 
-    'desktop_launchers/stretchly.desktop':               '~/.local/share/applications/stretchly.desktop',
+    # 'desktop_launchers/stretchly.desktop':               '~/.local/share/applications/stretchly.desktop', # not required with the snap install
     'desktop_launchers/neovim.desktop':                  '~/.local/share/applications/neovim.desktop',
     'desktop_launchers/scripts/nvim_desktop_wrapper.py': '/usr/local/bin/nvim_desktop_wrapper.py',
 

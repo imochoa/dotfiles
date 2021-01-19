@@ -7,6 +7,9 @@ from typing import Union, Sequence, Dict, Tuple, Optional
 from jumpstart.utils import echo, bcolors
 from jumpstart.installs.cmd_builders import aptget_install, aptget_remove
 
+# TODO This is a DEB! ->     'ripgrep',
+# TODO This is an  EXECUTABLE! ->     'exa',
+
 # TODO  libreoffice broken!
 # INSTALL_PKGS['libreoffice'] = r"""
 # ##!/usr/bin/env bash
@@ -45,6 +48,7 @@ TRIVIAL_PGKS = [
     'rsync',
     'grsync',
     'xclip',
+    'fd-find',
     'trash-cli',
     'disk_space',
     'arandr',
@@ -72,7 +76,7 @@ TRIVIAL_PGKS = [
 MULTIPLE_PKGs = {
     'networking':       ['wget', 'curl', 'iputils-ping', ],
     'exfat':            ['exfat-fuse', 'exfat-utils', ],
-    'texstudio':        ['texstudio', 'texlive-latex-extra', ],
+    'texstudio':        ['texstudio', 'texlive-latex-extra', 'texlive-xetex', ], # 'texlive-pstricks',
     'ssh':              ['openssh-server', 'xclip', 'xauth'],
     'tlp-gui':          ['tlp'],
     'openvpn':          ['openvpn', 'easy-rsa'],
@@ -81,6 +85,7 @@ MULTIPLE_PKGs = {
                          'feh', 'i3lock-fancy', 'i3-snapshot', ],
     # https://www.digitalocean.com/community/tutorials/installing-and-using-ranger-a-terminal-file-manager-on-a-ubuntu-vps
     'ranger':           ['ranger', 'caca-utils', 'highlight', 'atool', 'w3m', 'poppler-utils', 'mediainfo', 'xclip'],
+    'linux_utils':      ['trash-cli', 'xclip', 'gnu_parallel', 'bat_cat', 'fd-find'], #RIPGREP
     'regolith':         ['regolith', 'i3xrocks-battery', ],
 }
 
@@ -89,7 +94,7 @@ MULTIPLE_PKGs = {
 
 # [2nd STEP] Add any PPAs
 PKG_PPAs = {
-    'bashtop': 'ppa:bashtop-monitor/bashtop',
+    'bashtop': 'ppa:bashtop-monitor/bashtop', # REPLACE WITH BPYTOP!
     'tlp-gui': 'ppa:linuxuprising/apps',
     'shutter': 'ppa:linuxuprising/shutter',
     'peek':    'ppa:peek-developers/stable',
@@ -98,7 +103,9 @@ PKG_PPAs = {
 # [3rd STEP] get the REAL names
 RENAMED_PKGs = {
     '7zip':         'p7zip-full',
-    'fd':           'fd-find',
+    'gnu_parallel': 'parallel',
+    'bat_cat':      'bat',
+    'fd':           'fd-find', # NOT NEEDED
     'disk_space':   'baobab',
     'firewall_gui': 'gufw',
     'tlp-gui':      'tlpui',
