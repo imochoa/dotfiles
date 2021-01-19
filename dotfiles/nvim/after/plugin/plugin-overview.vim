@@ -98,6 +98,8 @@ call minpac#add('junegunn/fzf.vim')
 "COC
 call minpac#add('neoclide/coc.nvim', {'branch':'release'})
 
+" Plantuml syntax
+call minpac#add('aklt/plantuml-syntax')
 
 
 " -----------------------------------

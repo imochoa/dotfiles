@@ -76,6 +76,9 @@ nmap <silent> <Leader>ee :enew<CR>
 nmap <silent> <Leader>vv :vnew<CR>
 nmap <silent> <Leader>ss :new<CR>
 
+" Open file in a split (like 'gf' but in a vertical split)
+map <C-w>f <C-w>vgf
+
 " split positions
 set splitright " When splitting vertically, split to the right
 set splitbelow " When splitting horizontally, split below
