@@ -67,6 +67,11 @@ fi
 # # Bash customisations to be syncronised between machines.
 # export PS1='\[\e[1;34m\][\u@\h \W]\$\[\e[0m\] '
 
+# Don't print massive paths in the prompt...
+# PROMPT_DIRTRIM=1
+# PROMPT_DIRTRIM=2
+PROMPT_DIRTRIM=3
+
 if [ "$color_prompt" = yes ]; then
     # default PS1
     # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
@@ -99,11 +104,15 @@ esac
 
 # export PS1="\[\e[32m\][\[\e[m\]\[\e[31m\]\u\[\e[m\]\[\e[33m\]@\[\e[m\]\[\e[32m\]\h\[\e[m\]:\[\e[36m\]\w\[\e[m\]\[\e[32m\]]\[\e[m\]\[\e[32;47m\]\\$\[\e[m\] "
 
+# If running within Ranger, modify the PS1
+if [ -n "$RANGER_LEVEL" ]; then export PS1="[ranger]$PS1"; fi
+
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 
-# Alias definitions.
+# ALIAS DEFINITIONS
+# --------------------------------------------------------------------------------
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
@@ -112,10 +121,14 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# Function definitions
+# FUNCTION DEFINITIONS
+# --------------------------------------------------------------------------------
 if [ -f ~/.bash_functions ]; then
     source ~/.bash_functions
 fi
+
+# AUTOCOMPLETION
+# --------------------------------------------------------------------------------
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -143,7 +156,21 @@ setxkbmap -option caps:swapescape
 
 if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
   # INSIDE OF NEOVIM!
+  # export PS1="[nvr]$"
+
+  # default PS1
+  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
   export PS1="[nvr]${PS1}"
+
+  # Don't print massive paths in the NVR prompt...
+  PROMPT_DIRTRIM=1
+  # PROMPT_DIRTRIM=2
+  # PROMPT_DIRTRIM=3
+
+  # Add a newline for readability
+  export PS1="${PS1}\n> "
+
+
   # VISUAL can also be set by ~/.config/nvim/init.vim!  (dotfiles/nvim/after/general-settings.vim)
   # but this way the VISUAL & EDITOR env vars are updated
   export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'";
