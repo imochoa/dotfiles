@@ -20,8 +20,6 @@ alias please='sudo !!'
 # some more aliases
 alias ..='cd ..'
 alias cd..='cd ..'
-alias tree='tree -C'
-alias trls='tree -C | less -R'	# -C outputs colour, -R makes less understand color
 alias mode='(set -o | grep emacs.*on >/dev/null 2>&1 && echo "emacs mode" || echo "vi mode")'
 
 # ls shortcuts
@@ -53,6 +51,15 @@ alias l='exa'
 alias la='exa -a'
 alias ll='exa -lah'
 alias ls='exa --color=auto'
+
+# Like tree, but nicer
+# tree with color
+# alias tree='tree -C'
+# alias trls='tree -C | less -R'	# -C outputs colour, -R makes less understand color
+# using exa as the tree
+alias tree='exa --tree'
+
+
 
 # Find big files/directories
 alias space-left=baobab
