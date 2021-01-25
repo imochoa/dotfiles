@@ -33,6 +33,7 @@ TRIVIAL_PGKS = [
     'vlc',
     'pavucontrol',
     'cmus',
+    'blender',
     'tree',
     'software-properties-common',
     'firewall_gui',
