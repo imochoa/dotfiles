@@ -30,47 +30,47 @@ from jumpstart.installs.cmd_builders import aptget_install, aptget_remove
 
 TRIVIAL_PGKS = [
     # real packages
-    'vlc',
-    'pavucontrol',
-    'cmus',
-    'blender',
-    'tree',
-    'software-properties-common',
-    'firewall_gui',
-    'git',
-    'mupdf',
-    'checkinstall',
     '7zip',
-    'bashtop',
-    'tmux',
-    'sxiv',
-    'neofetch',
-    'entr',
-    'rsync',
-    'grsync',
-    'xclip',
-    'fd-find',
-    'trash-cli',
-    'disk_space',
     'arandr',
-    'tlp',
-    'shutter',
+    'bashtop',
+    'blender',
+    'checkinstall',
+    'cmus',
+    'disk_space',
+    'entr',
+    'fd-find',
+    'firewall_gui',
     'flameshot',
-    'nomacs',
+    'git',
+    'grsync',
     'lmms',
+    'mupdf',
     'mutt',
-    'pinta',
+    'neofetch',
+    'nomacs',
+    'pavucontrol',
     'peek',
+    'pinta',
+    'rsync',
+    'shutter',
+    'software-properties-common',
+    'sxiv',
+    'tlp',
+    'tmux',
+    'trash-cli',
+    'tree',
+    'vlc',
+    'xclip',
     # virtual packages (mapped in *MULTIPLE_PKGs* or *RENAMED_PKGs*)
-    'networking',
     'exfat',
-    'texstudio',
-    'ssh',
-    'tlp-gui',
-    'openvpn',
     'gnome_tweak_tool',
     'i3',
+    'networking',
+    'openvpn',
     'regolith',
+    'ssh',
+    'texstudio',
+    'tlp-gui',
 ]
 
 # [1st STEP] Expand packages with dependencies
@@ -96,19 +96,19 @@ MULTIPLE_PKGs = {
 # [2nd STEP] Add any PPAs
 PKG_PPAs = {
     'bashtop': 'ppa:bashtop-monitor/bashtop', # REPLACE WITH BPYTOP!
-    'tlp-gui': 'ppa:linuxuprising/apps',
-    'shutter': 'ppa:linuxuprising/shutter',
     'peek':    'ppa:peek-developers/stable',
+    'shutter': 'ppa:linuxuprising/shutter',
+    'tlp-gui': 'ppa:linuxuprising/apps',
 }
 
 # [3rd STEP] get the REAL names
 RENAMED_PKGs = {
     '7zip':         'p7zip-full',
-    'gnu_parallel': 'parallel',
     'bat_cat':      'bat',
-    'fd':           'fd-find', # NOT NEEDED
     'disk_space':   'baobab',
+    'fd':           'fd-find', # NOT NEEDED
     'firewall_gui': 'gufw',
+    'gnu_parallel': 'parallel',
     'tlp-gui':      'tlpui',
 }
 
