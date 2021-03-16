@@ -35,6 +35,9 @@ call minpac#add('k-takata/minpac', {'type': 'opt'})
 " Lots of shortcuts, see :help unimpaired
 call minpac#add('tpope/vim-unimpaired')
 
+" Allow '.' to repeat the last command, not just the last native command
+call minpac#add('tpope/vim-repeat')
+
 " Git wrapper
 call minpac#add('tpope/vim-fugitive')
 
@@ -105,6 +108,9 @@ call minpac#add('aklt/plantuml-syntax')
 " -----------------------------------
 " Visual Plugins
 " ----------------------------------- 
+
+" See the registers
+call minpac#add('junegunn/vim-peekaboo')
 
 " Rainbow CSVs
 call minpac#add('mechatroner/rainbow_csv')
