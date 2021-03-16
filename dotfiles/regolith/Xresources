@@ -1,8 +1,11 @@
 ! ~/.config/regolith/Xresources
 
 ! References:
-! https://regolith-linux.org/docs/reference/xresources/
+
+! To see what values can be changed, use: `xrdb -query`. For more info:
 ! https://regolith-linux.org/docs/howto/override-xres/
+! Standard values here:
+! https://regolith-linux.org/docs/reference/xresources/
 
 ! update with:
 ! regolith-look refresh
