@@ -5,7 +5,7 @@
 " -------------------- "
 
 "" Close buffer
-" noremap <leader>c :bd<CR>
+" noremap <Leader>c :bd<CR>
 nnoremap <Leader>d :bp\|bd #<CR>
 nnoremap <Leader>D :bp\|bd! #<CR>
 noremap <Leader>q :q<CR>
@@ -13,9 +13,9 @@ noremap <Leader>Q :q!<CR>
 
 
 "" Set working directory
-" nnoremap <leader>. :lcd %:p:h<CR>
+" nnoremap <Leader>. :lcd %:p:h<CR>
 "" Set working directory (and print the result)
-nnoremap <leader>. :lcd %:p:h<CR>:pwd<CR>
+nnoremap <Leader>. :lcd %:p:h<CR>:pwd<CR>
 
 " terminal emulation
 nnoremap <silent> <Leader>sh :terminal<CR>
@@ -28,7 +28,7 @@ noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 " See the runtimepath
-nnoremap  <leader>rt :echo join(split(&runtimepath, ','),"\n") <CR>
+nnoremap  <Leader>rt :echo join(split(&runtimepath, ','),"\n") <CR>
 
 
 
@@ -217,15 +217,15 @@ endif
 " noremap <Leader>gr :Gremove<CR>
 
 " " session management
-" nnoremap <leader>so :OpenSession<Space>
-" nnoremap <leader>ss :SaveSession<Space>
-" nnoremap <leader>sd :DeleteSession<CR>
-" nnoremap <leader>sc :CloseSession<CR>
+" nnoremap <Leader>so :OpenSession<Space>
+" nnoremap <Leader>ss :SaveSession<Space>
+" nnoremap <Leader>sd :DeleteSession<CR>
+" nnoremap <Leader>sc :CloseSession<CR>
 
 "" Set working directory
-" nnoremap <leader>. :lcd %:p:h<CR>
+" nnoremap <Leader>. :lcd %:p:h<CR>
 "" Set working directory (and print the result)
-nnoremap <leader>. :lcd %:p:h<CR>:pwd<CR>
+nnoremap <Leader>. :lcd %:p:h<CR>:pwd<CR>
 
 
 "" Opens an edit command with the path of the currently edited file filled in

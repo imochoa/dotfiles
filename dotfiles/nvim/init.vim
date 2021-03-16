@@ -4,11 +4,12 @@
 " leader key "
 " ---------- "
 " set leader key
-let g:mapleader=','
+" let g:mapleader=','
 
 " Remove any possible mapping beforehand
-" nnoremap <SPACE> <Nop>
-" let g:mapleader = " "
+nnoremap <SPACE> <Nop>
+" Set the leader to space
+let g:mapleader = " "
 
 
 " ----- "
