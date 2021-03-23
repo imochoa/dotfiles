@@ -7,13 +7,12 @@ from typing import Union, Sequence, Dict, Tuple, Optional
 # local imports
 
 
-def aptget_install(pkgs: Union[str, Sequence[str]],
-                   ppas: Union[None, str, Sequence[str]] = None,
-                   shebang: str = "#!/usr/bin/env bash\n",
-                   ) -> str:
-    """
-
-    """
+def aptget_install(
+    pkgs: Union[str, Sequence[str]],
+    ppas: Union[None, str, Sequence[str]] = None,
+    shebang: str = "#!/usr/bin/env bash\n",
+) -> str:
+    """"""
     cmd_str = shebang
 
     if ppas is not None:
@@ -28,13 +27,12 @@ def aptget_install(pkgs: Union[str, Sequence[str]],
     return f"{cmd_str}\nsudo apt-get install -y {' '.join(pkgs)}"
 
 
-def aptget_remove(pkgs: Union[str, Sequence[str]],
-                  ppas: Union[None, str, Sequence[str]] = None,
-                  shebang: str = "#!/usr/bin/env bash\n",
-                  ) -> str:
-    """
-
-    """
+def aptget_remove(
+    pkgs: Union[str, Sequence[str]],
+    ppas: Union[None, str, Sequence[str]] = None,
+    shebang: str = "#!/usr/bin/env bash\n",
+) -> str:
+    """"""
     cmd_str = shebang
 
     if ppas is not None:
@@ -49,13 +47,12 @@ def aptget_remove(pkgs: Union[str, Sequence[str]],
     return f"{cmd_str}\nsudo apt remove -y {' '.join(pkgs)}"
 
 
-def snap_install(pkgs: Union[str, Sequence[str]],
-                 channels: Union[None, str, Sequence[str]] = None,
-                 shebang: str = "#!/usr/bin/env bash\n",
-                 ) -> str:
-    """
-
-    """
+def snap_install(
+    pkgs: Union[str, Sequence[str]],
+    channels: Union[None, str, Sequence[str]] = None,
+    shebang: str = "#!/usr/bin/env bash\n",
+) -> str:
+    """"""
     cmd_str = shebang
 
     if isinstance(pkgs, str):
@@ -68,18 +65,18 @@ def snap_install(pkgs: Union[str, Sequence[str]],
     channels = [c for c in channels if c]
 
     if not channels:
-        channels = ['--classic' for _ in pkgs]
+        channels = ["--classic" for _ in pkgs]
 
     if len(pkgs) > len(channels):
         channels += (len(pkgs) - len(channels)) * [channels[-1]]
 
     for idx, c in enumerate(channels):
-        if c.startswith('--'):
+        if c.startswith("--"):
             continue
-        elif c.startswith('-'):
-            channels[idx] = f'-{c}'
+        elif c.startswith("-"):
+            channels[idx] = f"-{c}"
         else:
-            channels[idx] = f'--{c}'
+            channels[idx] = f"--{c}"
 
     for p, c in zip(pkgs, channels):
         cmd_str += f"sudo snap install {c} {p}\n"
@@ -87,13 +84,12 @@ def snap_install(pkgs: Union[str, Sequence[str]],
     return cmd_str
 
 
-def snap_remove(pkgs: Union[str, Sequence[str]],
-                channels: Union[None, str, Sequence[str]] = None,
-                shebang: str = "#!/usr/bin/env bash\n",
-                ) -> str:
-    """
-
-    """
+def snap_remove(
+    pkgs: Union[str, Sequence[str]],
+    channels: Union[None, str, Sequence[str]] = None,
+    shebang: str = "#!/usr/bin/env bash\n",
+) -> str:
+    """"""
     cmd_str = shebang
 
     if isinstance(pkgs, str):

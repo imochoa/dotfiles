@@ -9,10 +9,10 @@ from jumpstart.utils import echo, bcolors
 from jumpstart.installs.cmd_builders import snap_install, snap_remove
 
 TRIVIAL_PGKS = [
-    'slack',
-    'inkscape',
-    'pycharm-community',
-    'pycharm-professional',
+    "slack",
+    "inkscape",
+    "pycharm-community",
+    "pycharm-professional",
 ]
 
 PKG_CHANNELS = dict()
@@ -20,7 +20,9 @@ PKG_CHANNELS = dict()
 RENAMED_PKGs = dict()
 
 
-def build_snap_pkg_maps(pkg_keys: Optional[Sequence[str]] = None, ) -> Tuple[Dict[str, str], Dict[str, str]]:
+def build_snap_pkg_maps(
+    pkg_keys: Optional[Sequence[str]] = None,
+) -> Tuple[Dict[str, str], Dict[str, str]]:
     """
     Gets the commands for the packages with keys *pkg_keys* and returns the (*install_map*, *remove map*)
     """
@@ -30,18 +32,34 @@ def build_snap_pkg_maps(pkg_keys: Optional[Sequence[str]] = None, ) -> Tuple[Dic
         pkg_subset = pkg_subset.intersection(pkg_keys)
         lost_inputs = set(pkg_keys).difference(pkg_subset)
         if lost_inputs:
-            echo(([f'[{len(lost_inputs)}] UNKNOWN SNAP pkg(s)']
-                  + [f'[{idx:> 3}] {p}' for idx, p in enumerate(sorted(lost_inputs), start=1)]),
-                 color=bcolors.WARNING, sep='\n\t> ')
+            echo(
+                (
+                    [f"[{len(lost_inputs)}] UNKNOWN SNAP pkg(s)"]
+                    + [
+                        f"[{idx:> 3}] {p}"
+                        for idx, p in enumerate(sorted(lost_inputs), start=1)
+                    ]
+                ),
+                color=bcolors.WARNING,
+                sep="\n\t> ",
+            )
 
     if not pkg_subset:
-        echo('No APT-GET pkgs will be installed!', color=bcolors.WARNING, sep='\n\t> ')
+        echo("No APT-GET pkgs will be installed!", color=bcolors.WARNING, sep="\n\t> ")
         return dict(), dict()
 
     if pkg_keys:
-        echo(([f'[{len(pkg_subset)}] Filtered SNAP pkgs:']
-              + [f'[{idx:> 3}] {p}' for idx, p in enumerate(sorted(pkg_subset), start=1)]),
-             color=bcolors.DEBUG, sep='\n\t> ')
+        echo(
+            (
+                [f"[{len(pkg_subset)}] Filtered SNAP pkgs:"]
+                + [
+                    f"[{idx:> 3}] {p}"
+                    for idx, p in enumerate(sorted(pkg_subset), start=1)
+                ]
+            ),
+            color=bcolors.DEBUG,
+            sep="\n\t> ",
+        )
     install_map, remove_map = dict(), dict()
 
     for pkg in pkg_subset:
@@ -58,18 +76,28 @@ def build_snap_pkg_maps(pkg_keys: Optional[Sequence[str]] = None, ) -> Tuple[Dic
     return install_map, remove_map
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     full_install_map, full_remove_map = build_snap_pkg_maps()  # All commands:
     # full_install_map, full_remove_map = build_aptget_pkg_maps(['xclip', 'ssh'])  # OK subset
     # full_install_map, full_remove_map = build_aptget_pkg_maps(['poop'])  # All commands:
 
-    sep = 80 * '-'
-    print('\n'.join(
-        ['PKGs WITH THEIR INSTALL COMMANDS']
-        + [f'{sep}\n\tINSTALLING [{k}]\n{sep}\n{full_install_map[k]}\n' for k in sorted(full_install_map)])
+    sep = 80 * "-"
+    print(
+        "\n".join(
+            ["PKGs WITH THEIR INSTALL COMMANDS"]
+            + [
+                f"{sep}\n\tINSTALLING [{k}]\n{sep}\n{full_install_map[k]}\n"
+                for k in sorted(full_install_map)
+            ]
+        )
     )
 
-    print('\n'.join(
-        ['PKGs WITH THEIR REMOVE COMMANDS']
-        + [f'{sep}\n\tREMOVING [{k}]\n{sep}\n{full_remove_map[k]}\n' for k in sorted(full_remove_map)])
+    print(
+        "\n".join(
+            ["PKGs WITH THEIR REMOVE COMMANDS"]
+            + [
+                f"{sep}\n\tREMOVING [{k}]\n{sep}\n{full_remove_map[k]}\n"
+                for k in sorted(full_remove_map)
+            ]
+        )
     )

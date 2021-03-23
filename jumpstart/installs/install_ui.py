@@ -14,13 +14,13 @@ import pdb
 # TODO ADD Visual studio code: sudo snap install --classic code
 # TODO ADD pycharm etc.
 
-# if [[ ${SCOPE} = "SYSTEM" ]]; 
-# then    
+# if [[ ${SCOPE} = "SYSTEM" ]];
+# then
 # 	echo "Installing system-wide wallpapers";
 #         IMG_DIR=/usr/local/share/wallpapers/;
 # 	# System-wide install requires sudo
 # 	CP_CMD='sudo cp';
-# else   
+# else
 # 	echo "Installing wallpapers for user $USER";
 # 	IMG_DIR=~/Images/;
 # 	CP_CMD='cp';
@@ -29,7 +29,9 @@ import pdb
 INSTALL_UI = dict()
 
 # THEMES
-INSTALL_UI['nordic'] = r"""
+INSTALL_UI[
+    "nordic"
+] = r"""
 #!/usr/bin/env bash
 # https://github.com/EliverLara/Nordic/releases
 TEMPDIR=$(mktemp -d -t nordic-XXXXXXXXXX)
@@ -42,7 +44,9 @@ sudo mkdir -p /usr/share/themes/Nordic
 sudo tar xzf ${TEMPDIR}/nordic.tar.gz --directory=/usr/share/themes/Nordic --strip-components=1
 """
 
-INSTALL_UI['gtk_themes'] = r"""
+INSTALL_UI[
+    "gtk_themes"
+] = r"""
 #!/usr/bin/env bash
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
@@ -65,20 +69,26 @@ sudo apt install -y materia-gtk-theme
 """
 
 # ICON THEMES
-INSTALL_UI['papyrus'] = r"""
+INSTALL_UI[
+    "papyrus"
+] = r"""
 #!/usr/bin/env bash
 sudo add-apt-repository -y ppa:papirus/papirus
 sudo apt install -y papirus-icon-theme
 """
 
-INSTALL_UI['numix'] = r"""
+INSTALL_UI[
+    "numix"
+] = r"""
 #!/usr/bin/env bash
 sudo add-apt-repository -y ppa:numix/ppa
 sudo apt install -y numix-icon-theme-circle
 """
 
 # https://c.wallhere.com/photos/f4/de/1920x1080_px_Brume_Hills_Mount_Everest_mountains-1214842.jpg!d
-INSTALL_UI['wallpaper'] = r"""
+INSTALL_UI[
+    "wallpaper"
+] = r"""
 #!/usr/bin/env bash
 BGDIR=/usr/share/backgrounds
 mkdir -p ${BGDIR}
@@ -92,5 +102,5 @@ sudo convert ${BGDIR}/wallpaper.jpg ${BGDIR}/wallpaper.png
 # # https://github.com/conda-forge/glib-feedstock/issues/19
 """
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pass

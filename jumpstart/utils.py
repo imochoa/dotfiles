@@ -27,20 +27,21 @@ from jumpstart import TMP
 
 
 class bcolors:
-    HEADER = '\033[95m'
-    INFO = '\033[94m'
-    DEBUG = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+    HEADER = "\033[95m"
+    INFO = "\033[94m"
+    DEBUG = "\033[92m"
+    WARNING = "\033[93m"
+    FAIL = "\033[91m"
+    ENDC = "\033[0m"
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
 
 
-def echo(msg: collections.Iterable,
-         color: str = bcolors.INFO,
-         sep: str = '',
-         ) -> None:
+def echo(
+    msg: collections.Iterable,
+    color: str = bcolors.INFO,
+    sep: str = "",
+) -> None:
     if not isinstance(msg, str):
         msg = sep.join(msg)
     print(f"{color}{msg}{bcolors.ENDC}", sep=sep)
@@ -75,9 +76,10 @@ def hard_ln(src: pathlib.Path, dest: pathlib.Path, dry_run: bool = True) -> None
         os.link(src=src.absolute(), dst=dest.absolute())
 
 
-def is_symlink(linkfile: T.Union[str, pathlib.Path],
-               src: T.Union[None, str, pathlib.Path] = None,
-               ) -> bool:
+def is_symlink(
+    linkfile: T.Union[str, pathlib.Path],
+    src: T.Union[None, str, pathlib.Path] = None,
+) -> bool:
     """
     Checks if *linkfile* is a symlink.
     If a *src* is provided, it also checks to make sure that *linkfile* links to *src*
@@ -92,7 +94,11 @@ def is_symlink(linkfile: T.Union[str, pathlib.Path],
     return linkfile.resolve() == pathlib.Path(src).resolve()
 
 
-def mkdirs(src: pathlib.Path, exist_ok: bool = True, dry_run: bool = True, ) -> None:
+def mkdirs(
+    src: pathlib.Path,
+    exist_ok: bool = True,
+    dry_run: bool = True,
+) -> None:
     if dry_run:
         dryrun_echo(f"Would MKDIRS:\n\t{src}")
     else:
@@ -107,7 +113,7 @@ def rm(src: pathlib.Path, dry_run: bool = True) -> None:
 
 
 def get_timestamp() -> str:
-    return datetime.datetime.now().strftime('backup_%Y_%m_%d_T_%H_%M_%s')
+    return datetime.datetime.now().strftime("backup_%Y_%m_%d_T_%H_%M_%s")
 
 
 def get_release_tag(user_and_repo: str) -> str:
@@ -117,20 +123,23 @@ def get_release_tag(user_and_repo: str) -> str:
 
     # If the input was a URL, parse it
     user_and_repo = urlparse(user_and_repo).path
-    user_and_repo = user_and_repo[:-1] if user_and_repo.endswith('/') else user_and_repo
-    user_and_repo = user_and_repo[:-9] if user_and_repo.endswith('/releases') else user_and_repo
+    user_and_repo = user_and_repo[:-1] if user_and_repo.endswith("/") else user_and_repo
+    user_and_repo = (
+        user_and_repo[:-9] if user_and_repo.endswith("/releases") else user_and_repo
+    )
 
     # Make the query URL
     url = f"https://github.com/{quote(user_and_repo)}/releases/latest"
 
     with urlopen(url) as fp:
         # html = fp.read().decode('utf8')
-        return fp.url.split('/')[-1]
+        return fp.url.split("/")[-1]
 
 
-def get_release_tags(user_and_repos: T.Union[str, T.List[str]],
-                     max_workers: int = 4,
-                     ) -> T.List[str]:
+def get_release_tags(
+    user_and_repos: T.Union[str, T.List[str]],
+    max_workers: int = 4,
+) -> T.List[str]:
     """
     Same as *get_release_tag*, but multi-threaded
     """
@@ -144,7 +153,7 @@ def get_release_tags(user_and_repos: T.Union[str, T.List[str]],
 
 
 def tab(s: str) -> str:
-    return '\n\t'.join(s.split('\n'))
+    return "\n\t".join(s.split("\n"))
 
 
 # def find_files_with_exts(topdir: str,
@@ -163,32 +172,34 @@ def tab(s: str) -> str:
 
 def decode(s: str) -> str:
     try:
-        return s.decode('utf-8')
+        return s.decode("utf-8")
     except Exception:
         logging.exception("decoding error:", exc_info=True)
     return s
 
 
-def run_shell_str(shell_str: str,
-                  dry_run: bool = True,
-                  verbose: bool = False,
-                  ) -> T.Tuple[int, str]:
-    returncode, stdout = 0, ''
+def run_shell_str(
+    shell_str: str,
+    dry_run: bool = True,
+    verbose: bool = False,
+) -> T.Tuple[int, str]:
+    returncode, stdout = 0, ""
 
     if dry_run:
         echo(f"Would have run:\n{shell_str}", color=bcolors.DEBUG)
-        return (0, 'DRY RUN -> NO OUTPUT')
+        return (0, "DRY RUN -> NO OUTPUT")
 
     # TODO Use fp_stream?
     with tempfile.TemporaryFile() as fp_stream:
-        with subprocess.Popen(shell_str,
-                              shell=True,
-                              # stdout=fp_stream,
-                              # stderr=fp_stream,
-                              stdout=subprocess.PIPE,
-                              stderr=subprocess.STDOUT,
-                              # bufsize=1, # not supported in binary mode
-                              ) as p:
+        with subprocess.Popen(
+            shell_str,
+            shell=True,
+            # stdout=fp_stream,
+            # stderr=fp_stream,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            # bufsize=1, # not supported in binary mode
+        ) as p:
             # fp_stream.seek(0)
             while True:
                 line = decode(p.stdout.readline().rstrip())
@@ -204,9 +215,10 @@ def run_shell_str(shell_str: str,
     return returncode, stdout
 
 
-def download_and_unzip(zip_url: str,
-                       outdir: str,
-                       ) -> T.List[str]:
+def download_and_unzip(
+    zip_url: str,
+    outdir: str,
+) -> T.List[str]:
     resp = urlopen(zip_url)
     zipped = ZipFile(BytesIO(resp.read()))
     # for line in zipped.open(filepath).readlines():
@@ -229,5 +241,5 @@ def download_and_unzip(zip_url: str,
 #     )
 #     return p.returncode, p.stdout.decode('ascii')
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pass

@@ -30,64 +30,105 @@ from jumpstart.installs.cmd_builders import aptget_install, aptget_remove
 
 TRIVIAL_PGKS = [
     # real packages
-    '7zip',
-    'arandr',
-    'bashtop',
-    'blender',
-    'checkinstall',
-    'cmus',
-    'disk_space',
-    'entr',
-    'fd-find',
-    'firewall_gui',
-    'flameshot',
-    'git',
-    'grsync',
-    'lmms',
-    'mupdf',
-    'mutt',
-    'neofetch',
-    'nomacs',
-    'pavucontrol',
-    'peek',
-    'pinta',
-    'rsync',
-    'shutter',
-    'software-properties-common',
-    'sxiv',
-    'tlp',
-    'tmux',
-    'trash-cli',
-    'tree',
-    'vlc',
-    'xclip',
+    "7zip",
+    "arandr",
+    "bashtop",
+    "blender",
+    "checkinstall",
+    "cmus",
+    "disk_space",
+    "entr",
+    "fd-find",
+    "firewall_gui",
+    "flameshot",
+    "git",
+    "grsync",
+    "lmms",
+    "mupdf",
+    "mutt",
+    "neofetch",
+    "nomacs",
+    "pavucontrol",
+    "peek",
+    "pinta",
+    "rsync",
+    "shutter",
+    "software-properties-common",
+    "sxiv",
+    "tlp",
+    "tmux",
+    "trash-cli",
+    "tree",
+    "vlc",
+    "xclip",
     # virtual packages (mapped in *MULTIPLE_PKGs* or *RENAMED_PKGs*)
-    'exfat',
-    'gnome_tweak_tool',
-    'i3',
-    'networking',
-    'openvpn',
-    'regolith',
-    'ssh',
-    'texstudio',
-    'tlp-gui',
+    "exfat",
+    "gnome_tweak_tool",
+    "i3",
+    "networking",
+    "openvpn",
+    "regolith",
+    "ssh",
+    "texstudio",
+    "tlp-gui",
 ]
 
 # [1st STEP] Expand packages with dependencies
 MULTIPLE_PKGs = {
-    'networking':       ['wget', 'curl', 'iputils-ping', ],
-    'exfat':            ['exfat-fuse', 'exfat-utils', ],
-    'texstudio':        ['texstudio', 'texlive-latex-extra', 'texlive-xetex', ], # 'texlive-pstricks',
-    'ssh':              ['openssh-server', 'xclip', 'xauth'],
-    'tlp-gui':          ['tlp'],
-    'openvpn':          ['openvpn', 'easy-rsa'],
-    'gnome_tweak_tool': ['gnome-tweak-tool', 'gnome-tweaks'],
-    'i3':               ['i3', 'arandr', 'lxappearance', 'dmenu', 'rofi', 'compton', 'i3blocks', 'xbacklight', 'htop',
-                         'feh', 'i3lock-fancy', 'i3-snapshot', ],
+    "networking": [
+        "wget",
+        "curl",
+        "iputils-ping",
+    ],
+    "exfat": [
+        "exfat-fuse",
+        "exfat-utils",
+    ],
+    "texstudio": [
+        "texstudio",
+        "texlive-latex-extra",
+        "texlive-xetex",
+    ],  # 'texlive-pstricks',
+    "ssh": ["openssh-server", "xclip", "xauth"],
+    "tlp-gui": ["tlp"],
+    "openvpn": ["openvpn", "easy-rsa"],
+    "gnome_tweak_tool": ["gnome-tweak-tool", "gnome-tweaks"],
+    "i3": [
+        "i3",
+        "arandr",
+        "lxappearance",
+        "dmenu",
+        "rofi",
+        "compton",
+        "i3blocks",
+        "xbacklight",
+        "htop",
+        "feh",
+        "i3lock-fancy",
+        "i3-snapshot",
+    ],
     # https://www.digitalocean.com/community/tutorials/installing-and-using-ranger-a-terminal-file-manager-on-a-ubuntu-vps
-    'ranger':           ['ranger', 'caca-utils', 'highlight', 'atool', 'w3m', 'poppler-utils', 'mediainfo', 'xclip'],
-    'linux_utils':      ['trash-cli', 'xclip', 'gnu_parallel', 'bat_cat', 'fd-find'], #RIPGREP
-    'regolith':         ['regolith', 'i3xrocks-battery', ],
+    "ranger": [
+        "ranger",
+        "caca-utils",
+        "highlight",
+        "atool",
+        "w3m",
+        "poppler-utils",
+        "mediainfo",
+        "xclip",
+    ],
+    "linux_utils": [
+        "trash-cli",
+        "xclip",
+        "gnu_parallel",
+        "bat_cat",
+        "fd-find",
+    ],  # RIPGREP
+    "regolith": [
+        "regolith",
+        "i3xrocks-battery",
+    ],
 }
 
 # See more i3xrocks packages with:
@@ -95,21 +136,21 @@ MULTIPLE_PKGs = {
 
 # [2nd STEP] Add any PPAs
 PKG_PPAs = {
-    'bashtop': 'ppa:bashtop-monitor/bashtop', # REPLACE WITH BPYTOP!
-    'peek':    'ppa:peek-developers/stable',
-    'shutter': 'ppa:linuxuprising/shutter',
-    'tlp-gui': 'ppa:linuxuprising/apps',
+    "bashtop": "ppa:bashtop-monitor/bashtop",  # REPLACE WITH BPYTOP!
+    "peek": "ppa:peek-developers/stable",
+    "shutter": "ppa:linuxuprising/shutter",
+    "tlp-gui": "ppa:linuxuprising/apps",
 }
 
 # [3rd STEP] get the REAL names
 RENAMED_PKGs = {
-    '7zip':         'p7zip-full',
-    'bat_cat':      'bat',
-    'disk_space':   'baobab',
-    'fd':           'fd-find', # NOT NEEDED
-    'firewall_gui': 'gufw',
-    'gnu_parallel': 'parallel',
-    'tlp-gui':      'tlpui',
+    "7zip": "p7zip-full",
+    "bat_cat": "bat",
+    "disk_space": "baobab",
+    "fd": "fd-find",  # NOT NEEDED
+    "firewall_gui": "gufw",
+    "gnu_parallel": "parallel",
+    "tlp-gui": "tlpui",
 }
 
 
@@ -137,28 +178,49 @@ RENAMED_PKGs = {
 # ForwardX11 yes
 # ForwardX11Trusted yes
 
-def build_aptget_pkg_maps(pkg_keys: Optional[Sequence[str]] = None) -> Tuple[Dict[str, str], Dict[str, str]]:
+
+def build_aptget_pkg_maps(
+    pkg_keys: Optional[Sequence[str]] = None,
+) -> Tuple[Dict[str, str], Dict[str, str]]:
     """
     Gets the commands for the packages with keys *pkg_keys* and returns the (*install_map*, *remove map*)
     """
-    pkg_subset = set(TRIVIAL_PGKS).union(PKG_PPAs).union(RENAMED_PKGs).union(MULTIPLE_PKGs)
+    pkg_subset = (
+        set(TRIVIAL_PGKS).union(PKG_PPAs).union(RENAMED_PKGs).union(MULTIPLE_PKGs)
+    )
 
     if pkg_keys:
         pkg_subset = pkg_subset.intersection(pkg_keys)
         lost_inputs = set(pkg_keys).difference(pkg_subset)
         if lost_inputs:
-            echo(([f'[{len(lost_inputs)}] UNKNOWN APT-GET pkg(s)']
-                  + [f'[{idx:> 3}] {p}' for idx, p in enumerate(sorted(lost_inputs), start=1)]),
-                 color=bcolors.WARNING, sep='\n\t> ')
+            echo(
+                (
+                    [f"[{len(lost_inputs)}] UNKNOWN APT-GET pkg(s)"]
+                    + [
+                        f"[{idx:> 3}] {p}"
+                        for idx, p in enumerate(sorted(lost_inputs), start=1)
+                    ]
+                ),
+                color=bcolors.WARNING,
+                sep="\n\t> ",
+            )
 
     if not pkg_subset:
-        echo('No APT-GET pkgs will be installed!', color=bcolors.WARNING, sep='\n\t> ')
+        echo("No APT-GET pkgs will be installed!", color=bcolors.WARNING, sep="\n\t> ")
         return dict(), dict()
 
     if pkg_keys:
-        echo(([f'[{len(pkg_subset)}] Filtered APT-GET pkgs:']
-              + [f'[{idx:> 3}] {p}' for idx, p in enumerate(sorted(pkg_subset), start=1)]),
-             color=bcolors.DEBUG, sep='\n\t> ')
+        echo(
+            (
+                [f"[{len(pkg_subset)}] Filtered APT-GET pkgs:"]
+                + [
+                    f"[{idx:> 3}] {p}"
+                    for idx, p in enumerate(sorted(pkg_subset), start=1)
+                ]
+            ),
+            color=bcolors.DEBUG,
+            sep="\n\t> ",
+        )
 
     install_map, remove_map = dict(), dict()
 
@@ -176,18 +238,28 @@ def build_aptget_pkg_maps(pkg_keys: Optional[Sequence[str]] = None) -> Tuple[Dic
     return install_map, remove_map
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     full_install_map, full_remove_map = build_aptget_pkg_maps()  # All commands:
     # full_install_map, full_remove_map = build_aptget_pkg_maps(['xclip', 'ssh'])  # OK subset
     # full_install_map, full_remove_map = build_aptget_pkg_maps(['poop'])  # All commands:
 
-    sep = 80 * '-'
-    print('\n'.join(
-        ['PKGs WITH THEIR INSTALL COMMANDS']
-        + [f'{sep}\n\tINSTALLING [{k}]\n{sep}\n{full_install_map[k]}\n' for k in sorted(full_install_map)])
+    sep = 80 * "-"
+    print(
+        "\n".join(
+            ["PKGs WITH THEIR INSTALL COMMANDS"]
+            + [
+                f"{sep}\n\tINSTALLING [{k}]\n{sep}\n{full_install_map[k]}\n"
+                for k in sorted(full_install_map)
+            ]
+        )
     )
 
-    print('\n'.join(
-        ['PKGs WITH THEIR REMOVE COMMANDS']
-        + [f'{sep}\n\tREMOVING [{k}]\n{sep}\n{full_remove_map[k]}\n' for k in sorted(full_remove_map)])
+    print(
+        "\n".join(
+            ["PKGs WITH THEIR REMOVE COMMANDS"]
+            + [
+                f"{sep}\n\tREMOVING [{k}]\n{sep}\n{full_remove_map[k]}\n"
+                for k in sorted(full_remove_map)
+            ]
+        )
     )

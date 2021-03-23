@@ -9,7 +9,11 @@ import typing as T
 
 # local imports
 from jumpstart import DOTFILE_DIR, REPO_DIR, utils
-from jumpstart.configs.dotfile_map import DOTFILE_MAP, map_dotfiles_to_paths, report_dotmap
+from jumpstart.configs.dotfile_map import (
+    DOTFILE_MAP,
+    map_dotfiles_to_paths,
+    report_dotmap,
+)
 
 
 # def map_dotfiles_to_paths(
@@ -81,16 +85,17 @@ from jumpstart.configs.dotfile_map import DOTFILE_MAP, map_dotfiles_to_paths, re
 #     return {DOTFILE_DIR / k: dotfile_map[k] for k in repo_files if k in matched_ks}
 
 
-def soft_config_copy(src: pathlib.Path,
-                     dest: pathlib.Path,
-                     dry_run: bool = True,
-                     keep_backup: bool = True,
-                     ) -> bool:
+def soft_config_copy(
+    src: pathlib.Path,
+    dest: pathlib.Path,
+    dry_run: bool = True,
+    keep_backup: bool = True,
+) -> bool:
     """
     returns: True if it worked, False otherwise
     """
     if not src.is_file():
-        utils.echo(f'{src} NOT FOUND!', color=utils.bcolors.DEBUG)
+        utils.echo(f"{src} NOT FOUND!", color=utils.bcolors.DEBUG)
         return False
 
     if dest.is_file() and utils.is_symlink(dest, src):
@@ -108,16 +113,17 @@ def soft_config_copy(src: pathlib.Path,
     return True
 
 
-def hard_config_copy(src: pathlib.Path,
-                     dest: pathlib.Path,
-                     dry_run: bool = True,
-                     keep_backup: bool = True,
-                     ) -> bool:
+def hard_config_copy(
+    src: pathlib.Path,
+    dest: pathlib.Path,
+    dry_run: bool = True,
+    keep_backup: bool = True,
+) -> bool:
     """
     returns: True if it worked, False otherwise
     """
     if not src.is_file():
-        utils.echo(f'{src} NOT FOUND!', color=utils.bcolors.DEBUG)
+        utils.echo(f"{src} NOT FOUND!", color=utils.bcolors.DEBUG)
         return False
 
     if dest.is_file() and os.path.samefile(src, dest):
@@ -136,14 +142,17 @@ def hard_config_copy(src: pathlib.Path,
     return True
 
 
-def apply_dotfiles(input_dotfiles: T.Set,
-                   dry_run: bool = True,
-                   homedir: T.Optional[str] = None,
-                   keep_backup: bool = True,
-                   ) -> None:
+def apply_dotfiles(
+    input_dotfiles: T.Set,
+    dry_run: bool = True,
+    homedir: T.Optional[str] = None,
+    keep_backup: bool = True,
+) -> None:
     if not input_dotfiles:
         utils.echo("Empty dotfile input, skipping!", color=utils.bcolors.WARNING)
-        utils.echo(f"Possible keys:\n{report_dotmap(DOTFILE_MAP)}", color=utils.bcolors.INFO)
+        utils.echo(
+            f"Possible keys:\n{report_dotmap(DOTFILE_MAP)}", color=utils.bcolors.INFO
+        )
         return None
 
     if not isinstance(input_dotfiles, set):
@@ -158,7 +167,11 @@ def apply_dotfiles(input_dotfiles: T.Set,
     expanded_keys = set()
     invalid_keys = set()
     for unmatched_key in unkown_keys:
-        matched_keys = [known_k for l_k, known_k in l_map.items() if l_k.startswith(unmatched_key.lower())]
+        matched_keys = [
+            known_k
+            for l_k, known_k in l_map.items()
+            if l_k.startswith(unmatched_key.lower())
+        ]
         if not matched_keys:
             invalid_keys.add(unmatched_key)
         else:
@@ -166,9 +179,11 @@ def apply_dotfiles(input_dotfiles: T.Set,
 
     # match_keys
     if invalid_keys:
-        utils.echo(["Removing invalid install keys:"] + sorted(invalid_keys),
-                   color=utils.bcolors.WARNING,
-                   sep='\n\t> ')
+        utils.echo(
+            ["Removing invalid install keys:"] + sorted(invalid_keys),
+            color=utils.bcolors.WARNING,
+            sep="\n\t> ",
+        )
     input_dotfiles = known_keys.union(expanded_keys)
 
     # Filter the dotfile map
@@ -176,44 +191,55 @@ def apply_dotfiles(input_dotfiles: T.Set,
 
     dotabsfilepath_map = map_dotfiles_to_paths(dotfile_map, homedir=homedir)
     for src_config_file, dest_config_file in dotabsfilepath_map.items():
-        if soft_config_copy(src_config_file,
-                            dest_config_file,
-                            dry_run=dry_run,
-                            keep_backup=keep_backup,
-                            ):
-            utils.echo(f"{src_config_file} -> {dest_config_file}", color=utils.bcolors.INFO)
+        if soft_config_copy(
+            src_config_file,
+            dest_config_file,
+            dry_run=dry_run,
+            keep_backup=keep_backup,
+        ):
+            utils.echo(
+                f"{src_config_file} -> {dest_config_file}", color=utils.bcolors.INFO
+            )
 
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser(description=f'Choose what config files to link')
+    parser = argparse.ArgumentParser(description=f"Choose what config files to link")
 
-    parser.add_argument("dotfiles",
-                        type=str,
-                        nargs='*',
-                        help=("Which dotfiles to link, separated by spaces (e.g. 'ssh xclip sxiv') or a file with one "
-                              "dotfile per line. Run the command without any inputs to see all possibilities, "
-                              "or with 'all' to configure everything. If you just specify the beginning of a dotfile "
-                              "path, it will be expanded to all matches"
-                              )
-                        )
+    parser.add_argument(
+        "dotfiles",
+        type=str,
+        nargs="*",
+        help=(
+            "Which dotfiles to link, separated by spaces (e.g. 'ssh xclip sxiv') or a file with one "
+            "dotfile per line. Run the command without any inputs to see all possibilities, "
+            "or with 'all' to configure everything. If you just specify the beginning of a dotfile "
+            "path, it will be expanded to all matches"
+        ),
+    )
 
-    parser.add_argument('-d', '--dry',
-                        action='store_true',
-                        help="For debugging. When set, the script won't actually install anything, just report back")
+    parser.add_argument(
+        "-d",
+        "--dry",
+        action="store_true",
+        help="For debugging. When set, the script won't actually install anything, just report back",
+    )
 
-    parser.add_argument('-c', '--copy',
-                        action='store_true',
-                        help=("Copy the config files instead of linking to them (by default)."
-                              " That way, you can delete the repo and keep the dotfiles"))
+    parser.add_argument(
+        "-c",
+        "--copy",
+        action="store_true",
+        help=(
+            "Copy the config files instead of linking to them (by default)."
+            " That way, you can delete the repo and keep the dotfiles"
+        ),
+    )
 
-    parser.add_argument('-v', '--verbose',
-                        action='store_true',
-                        help="More output")
+    parser.add_argument("-v", "--verbose", action="store_true", help="More output")
 
-    parser.add_argument('-y', '--yes',
-                        action='store_true',
-                        help="Don't ask for confirmation")
+    parser.add_argument(
+        "-y", "--yes", action="store_true", help="Don't ask for confirmation"
+    )
 
     args = parser.parse_args()
     input_dotfiles = args.dotfiles
@@ -227,13 +253,15 @@ if __name__ == "__main__":
 
     for f in input_paths:
         # TODO DOES THIS WORK?
-        with open(f, 'r') as fp:
+        with open(f, "r") as fp:
             input_dotfiles.extend(fp.readlines())
 
     # No inputs?
     if not input_dotfiles:
         utils.echo(f"No inputs given!", color=utils.bcolors.INFO)
-        utils.echo(f"Possible keys:\n{report_dotmap(DOTFILE_MAP)}", color=utils.bcolors.INFO)
+        utils.echo(
+            f"Possible keys:\n{report_dotmap(DOTFILE_MAP)}", color=utils.bcolors.INFO
+        )
         sys.exit(0)
 
     # Valid inputs?

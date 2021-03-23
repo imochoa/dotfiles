@@ -12,7 +12,9 @@ from jumpstart.installs.snap import build_snap_pkg_maps
 from jumpstart.installs.src import *
 
 
-def build_pkg_maps(pkg_keys: Optional[Sequence[str]] = None) -> Tuple[Dict[str, str], Dict[str, str]]:
+def build_pkg_maps(
+    pkg_keys: Optional[Sequence[str]] = None,
+) -> Tuple[Dict[str, str], Dict[str, str]]:
     full_install_map, full_remove_map = dict(), dict()
 
     for fcn in (build_aptget_pkg_maps, build_snap_pkg_maps):

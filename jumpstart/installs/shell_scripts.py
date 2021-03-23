@@ -25,7 +25,9 @@ REMOVE_PKGS = dict()
 #     | tail --lines=1
 
 # https://github.com/nodesource/distributions/blob/master/README.md
-INSTALL_PKGS['nodejs'] = r"""
+INSTALL_PKGS[
+    "nodejs"
+] = r"""
 #!/usr/bin/env bash
 # Using Ubuntu
 sudo apt-get install -y curl
@@ -39,7 +41,9 @@ sudo npm install -g npm
 sudo apt-get install -y build-essential
 """
 
-INSTALL_PKGS['python3'] = r"""
+INSTALL_PKGS[
+    "python3"
+] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y python3 python3-pip python3-venv python3-dev  build-essential libssl-dev libffi-dev  libxml2-dev libxslt1-dev zlib1g-dev
 # For python+PDF
@@ -51,7 +55,9 @@ sudo apt install -y libpq-dev python3-dev
 sudo -H pip3  install --upgrade pip
 """
 
-INSTALL_PKGS['polybar'] = r"""
+INSTALL_PKGS[
+    "polybar"
+] = r"""
 #!/usr/bin/env bash
 # TODO FONTS NOT FOUND:
 # -- Font not found: fixed:pixelsize=10
@@ -85,7 +91,9 @@ git checkout $latestTag
 """
 
 # TODO Add checkinstall
-INSTALL_PKGS['goxel'] = r"""
+INSTALL_PKGS[
+    "goxel"
+] = r"""
 #!/usr/bin/env bash
 
 sudo apt-get install -y scons pkg-config libglfw3-dev libgtk-3-dev git \
@@ -120,7 +128,9 @@ sudo apt-get install -y scons pkg-config libglfw3-dev libgtk-3-dev git \
 ## sudo apt-get install -y         libocct-data-exchange-dev         libocct-ocaf-dev         libocct-visualization-dev         occt-draw         libcoin-dev         python3-pyside2.qtgui         python3-pyside2.qtsvg         python3-pyside2.qtwidgets                pyside2-tools         libshiboken2-dev         python3-pivy         libpyside2-dev         python3-pyside2.qtcore
 ## sudo apt-get install -y libsimage-dev
 
-INSTALL_PKGS['freecad'] = r"""
+INSTALL_PKGS[
+    "freecad"
+] = r"""
 #!/usr/bin/env bash
 
 sudo apt-get install -y software-properties-common
@@ -132,7 +142,9 @@ sudo apt-get install -y freecad freecad-common freecad-python3
 # sudo update-alternatives --config freecad
 """
 
-INSTALL_PKGS['xcwd'] = r"""
+INSTALL_PKGS[
+    "xcwd"
+] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y git \
 && sudo mkdir -p /opt/ \
@@ -145,7 +157,9 @@ sudo apt-get install -y git \
 # && sudo make install
 """
 
-INSTALL_PKGS['chrome'] = r"""
+INSTALL_PKGS[
+    "chrome"
+] = r"""
 #!/usr/bin/env bash
 
 TMP_DEB=/tmp/google-chrome.deb
@@ -155,7 +169,9 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -
 sudo apt install ${TMP_DEB}
 """
 
-INSTALL_PKGS["duf"] = r"""
+INSTALL_PKGS[
+    "duf"
+] = r"""
 #!/usr/bin/env bash
 
 sudo apt-get install -y wget git
@@ -172,7 +188,9 @@ wget https://github.com/muesli/duf/releases/download/${VER}/duf_${VER:1}_linux_a
 sudo apt install ${TMP_DEB}
 """
 
-INSTALL_PKGS['tmpmail'] = r"""
+INSTALL_PKGS[
+    "tmpmail"
+] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y curl w3m jq
 sudo wget https://raw.githubusercontent.com/sdushantha/tmpmail/master/tmpmail --continue --output-document=/usr/local/bin/tmpmail
@@ -181,12 +199,16 @@ sudo chmod +x /usr/local/bin/tmpmail
 # Prepare first email
 /usr/local/bin/tmpmail --generate
 """
-REMOVE_PKGS['tmpmail'] = r"""
+REMOVE_PKGS[
+    "tmpmail"
+] = r"""
 #!/usr/bin/env bash
 sudo rm -f /usr/local/bin/tmpmail
 """
 
-INSTALL_PKGS['docker'] = r"""
+INSTALL_PKGS[
+    "docker"
+] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y curl \
 && sudo curl -sSL https://get.docker.com/ \
@@ -197,7 +219,9 @@ sudo apt-get install -y curl \
 # sudo usermod -aG docker ${USER}
 """
 
-INSTALL_PKGS['beekeeper-studio'] = r"""
+INSTALL_PKGS[
+    "beekeeper-studio"
+] = r"""
 #!/usr/bin/env bash
 
 # https://docs.beekeeperstudio.io/installation/#apt-deb
@@ -237,7 +261,9 @@ sudo ln -s "${BEEKEEPER_DIR}/beekeeper-studio" /usr/local/bin/beekeeper-studio
 # """
 # UPDATE_PGKS['bpytop'] = INSTALL_PKGS['bpytop']
 
-INSTALL_PKGS['docker_compose'] = r"""
+INSTALL_PKGS[
+    "docker_compose"
+] = r"""
 #!/usr/bin/env bash
 # https://github.com/docker/compose/releases
 VER=1.26.2
@@ -246,7 +272,9 @@ sudo apt-get install -y curl \
 && sudo chmod +x /usr/local/bin/docker-compose
 """
 
-INSTALL_PKGS['stretchly'] = r"""
+INSTALL_PKGS[
+    "stretchly"
+] = r"""
 #!/usr/bin/env bash
 
 VER=$(git ls-remote --refs --tags https://github.com/hovancik/stretchly \
@@ -260,10 +288,12 @@ sudo rm -f /usr/local/bin/stretchly \
     --output-document=/usr/local/bin/stretchly \
 && sudo chmod +x /usr/local/bin/stretchly;
 """
-UPDATE_PGKS['stretchly'] = INSTALL_PKGS['stretchly']
+UPDATE_PGKS["stretchly"] = INSTALL_PKGS["stretchly"]
 
 
-INSTALL_PKGS['miniconda'] = r"""
+INSTALL_PKGS[
+    "miniconda"
+] = r"""
 #!/usr/bin/env bash
 # Asks for confirmations...
 curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
@@ -272,7 +302,9 @@ sh Miniconda3-latest-Linux-x86_64.sh
 
 
 # https://github.com/jrfonseca/gprof2dot
-INSTALL_PKGS['gprof2dot'] = r"""
+INSTALL_PKGS[
+    "gprof2dot"
+] = r"""
 #!/usr/bin/env bash
 sudo rm -f /usr/local/bin/gprof2dot.py
 sudo wget https://raw.githubusercontent.com/jrfonseca/gprof2dot/master/gprof2dot.py --continue --output-document=/usr/local/bin/gprof2dot.py
@@ -281,9 +313,11 @@ sudo chmod +x /usr/local/bin/gprof2dot.py
 # python -m cProfile -o foo.stats foo.py
 $ gprof2dot foo.stats -f pstats > foo.dot
 """
-UPDATE_PGKS['gprof2dot'] = INSTALL_PKGS['gprof2dot']
+UPDATE_PGKS["gprof2dot"] = INSTALL_PKGS["gprof2dot"]
 
-INSTALL_PKGS['xournal'] = r"""
+INSTALL_PKGS[
+    "xournal"
+] = r"""
 #!/usr/bin/env bash
 
 sudo apt-get install -y software-properties-common \
@@ -300,7 +334,9 @@ sudo apt-get install -y software-properties-common \
 # """
 
 # TODO the second i3gaps line probably belongs somewhere else...
-INSTALL_PKGS['i3_gaps'] = r"""
+INSTALL_PKGS[
+    "i3_gaps"
+] = r"""
 #!/usr/bin/env bash
 
 sudo apt-get install -y software-properties-common \
@@ -312,7 +348,9 @@ sudo apt-get install -y software-properties-common \
 && sudo apt-get install -y fonts-source-code-pro-ttf nordic moka-icon-theme
 """
 
-INSTALL_PKGS['vim'] = r"""
+INSTALL_PKGS[
+    "vim"
+] = r"""
 #!/usr/bin/env bash
 sudo apt-get remove -y vim-tiny gvim \
 && sudo apt-get install -y vim vim-gtk \
@@ -320,21 +358,27 @@ sudo apt-get remove -y vim-tiny gvim \
 # Update!
 """
 
-INSTALL_PKGS['dunst'] = r"""
+INSTALL_PKGS[
+    "dunst"
+] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y dunst
 # Enable and configure it in systemd
 systemctl restart --user dunst.service
 """
 
-REMOVE_PKGS['dunst'] = r"""
+REMOVE_PKGS[
+    "dunst"
+] = r"""
 #!/usr/bin/env bash
 sudo apt-get remove -y dunst
 # Enable and configure it in systemd
 systemctl disable --user dunst.service
 """
 
-INSTALL_PKGS['alacritty'] = r"""
+INSTALL_PKGS[
+    "alacritty"
+] = r"""
 #!/usr/bin/env bash
 # TODO FROM https://github.com/alacritty/alacritty/blob/master/INSTALL.md
 
@@ -350,7 +394,9 @@ sudo update-alternatives --install /usr/bin/alacritty x-terminal-emulator /usr/l
 # apt-get install -y byobu
 """
 
-INSTALL_PKGS['neovim'] = r"""
+INSTALL_PKGS[
+    "neovim"
+] = r"""
 #!/usr/bin/env bash
 
 sudo apt-get install -y wget curl git xclip exuberant-ctags ncurses-term python3-pip python3-autopep8
@@ -412,7 +458,9 @@ neovim +PackUpdate +qall
 neovim +CocInstall +qall
 """
 
-UPDATE_PGKS['neovim'] = r"""
+UPDATE_PGKS[
+    "neovim"
+] = r"""
 
 VER=$(git ls-remote --refs --tags https://github.com/neovim/neovim \
     | cut --delimiter='/' --fields=3     \
@@ -441,7 +489,9 @@ sudo npm install -g npm
 
 """
 
-INSTALL_PKGS['calibre'] = r"""
+INSTALL_PKGS[
+    "calibre"
+] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y wget \
 && sudo -v \
@@ -450,7 +500,9 @@ sudo apt-get install -y wget \
 """
 
 # TODO
-INSTALL_PKGS['clipster'] = r"""
+INSTALL_PKGS[
+    "clipster"
+] = r"""
 #!/usr/bin/env bash
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
@@ -476,21 +528,21 @@ mkdir -p ~/Applications \
 """
 
 DEPENDENCY_MAP = dict()
-DEPENDENCY_MAP['neovim'] = ['python3', 'nodejs', 'networking', 'xclip', 'git']
-DEPENDENCY_MAP['calibre'] = ['networking']
-DEPENDENCY_MAP['docker'] = ['networking']
-DEPENDENCY_MAP['tmpmail'] = ['networking']
-DEPENDENCY_MAP['docker_compose'] = ['networking']
-DEPENDENCY_MAP['nodejs'] = ['networking']
-DEPENDENCY_MAP['stretchly'] = ['networking']
-DEPENDENCY_MAP['clipster'] = ['git']
-DEPENDENCY_MAP['polybar'] = ['git']
-DEPENDENCY_MAP['goxel'] = ['git', 'checkinstall']
-DEPENDENCY_MAP['xcwd'] = ['git', 'checkinstall']
-DEPENDENCY_MAP['freecad'] = ['git', 'checkinstall']
+DEPENDENCY_MAP["neovim"] = ["python3", "nodejs", "networking", "xclip", "git"]
+DEPENDENCY_MAP["calibre"] = ["networking"]
+DEPENDENCY_MAP["docker"] = ["networking"]
+DEPENDENCY_MAP["tmpmail"] = ["networking"]
+DEPENDENCY_MAP["docker_compose"] = ["networking"]
+DEPENDENCY_MAP["nodejs"] = ["networking"]
+DEPENDENCY_MAP["stretchly"] = ["networking"]
+DEPENDENCY_MAP["clipster"] = ["git"]
+DEPENDENCY_MAP["polybar"] = ["git"]
+DEPENDENCY_MAP["goxel"] = ["git", "checkinstall"]
+DEPENDENCY_MAP["xcwd"] = ["git", "checkinstall"]
+DEPENDENCY_MAP["freecad"] = ["git", "checkinstall"]
 
-if __name__ == '__main__':
-    sep = 80 * '-'
+if __name__ == "__main__":
+    sep = 80 * "-"
     # print('\n'.join(
     #     ['PKGs WITH THEIR INSTALL COMMANDS']
     #     + [f'{sep}\n\tINSTALLING [{k}]\n{sep}\n{INSTALL_PKGS[k]}\n' for k in sorted(INSTALL_PKGS)])

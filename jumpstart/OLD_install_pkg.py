@@ -12,10 +12,10 @@ import pdb
 BASH_SHEBANG = "#!/usr/bin/env bash"
 
 
-def aptget_install(pkgs: Union[str, Sequence[str]], ppas: Union[None, str, Sequence[str]] = None) -> str:
-    """
-
-    """
+def aptget_install(
+    pkgs: Union[str, Sequence[str]], ppas: Union[None, str, Sequence[str]] = None
+) -> str:
+    """"""
     cmd_str = f"{BASH_SHEBANG}\n"
 
     if ppas is not None:
@@ -30,10 +30,10 @@ def aptget_install(pkgs: Union[str, Sequence[str]], ppas: Union[None, str, Seque
     return f"{cmd_str}\nsudo apt-get install -y {' '.join(pkgs)}"
 
 
-def aptget_remove(pkgs: Union[str, Sequence[str]], ppas: Union[None, str, Sequence[str]] = None) -> str:
-    """
-
-    """
+def aptget_remove(
+    pkgs: Union[str, Sequence[str]], ppas: Union[None, str, Sequence[str]] = None
+) -> str:
+    """"""
     cmd_str = f"{BASH_SHEBANG}\n"
 
     if ppas is not None:
@@ -53,95 +53,119 @@ DEPENDENCY_MAP = dict()
 INSTALL_PKGS = dict()
 REMOVE_PKGS = dict()
 
-INSTALL_PKGS['7zip'] = aptget_install('p7zip-full')
-REMOVE_PKGS['7zip'] = aptget_remove('p7zip-full')
+INSTALL_PKGS["7zip"] = aptget_install("p7zip-full")
+REMOVE_PKGS["7zip"] = aptget_remove("p7zip-full")
 
-INSTALL_PKGS['bashtop'] = aptget_install('bashtop', ppas='ppa:bashtop-monitor/bashtop')
-REMOVE_PKGS['bashtop'] = aptget_remove('bashtop', ppas='ppa:bashtop-monitor/bashtop')
+INSTALL_PKGS["bashtop"] = aptget_install("bashtop", ppas="ppa:bashtop-monitor/bashtop")
+REMOVE_PKGS["bashtop"] = aptget_remove("bashtop", ppas="ppa:bashtop-monitor/bashtop")
 
-INSTALL_PKGS['tmux'] = aptget_install('tmux')
-REMOVE_PKGS['tmux'] = aptget_remove('tmux')
+INSTALL_PKGS["tmux"] = aptget_install("tmux")
+REMOVE_PKGS["tmux"] = aptget_remove("tmux")
 
-INSTALL_PKGS['fd'] = aptget_install('fd-find')
-REMOVE_PKGS['fd'] = aptget_remove('fd-find')
+INSTALL_PKGS["fd"] = aptget_install("fd-find")
+REMOVE_PKGS["fd"] = aptget_remove("fd-find")
 
-INSTALL_PKGS['sxiv'] = aptget_install('sxiv')
-REMOVE_PKGS['sxiv'] = aptget_remove('sxiv')
+INSTALL_PKGS["sxiv"] = aptget_install("sxiv")
+REMOVE_PKGS["sxiv"] = aptget_remove("sxiv")
 
-INSTALL_PKGS['neofetch'] = aptget_install('neofetch')
-REMOVE_PKGS['neofetch'] = aptget_remove('neofetch')
+INSTALL_PKGS["neofetch"] = aptget_install("neofetch")
+REMOVE_PKGS["neofetch"] = aptget_remove("neofetch")
 
-INSTALL_PKGS['networking'] = aptget_install(['wget', 'curl', 'iputils-ping', ])
-REMOVE_PKGS['networking'] = aptget_remove(['wget', 'curl', 'iputils-ping', ])
+INSTALL_PKGS["networking"] = aptget_install(
+    [
+        "wget",
+        "curl",
+        "iputils-ping",
+    ]
+)
+REMOVE_PKGS["networking"] = aptget_remove(
+    [
+        "wget",
+        "curl",
+        "iputils-ping",
+    ]
+)
 
-INSTALL_PKGS['entr'] = aptget_install('entr')
-REMOVE_PKGS['entr'] = aptget_remove('entr')
+INSTALL_PKGS["entr"] = aptget_install("entr")
+REMOVE_PKGS["entr"] = aptget_remove("entr")
 
-INSTALL_PKGS['xclip'] = aptget_install('xclip')
-REMOVE_PKGS['xclip'] = aptget_remove('xclip')
+INSTALL_PKGS["xclip"] = aptget_install("xclip")
+REMOVE_PKGS["xclip"] = aptget_remove("xclip")
 
-INSTALL_PKGS['disk_space'] = aptget_install('baobab')
-REMOVE_PKGS['disk_space'] = aptget_remove('baobab')
+INSTALL_PKGS["disk_space"] = aptget_install("baobab")
+REMOVE_PKGS["disk_space"] = aptget_remove("baobab")
 
-INSTALL_PKGS['trash_cli'] = aptget_install('trash-cli')
-REMOVE_PKGS['trash_cli'] = aptget_remove('trash-cli')
+INSTALL_PKGS["trash_cli"] = aptget_install("trash-cli")
+REMOVE_PKGS["trash_cli"] = aptget_remove("trash-cli")
 
-INSTALL_PKGS['exfat'] = aptget_install(['exfat-fuse', 'exfat-utils'])
-REMOVE_PKGS['exfat'] = aptget_remove(['exfat-fuse', 'exfat-utils'])
+INSTALL_PKGS["exfat"] = aptget_install(["exfat-fuse", "exfat-utils"])
+REMOVE_PKGS["exfat"] = aptget_remove(["exfat-fuse", "exfat-utils"])
 
-INSTALL_PKGS['arandr'] = aptget_install('arandr')
-REMOVE_PKGS['arandr'] = aptget_remove('arandr')
+INSTALL_PKGS["arandr"] = aptget_install("arandr")
+REMOVE_PKGS["arandr"] = aptget_remove("arandr")
 
-INSTALL_PKGS['texstudio'] = aptget_install(['texstudio', 'texlive-latex-extra', ])
-REMOVE_PKGS['texstudio'] = aptget_remove(['texstudio', 'texlive-latex-extra', ])
+INSTALL_PKGS["texstudio"] = aptget_install(
+    [
+        "texstudio",
+        "texlive-latex-extra",
+    ]
+)
+REMOVE_PKGS["texstudio"] = aptget_remove(
+    [
+        "texstudio",
+        "texlive-latex-extra",
+    ]
+)
 
-INSTALL_PKGS['git'] = aptget_install('git')
-REMOVE_PKGS['git'] = aptget_remove('git')
+INSTALL_PKGS["git"] = aptget_install("git")
+REMOVE_PKGS["git"] = aptget_remove("git")
 
-INSTALL_PKGS['tree'] = aptget_install('tree')
-REMOVE_PKGS['tree'] = aptget_remove('tree')
+INSTALL_PKGS["tree"] = aptget_install("tree")
+REMOVE_PKGS["tree"] = aptget_remove("tree")
 
-INSTALL_PKGS['firewall_gui'] = aptget_install('gufw')
-REMOVE_PKGS['firewall_gui'] = aptget_remove('gufw')
+INSTALL_PKGS["firewall_gui"] = aptget_install("gufw")
+REMOVE_PKGS["firewall_gui"] = aptget_remove("gufw")
 # --fix-broken
 
-INSTALL_PKGS['gnome_tweak_tool'] = aptget_install(['gnome-tweak-tool', 'gnome-tweaks'])
-REMOVE_PKGS['gnome_tweak_tool'] = aptget_remove(['gnome-tweak-tool', 'gnome-tweaks'])
+INSTALL_PKGS["gnome_tweak_tool"] = aptget_install(["gnome-tweak-tool", "gnome-tweaks"])
+REMOVE_PKGS["gnome_tweak_tool"] = aptget_remove(["gnome-tweak-tool", "gnome-tweaks"])
 
 # https://help.ubuntu.com/community/CheckInstall
-INSTALL_PKGS['checkinstall'] = aptget_install('checkinstall')
-REMOVE_PKGS['checkinstall'] = aptget_remove('checkinstall')
+INSTALL_PKGS["checkinstall"] = aptget_install("checkinstall")
+REMOVE_PKGS["checkinstall"] = aptget_remove("checkinstall")
 
-INSTALL_PKGS['mupdf'] = aptget_install('mupdf')
-REMOVE_PKGS['mupdf'] = aptget_remove('mupdf')
+INSTALL_PKGS["mupdf"] = aptget_install("mupdf")
+REMOVE_PKGS["mupdf"] = aptget_remove("mupdf")
 
-INSTALL_PKGS['cmus'] = aptget_install('cmus')
-REMOVE_PKGS['cmus'] = aptget_remove('cmus')
+INSTALL_PKGS["cmus"] = aptget_install("cmus")
+REMOVE_PKGS["cmus"] = aptget_remove("cmus")
 
-INSTALL_PKGS['pavucontrol'] = aptget_install('pavucontrol')
-REMOVE_PKGS['pavucontrol'] = aptget_remove('pavucontrol')
+INSTALL_PKGS["pavucontrol"] = aptget_install("pavucontrol")
+REMOVE_PKGS["pavucontrol"] = aptget_remove("pavucontrol")
 
-INSTALL_PKGS['vlc'] = aptget_install('vlc')
-REMOVE_PKGS['vlc'] = aptget_remove('vlc')
+INSTALL_PKGS["vlc"] = aptget_install("vlc")
+REMOVE_PKGS["vlc"] = aptget_remove("vlc")
 
 # TODO Required to add app reps?
-INSTALL_PKGS['software-properties-common'] = aptget_install('software-properties-common')
-REMOVE_PKGS['software-properties-common'] = aptget_remove('software-properties-common')
+INSTALL_PKGS["software-properties-common"] = aptget_install(
+    "software-properties-common"
+)
+REMOVE_PKGS["software-properties-common"] = aptget_remove("software-properties-common")
 
-INSTALL_PKGS['shutter'] = aptget_install('shutter', ppas='ppa:linuxuprising/shutter')
-REMOVE_PKGS['shutter'] = aptget_remove('shutter', ppas='ppa:linuxuprising/shutter')
+INSTALL_PKGS["shutter"] = aptget_install("shutter", ppas="ppa:linuxuprising/shutter")
+REMOVE_PKGS["shutter"] = aptget_remove("shutter", ppas="ppa:linuxuprising/shutter")
 
-INSTALL_PKGS['openvpn'] = aptget_install(['openvpn', 'easy-rsa'])
-REMOVE_PKGS['openvpn'] = aptget_remove(['openvpn', 'easy-rsa'])
+INSTALL_PKGS["openvpn"] = aptget_install(["openvpn", "easy-rsa"])
+REMOVE_PKGS["openvpn"] = aptget_remove(["openvpn", "easy-rsa"])
 
-INSTALL_PKGS['tlp'] = aptget_install('tlp')
-REMOVE_PKGS['tlp'] = aptget_remove('tlp')
+INSTALL_PKGS["tlp"] = aptget_install("tlp")
+REMOVE_PKGS["tlp"] = aptget_remove("tlp")
 
-INSTALL_PKGS['tlp_gui'] = aptget_install('tlpui', ppas='ppa:linuxuprising/apps')
-REMOVE_PKGS['tlp_gui'] = aptget_remove('tlpui', ppas='ppa:linuxuprising/apps')
+INSTALL_PKGS["tlp_gui"] = aptget_install("tlpui", ppas="ppa:linuxuprising/apps")
+REMOVE_PKGS["tlp_gui"] = aptget_remove("tlpui", ppas="ppa:linuxuprising/apps")
 
-INSTALL_PKGS['ssh'] = aptget_install(['openssh-server', 'xclip', 'xauth'])
-REMOVE_PKGS['ssh'] = aptget_remove(['openssh-server', 'xclip', 'xauth'])
+INSTALL_PKGS["ssh"] = aptget_install(["openssh-server", "xclip", "xauth"])
+REMOVE_PKGS["ssh"] = aptget_remove(["openssh-server", "xclip", "xauth"])
 # INSTALL_PKGS['ssh'] = r"""
 ##!/usr/bin/env bash
 # sudo apt install -y openssh-server xclip xauth
@@ -164,7 +188,9 @@ REMOVE_PKGS['ssh'] = aptget_remove(['openssh-server', 'xclip', 'xauth'])
 # ForwardX11Trusted yes
 
 
-INSTALL_PKGS['nodejs'] = r"""
+INSTALL_PKGS[
+    "nodejs"
+] = r"""
 #!/usr/bin/env bash
 # https://github.com/nodesource/distributions/blob/master/README.md
 # Using Ubuntu
@@ -179,7 +205,9 @@ sudo npm install -g npm
 sudo apt-get install -y build-essential
 """
 
-INSTALL_PKGS['python3'] = r"""
+INSTALL_PKGS[
+    "python3"
+] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y python3 python3-pip python3-venv python3-dev  build-essential libssl-dev libffi-dev  libxml2-dev libxslt1-dev zlib1g-dev
 # For python+PDF
@@ -191,7 +219,9 @@ sudo apt install -y libpq-dev python3-dev
 sudo -H pip3  install --upgrade pip
 """
 
-INSTALL_PKGS['polybar'] = r"""
+INSTALL_PKGS[
+    "polybar"
+] = r"""
 #!/usr/bin/env bash
 # TODO FONTS NOT FOUND:
 # -- Font not found: fixed:pixelsize=10
@@ -225,7 +255,9 @@ git checkout $latestTag
 """
 
 # TODO libreoffice broken!
-INSTALL_PKGS['libreoffice'] = r"""
+INSTALL_PKGS[
+    "libreoffice"
+] = r"""
 ##!/usr/bin/env bash
 #sudo apt-get remove -y libreoffice
 #sudo apt-get install -y software-properties-common
@@ -235,7 +267,9 @@ INSTALL_PKGS['libreoffice'] = r"""
 """
 
 # TODO Add checkinstall
-INSTALL_PKGS['goxel'] = r"""
+INSTALL_PKGS[
+    "goxel"
+] = r"""
 #!/usr/bin/env bash
 
 sudo apt-get install -y scons pkg-config libglfw3-dev libgtk-3-dev git \
@@ -270,7 +304,9 @@ sudo apt-get install -y scons pkg-config libglfw3-dev libgtk-3-dev git \
 ## sudo apt-get install -y         libocct-data-exchange-dev         libocct-ocaf-dev         libocct-visualization-dev         occt-draw         libcoin-dev         python3-pyside2.qtgui         python3-pyside2.qtsvg         python3-pyside2.qtwidgets                pyside2-tools         libshiboken2-dev         python3-pivy         libpyside2-dev         python3-pyside2.qtcore
 ## sudo apt-get install -y libsimage-dev
 
-INSTALL_PKGS['freecad'] = r"""
+INSTALL_PKGS[
+    "freecad"
+] = r"""
 #!/usr/bin/env bash
 
 sudo apt-get install -y software-properties-common
@@ -282,7 +318,9 @@ sudo apt-get install -y freecad freecad-common freecad-python3
 # sudo update-alternatives --config freecad
 """
 
-INSTALL_PKGS['xcwd'] = r"""
+INSTALL_PKGS[
+    "xcwd"
+] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y git \
 && sudo mkdir -p /opt/ \
@@ -295,7 +333,9 @@ sudo apt-get install -y git \
 # && sudo make install
 """
 
-INSTALL_PKGS['chrome'] = r"""
+INSTALL_PKGS[
+    "chrome"
+] = r"""
 #!/usr/bin/env bash
 
 TMP_DEB=/tmp/google-chrome.deb
@@ -305,7 +345,9 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -
 sudo apt install ${TMP_DEB}
 """
 
-INSTALL_PKGS['slack'] = r"""
+INSTALL_PKGS[
+    "slack"
+] = r"""
 #!/usr/bin/env bash
 # # Apt-get (was problematic)
 # sudo apt-get install -y slack
@@ -313,7 +355,9 @@ INSTALL_PKGS['slack'] = r"""
 sudo snap install slack --classic
 """
 
-INSTALL_PKGS['docker'] = r"""
+INSTALL_PKGS[
+    "docker"
+] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y curl \
 && sudo curl -sSL https://get.docker.com/ \
@@ -324,7 +368,9 @@ sudo apt-get install -y curl \
 # sudo usermod -aG docker ${USER}
 """
 
-INSTALL_PKGS['docker_compose'] = r"""
+INSTALL_PKGS[
+    "docker_compose"
+] = r"""
 #!/usr/bin/env bash
 # https://github.com/docker/compose/releases
 VER=1.26.2
@@ -333,7 +379,9 @@ sudo apt-get install -y curl \
 && sudo chmod +x /usr/local/bin/docker-compose
 """
 
-INSTALL_PKGS['stretchly'] = r"""
+INSTALL_PKGS[
+    "stretchly"
+] = r"""
 #!/usr/bin/env bash
 
 sudo apt-get install -y wget
@@ -345,7 +393,9 @@ sudo chmod u+x /opt/stretchly.appimage
 sudo ln -s /opt/stretchly.appimage /usr/local/bin/stretchly
 """
 
-INSTALL_PKGS['xournal'] = r"""
+INSTALL_PKGS[
+    "xournal"
+] = r"""
 #!/usr/bin/env bash
 
 sudo apt-get install -y software-properties-common \
@@ -354,14 +404,18 @@ sudo apt-get install -y software-properties-common \
 && sudo apt-get install -y xournalpp
 """
 
-INSTALL_PKGS['i3'] = r"""
+INSTALL_PKGS[
+    "i3"
+] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y i3 arandr lxappearance dmenu rofi compton i3blocks xbacklight htop feh i3lock-fancy
 # install  i3-snapshot?
 """
 
 # TODO the second i3gaps line probably belongs somewhere else...
-INSTALL_PKGS['i3_gaps'] = r"""
+INSTALL_PKGS[
+    "i3_gaps"
+] = r"""
 #!/usr/bin/env bash
 
 sudo apt-get install -y software-properties-common \
@@ -373,7 +427,9 @@ sudo apt-get install -y software-properties-common \
 && sudo apt-get install -y fonts-source-code-pro-ttf nordic moka-icon-theme
 """
 
-INSTALL_PKGS['vim'] = r"""
+INSTALL_PKGS[
+    "vim"
+] = r"""
 #!/usr/bin/env bash
 sudo apt-get remove -y vim-tiny gvim \
 && sudo apt-get install -y vim vim-gtk \
@@ -381,7 +437,9 @@ sudo apt-get remove -y vim-tiny gvim \
 # Update!
 """
 
-INSTALL_PKGS['neovim'] = r"""
+INSTALL_PKGS[
+    "neovim"
+] = r"""
 #!/usr/bin/env bash
 
 sudo apt-get install -y wget curl git xclip exuberant-ctags ncurses-term python3-pip python3-autopep8
@@ -434,18 +492,24 @@ neovim +PackUpdate +qall
 neovim +CocInstall +qall
 """
 
-INSTALL_PKGS['pycharm-community'] = r"""
+INSTALL_PKGS[
+    "pycharm-community"
+] = r"""
 #!/usr/bin/env bash
 sudo snap install pycharm-community --classic
 """
 
-INSTALL_PKGS['pycharm-professional'] = r"""
+INSTALL_PKGS[
+    "pycharm-professional"
+] = r"""
 #!/usr/bin/env bash
 sudo snap install pycharm-professional --classic
 """
 # sudo snap install pycharm-educational --classic
 
-INSTALL_PKGS['calibre'] = r"""
+INSTALL_PKGS[
+    "calibre"
+] = r"""
 #!/usr/bin/env bash
 sudo apt-get install -y wget \
 && sudo -v \
@@ -454,7 +518,9 @@ sudo apt-get install -y wget \
 """
 
 # TODO
-INSTALL_PKGS['clipster'] = r"""
+INSTALL_PKGS[
+    "clipster"
+] = r"""
 #!/usr/bin/env bash
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
@@ -479,27 +545,37 @@ mkdir -p ~/Applications \
 # sudo ln -s $(realpath roficlip) /usr/bin/roficlip
 """
 
-DEPENDENCY_MAP['neovim'] = ['python3', 'nodejs', 'networking', 'xclip']
-DEPENDENCY_MAP['ssh'] = ['xclip']
-DEPENDENCY_MAP['calibre'] = ['networking']
-DEPENDENCY_MAP['docker'] = ['networking']
-DEPENDENCY_MAP['docker_compose'] = ['networking']
-DEPENDENCY_MAP['nodejs'] = ['networking']
-DEPENDENCY_MAP['stretchly'] = ['networking']
-DEPENDENCY_MAP['clipster'] = ['git']
-DEPENDENCY_MAP['polybar'] = ['git']
-DEPENDENCY_MAP['goxel'] = ['git', 'checkinstall']
-DEPENDENCY_MAP['xcwd'] = ['git', 'checkinstall']
-DEPENDENCY_MAP['freecad'] = ['git', 'checkinstall']
+DEPENDENCY_MAP["neovim"] = ["python3", "nodejs", "networking", "xclip"]
+DEPENDENCY_MAP["ssh"] = ["xclip"]
+DEPENDENCY_MAP["calibre"] = ["networking"]
+DEPENDENCY_MAP["docker"] = ["networking"]
+DEPENDENCY_MAP["docker_compose"] = ["networking"]
+DEPENDENCY_MAP["nodejs"] = ["networking"]
+DEPENDENCY_MAP["stretchly"] = ["networking"]
+DEPENDENCY_MAP["clipster"] = ["git"]
+DEPENDENCY_MAP["polybar"] = ["git"]
+DEPENDENCY_MAP["goxel"] = ["git", "checkinstall"]
+DEPENDENCY_MAP["xcwd"] = ["git", "checkinstall"]
+DEPENDENCY_MAP["freecad"] = ["git", "checkinstall"]
 
-if __name__ == '__main__':
-    sep = 80 * '-'
-    print('\n'.join(
-        ['PKGs WITH THEIR INSTALL COMMANDS']
-        + [f'{sep}\n\tINSTALLING [{k}]\n{sep}\n{INSTALL_PKGS[k]}\n' for k in sorted(INSTALL_PKGS)])
+if __name__ == "__main__":
+    sep = 80 * "-"
+    print(
+        "\n".join(
+            ["PKGs WITH THEIR INSTALL COMMANDS"]
+            + [
+                f"{sep}\n\tINSTALLING [{k}]\n{sep}\n{INSTALL_PKGS[k]}\n"
+                for k in sorted(INSTALL_PKGS)
+            ]
+        )
     )
 
-    print('\n'.join(
-        ['PKGs WITH THEIR REMOVE COMMANDS']
-        + [f'{sep}\n\tREMOVING [{k}]\n{sep}\n{REMOVE_PKGS[k]}\n' for k in sorted(REMOVE_PKGS)])
+    print(
+        "\n".join(
+            ["PKGs WITH THEIR REMOVE COMMANDS"]
+            + [
+                f"{sep}\n\tREMOVING [{k}]\n{sep}\n{REMOVE_PKGS[k]}\n"
+                for k in sorted(REMOVE_PKGS)
+            ]
+        )
     )
