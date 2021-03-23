@@ -8,15 +8,18 @@ from typing import Dict, Optional, Union, Sequence
 from jumpstart import DOTFILE_DIR, REPO_DIR
 from jumpstart.utils import echo, bcolors
 
+BASH_COMPLETION_DIR = "~/.local/share/bash-completion/completions/"
+
 DOTFILE_MAP = {
     'bash/bashrc':                                       '~/.bashrc',
     'bash/bash_aliases':                                 '~/.bash_aliases',
     'bash/bash_functions':                               '~/.bash_functions',
     'bash/inputrc':                                      '~/.inputrc',
     'bash/bash_profile':                                 '~/.bash_profile',
-    'bash/bash_completion.d/docker-goinside.bashcomp':   '~/.bash_completion.d/docker-goinside.bashcomp',
-    'bash/bash_completion.d/known-hosts.bashcomp':       '~/.bash_completion.d/known-hosts.bashcomp',
-    'bash/bash_completion.d/sudo-alias.bashcomp':        '~/.bash_completion.d/sudo-alias.bashcomp',
+    "bash/completions/docker-goinside.bash":             f"{BASH_COMPLETION_DIR}/docker-goinside.bash",
+    "bash/completions/known-hosts.bash":                 f"{BASH_COMPLETION_DIR}/known-hosts.bash",
+    "bash/completions/sudo-alias.bash":                  f"{BASH_COMPLETION_DIR}/sudo-alias.bash",
+    "bash/bash_completion/cheat.bash":                   f"{BASH_COMPLETION_DIR}/cheat.bash",
 
     'texstudio/texstudio.ini':                           '~/.config/texstudio/texstudio.ini',
     'texstudio/stylesheet.qss':                          '~/.config/texstudio/stylesheet.qss',

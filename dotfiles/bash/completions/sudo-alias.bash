@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Let root user use your aliases
+
 _comp_sudo_alias() { from="$2"; COMPREPLY=()
   if [[ $COMP_CWORD == 1 ]]; then
     COMPREPLY=( "$( alias -p | grep "^ *alias $from=" | sed -r "s/^ *alias [^=]+='(.*)'$/\1/" )" )

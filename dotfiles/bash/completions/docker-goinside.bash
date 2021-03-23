@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # For going inside running docker containers
+
 goinside(){
     docker exec -it $1 bash -c "stty cols $COLUMNS rows $LINES && bash";
 }
@@ -9,5 +10,4 @@ _goinside(){
 }
 complete -F _goinside goinside;
 export -f goinside;
-
 
