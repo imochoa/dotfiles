@@ -236,15 +236,8 @@ noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 "" Highlighting lines with <Leader> l & <Leader> c
 " https://vim.fandom.com/wiki/Highlight_current_line
-" define line highlight color
-" highlight LineHighlight ctermbg=darkgray guibg=darkgray
 " highlight the current line
-" nnoremap <Leader>l :call matchadd('LineHighlight', '\%'.line('.').'l') <CR>
-" nnoremap <silent> <Leader>l ml:execute 'match Search /\%'.line('.').'l/'<CR>
-" nnoremap <Leader>l :call matchadd('LineHighlight', '/\%'.line('.').'l') <CR>
 nnoremap <silent> <Leader>l :exe "let m = matchadd('WildMenu','\\%" . line('.') . "l')"<CR>
 " clear all the highlighted lines
-" nnoremap <silent> <Leader>c :execute 'match Search /\%'.virtcol('.').'v/'<CR>
-" nnoremap <Leader>c :call clearmatches() <CR>
 nnoremap <silent> <Leader>c :call clearmatches()<CR>
 
