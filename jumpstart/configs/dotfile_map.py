@@ -19,7 +19,7 @@ DOTFILE_MAP = {
     "bash/completions/docker-goinside.bash": f"{BASH_COMPLETION_DIR}/docker-goinside.bash",
     "bash/completions/known-hosts.bash": f"{BASH_COMPLETION_DIR}/known-hosts.bash",
     "bash/completions/sudo-alias.bash": f"{BASH_COMPLETION_DIR}/sudo-alias.bash",
-    "bash/bash_completion/cheat.bash": f"{BASH_COMPLETION_DIR}/cheat.bash",
+    "bash/completions/cheat.bash": f"{BASH_COMPLETION_DIR}/cheat.bash",
     "texstudio/texstudio.ini": "~/.config/texstudio/texstudio.ini",
     "texstudio/stylesheet.qss": "~/.config/texstudio/stylesheet.qss",
     "debugging/pdbrc": "~/.pdbrc",
