@@ -107,6 +107,31 @@ DOTFILE_MAP = {
     # 'X/xprofile':                    '~/.xprofile',
 }
 
+# CLEANUPS & SAFETY CHECKS
+DOTFILE_MAP = {k.strip(): v.strip() for k, v in DOTFILE_MAP.items()}
+
+# If the value is a directory, append '/' (don't rely on this because "HOME" depends on the current user) (*)
+keys_where_the_path_is_a_directory = (
+    k for k, v in DOTFILE_MAP.items() if pathlib.Path(v).expanduser().is_dir()
+)
+DOTFILE_MAP.update(
+    {k: DOTFILE_MAP[k] + "/" for k in keys_where_the_path_is_a_directory}
+)
+
+# Extend any values that end in '/' with the same filenames as the keys (Safer than (*))
+keys_where_the_filename_is_missing = (
+    k for k, v in DOTFILE_MAP.items() if v.endswith("/")
+)
+DOTFILE_MAP.update(
+    {
+        k: DOTFILE_MAP[k] + k.rpartition("/")[-1]
+        for k in keys_where_the_filename_is_missing
+    }
+)
+
+# Extend any values that are actually directories
+# TODO
+
 
 # TODO fcn to substitute home dir!
 # def resolve_homedir(homedir: Union[str, pathlib.Path] = None) -> str:
