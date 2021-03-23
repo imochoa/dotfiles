@@ -8,18 +8,13 @@ from typing import Dict, Optional, Union, Sequence
 from jumpstart import DOTFILE_DIR, REPO_DIR
 from jumpstart.utils import echo, bcolors
 
-BASH_COMPLETION_DIR = "~/.local/share/bash-completion/completions/"
-
 DOTFILE_MAP = {
     "bash/bashrc": "~/.bashrc",
     "bash/bash_aliases": "~/.bash_aliases",
     "bash/bash_functions": "~/.bash_functions",
     "bash/inputrc": "~/.inputrc",
     "bash/bash_profile": "~/.bash_profile",
-    "bash/completions/docker-goinside.bash": f"{BASH_COMPLETION_DIR}/docker-goinside.bash",
-    "bash/completions/known-hosts.bash": f"{BASH_COMPLETION_DIR}/known-hosts.bash",
-    "bash/completions/sudo-alias.bash": f"{BASH_COMPLETION_DIR}/sudo-alias.bash",
-    "bash/completions/cheat.bash": f"{BASH_COMPLETION_DIR}/cheat.bash",
+    "bash/completions/*": "~/.local/share/bash-completion/completions/",
     "texstudio/texstudio.ini": "~/.config/texstudio/texstudio.ini",
     "texstudio/stylesheet.qss": "~/.config/texstudio/stylesheet.qss",
     "debugging/pdbrc": "~/.pdbrc",
@@ -40,8 +35,6 @@ DOTFILE_MAP = {
     # 'vim/vimrc':                     '~/.vimrc',
     # 'vim/vimrc.local':               '~/.vimrc.local',
     "git/gitconfig": "~/.config/git/config",
-    "regolith/i3/config": "~/.config/regolith/i3/config",
-    "regolith/Xresources": "~/.config/regolith/Xresources",
     "ImageMagick/policy.xml": "/etc/ImageMagick-6/policy.xml",
     # 'desktop_launchers/stretchly.desktop':               '~/.local/share/applications/stretchly.desktop', # not required with the snap install
     "desktop_launchers/neovim.desktop": "~/.local/share/applications/neovim.desktop",
@@ -87,12 +80,26 @@ DOTFILE_MAP = {
 # CLEANUPS & SAFETY CHECKS
 DOTFILE_MAP = {k.strip(): v.strip() for k, v in DOTFILE_MAP.items()}
 
+# If the key ends in '*' expand to all files in dir
+keys_to_expand = [k for k in DOTFILE_MAP if k.endswith("*")]
+keys_to_expand = [(k, DOTFILE_MAP.pop(k)) for k in keys_to_expand]
+DOTFILE_MAP.update(
+    {
+        str(f.relative_to(DOTFILE_DIR)): v
+        for k, v in keys_to_expand
+        for f in (DOTFILE_DIR / k[:-1]).iterdir()
+    }
+)
+
 # If the value is a directory, append '/' (don't rely on this because "HOME" depends on the current user) (*)
 keys_where_the_path_is_a_directory = (
-    k for k, v in DOTFILE_MAP.items() if pathlib.Path(v).expanduser().is_dir()
+    k
+    for k, v in DOTFILE_MAP.items()
+    if pathlib.Path(v).expanduser().is_dir() and not v.endswith("/")
 )
+keys_where_the_path_is_a_directory = list(keys_where_the_path_is_a_directory)
 DOTFILE_MAP.update(
-    {k: DOTFILE_MAP[k] + "/" for k in keys_where_the_path_is_a_directory}
+    {k: f"{DOTFILE_MAP[k]}/" for k in keys_where_the_path_is_a_directory}
 )
 
 # Extend any values that end in '/' with the same filenames as the keys (Safer than (*))
@@ -105,6 +112,7 @@ DOTFILE_MAP.update(
         for k in keys_where_the_filename_is_missing
     }
 )
+
 
 # Extend any values that are actually directories
 # TODO
