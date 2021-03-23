@@ -20,13 +20,15 @@ DOTFILE_MAP = {
     "debugging/pdbrc": "~/.pdbrc",
     "ranger/rc.conf": "~/.config/ranger/rc.conf",
     "i3/config": "~/.config/i3/config",
-    "i3/scripts/polybar.sh": "~/.config/i3/scripts/polybar.sh",
-    "i3/scripts/lock.sh": "~/.config/i3/scripts/lock.sh",
-    "i3/polybar/config.ini": "~/.config/polybar/config.ini",
-    "i3/polybar/colors.ini": "~/.config/polybar/colors.ini",
-    "i3/polybar/bars.ini": "~/.config/polybar/bars.ini",
-    "i3/polybar/modules.ini": "~/.config/polybar/modules.ini",
-    "i3/polybar/user_modules.ini": "~/.config/polybar/user_modules.ini",
+    # "i3/scripts/polybar.sh": "~/.config/i3/scripts/polybar.sh",
+    # "i3/scripts/lock.sh": "~/.config/i3/scripts/lock.sh",
+    "i3/scripts/*": "~/.config/i3/scripts/",
+    # "i3/polybar/config.ini": "~/.config/polybar/config.ini",
+    # "i3/polybar/colors.ini": "~/.config/polybar/colors.ini",
+    # "i3/polybar/bars.ini": "~/.config/polybar/bars.ini",
+    # "i3/polybar/modules.ini": "~/.config/polybar/modules.ini",
+    # "i3/polybar/user_modules.ini": "~/.config/polybar/user_modules.ini",
+    "i3/polybar/*": "~/.config/polybar/",
     # 'i3/scripts/Lock_icon.png':         'path',
     # 'i3/i3blocks.conf':              'path',
     # 'rofi/config.rasi':              '~/.config/rasi/config.rasi',
@@ -47,25 +49,29 @@ DOTFILE_MAP = {
     "nvim/init.vim": "~/.config/nvim/init.vim",
     "nvim/coc-settings.json": "~/.config/nvim/coc-settings.json",
     "nvim/package-lock.json": "~/.config/nvim/package-lock.json",
-    "nvim/UltiSnips/python.snippets": "~/.config/nvim/UltiSnips/python.snippets",
-    "nvim/UltiSnips/markdown.snippets": "~/.config/nvim/UltiSnips/markdown.snippets",
+    # "nvim/UltiSnips/python.snippets": "~/.config/nvim/UltiSnips/python.snippets",
+    # "nvim/UltiSnips/markdown.snippets": "~/.config/nvim/UltiSnips/markdown.snippets",
+    "nvim/UltiSnips/*": "~/.config/nvim/UltiSnips/",
     "nvim/after/autocommands.vim": "~/.config/nvim/after/autocommands.vim",
     "nvim/after/general-settings.vim": "~/.config/nvim/after/general-settings.vim",
     "nvim/after/mappings.vim": "~/.config/nvim/after/mappings.vim",
     "nvim/after/visual.vim": "~/.config/nvim/after/visual.vim",
-    "nvim/after/plugin/plugin-config.vim": "~/.config/nvim/after/plugin/plugin-config.vim",
-    "nvim/after/plugin/plugin-overview.vim": "~/.config/nvim/after/plugin/plugin-overview.vim",
-    "nvim/after/plugin/coc.vim": "~/.config/nvim/after/plugin/coc.vim",
-    "nvim/after/ftplugin/json.vim": "~/.config/nvim/after/ftplugin/json.vim",
-    "nvim/after/ftplugin/python.vim": "~/.config/nvim/after/ftplugin/python.vim",
-    "nvim/after/ftplugin/html.vim": "~/.config/nvim/after/ftplugin/html.vim",
-    "nvim/after/ftplugin/yaml.vim": "~/.config/nvim/after/ftplugin/yaml.vim",
-    "nvim/after/compiler/cpp.vim": "~/.config/nvim/after/compiler/cpp.vim",
-    "nvim/after/compiler/dummy.vim": "~/.config/nvim/after/compiler/dummy.vim",
-    "nvim/after/compiler/tardyscript.vim": "~/.config/nvim/after/compiler/tardyscript.vim",
-    "nvim/after/compiler/tsconfig.vim": "~/.config/nvim/after/compiler/tsconfig.vim",
-    "nvim/after/compiler/tslint.vim": "~/.config/nvim/after/compiler/tslint.vim",
-    "nvim/after/compiler/typescript.vim": "~/.config/nvim/after/compiler/typescript.vim",
+    # "nvim/after/plugin/plugin-config.vim": "~/.config/nvim/after/plugin/plugin-config.vim",
+    # "nvim/after/plugin/plugin-overview.vim": "~/.config/nvim/after/plugin/plugin-overview.vim",
+    # "nvim/after/plugin/coc.vim": "~/.config/nvim/after/plugin/coc.vim",
+    "nvim/after/plugin/*": "~/.config/nvim/after/plugin/",
+    # "nvim/after/ftplugin/json.vim": "~/.config/nvim/after/ftplugin/json.vim",
+    # "nvim/after/ftplugin/python.vim": "~/.config/nvim/after/ftplugin/python.vim",
+    # "nvim/after/ftplugin/html.vim": "~/.config/nvim/after/ftplugin/html.vim",
+    # "nvim/after/ftplugin/yaml.vim": "~/.config/nvim/after/ftplugin/yaml.vim",
+    "nvim/after/ftplugin/*": "~/.config/nvim/after/ftplugin/",
+    # "nvim/after/compiler/cpp.vim": "~/.config/nvim/after/compiler/cpp.vim",
+    # "nvim/after/compiler/dummy.vim": "~/.config/nvim/after/compiler/dummy.vim",
+    # "nvim/after/compiler/tardyscript.vim": "~/.config/nvim/after/compiler/tardyscript.vim",
+    # "nvim/after/compiler/tsconfig.vim": "~/.config/nvim/after/compiler/tsconfig.vim",
+    # "nvim/after/compiler/tslint.vim": "~/.config/nvim/after/compiler/tslint.vim",
+    # "nvim/after/compiler/typescript.vim": "~/.config/nvim/after/compiler/typescript.vim",
+    "nvim/after/compiler/*": "~/.config/nvim/after/compiler/",
     "gtk-2.0/gtkrc-2.0": "~/.gtkrc-2.0",
     "gtk-3.0/gtk.css": "~/.config/gtk-3.0/gtk.css",
     "gtk-3.0/settings.ini": "~/.config/gtk-3.0/settings.ini",
@@ -83,13 +89,10 @@ DOTFILE_MAP = {k.strip(): v.strip() for k, v in DOTFILE_MAP.items()}
 # If the key ends in '*' expand to all files in dir
 keys_to_expand = [k for k in DOTFILE_MAP if k.endswith("*")]
 keys_to_expand = [(k, DOTFILE_MAP.pop(k)) for k in keys_to_expand]
-DOTFILE_MAP.update(
-    {
-        str(f.relative_to(DOTFILE_DIR)): v
-        for k, v in keys_to_expand
-        for f in (DOTFILE_DIR / k[:-1]).iterdir()
-    }
-)
+keys_to_expand = [((DOTFILE_DIR / k[:-1]).iterdir(), v) for k, v in keys_to_expand]
+keys_to_expand = [(f, v) for fs, v in keys_to_expand for f in fs if f.is_file()]
+# TODO -> Star expansion handling directories as well!
+DOTFILE_MAP.update({str(f.relative_to(DOTFILE_DIR)): str(v) for f, v in keys_to_expand})
 
 # If the value is a directory, append '/' (don't rely on this because "HOME" depends on the current user) (*)
 keys_where_the_path_is_a_directory = (
