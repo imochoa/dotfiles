@@ -141,6 +141,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# The autocompletion *.bash files are at ~/.local/share/bash-completion/completions/
+
 
 # If running within Ranger, modify the PS1
 if [ -n "$RANGER_LEVEL" ]; then export PS1="[ranger]$PS1"; fi
