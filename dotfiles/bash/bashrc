@@ -141,22 +141,22 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# The autocompletion *.bash files are at ~/.local/share/bash-completion/completions/
+# # The autocompletion *.bash files are at ~/.local/share/bash-completion/completions/
 
-# My LOCAL autocompletion files in ~/.bash_completion.d
-# # mkdir -p ~/.bash_completion.d
-# for bcfile in ~/.bash_completion.d/* ; do
-#   [ -f "$bcfile" ] && . $bcfile
-# done
+# # My LOCAL autocompletion files in ~/.bash_completion.d
+# # # mkdir -p ~/.bash_completion.d
+# # for bcfile in ~/.bash_completion.d/* ; do
+# #   [ -f "$bcfile" ] && . $bcfile
+# # done
 
-if [[ -d ~/.bash_completion.d/ ]] && \
-   ! find ~/.bash_completion.d/. ! -name . -prune -exec false {} +
-then
-    for f in ~/.bash_completion.d/*
-    do
-        source "$f"
-    done
-fi
+# if [[ -d ~/.bash_completion.d/ ]] && \
+#    ! find ~/.bash_completion.d/. ! -name . -prune -exec false {} +
+# then
+#     for f in ~/.bash_completion.d/*
+#     do
+#         source "$f"
+#     done
+# fi
 
 # AUTOCOMPLETION FOR ALIASES
 # --------------------------------------------------------------------------------
