@@ -54,7 +54,8 @@ DOTFILE_MAP = {
     "gtk-3.0/gtk.css": "~/.config/gtk-3.0/gtk.css",
     "gtk-3.0/settings.ini": "~/.config/gtk-3.0/settings.ini",
     "gtk-4.0/settings.ini": "~/.config/gtk-4.0/settings.ini",
-    "alacritty/alacritty.yml": "~/.config/alacritty/alacritty.yml"
+    "alacritty/alacritty.yml": "~/.config/alacritty/alacritty.yml",
+    "xxh/config.xxhc": "~/.config/xxh/config.xxhc",
     # 'plantuml_style.iuml': 'path',
     # 'X/Xresources':                  '~/.Xresources',
     # 'X/default_screenlayout.sh':     '~/.screenlayout/default_screenlayout.sh',
